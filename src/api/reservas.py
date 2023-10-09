@@ -23,31 +23,29 @@ def eliminarreserva(id):
     db.session.commit()
     return jsonify(rese_schema.dump(rese))
 
-@routes_vuelos.route('/actualizarvuelos', methods=['POST'] )
-def actualizarvuelos():
+@routes_reserva.route('/actualizarreservas', methods=['POST'] )
+def actualizarreservas():
     id = request.json['id']
-    aerolinea = request.json['aerolinea']
-    ciudadOrigen = request.json['ciudadOrigen']
-    ciudadDestino = request.json['ciudadDestino']
-    fechaHSalida = request.json['fechaHSalida']
-    fechaHLlegada = request.json['fechaHLlegada']
-    asientosDisponibles = request.json['asientosDisponibles']    
-    precio = request.json['precio']
-    tipoAvion = request.json['tipoAvion']    
-    numeroEscalas = request.json['numeroEscalas']
-    duracionVuelo = request.json['duracionVuelo']
+    id_usuario = request.json['id_usuario']
+    id_vuelo = request.json['id_vuelo']
+    estadoreserva = request.json['estadoreserva']
+    asientosReservados = request.json['asientosReservados']
+    fechaReserva = request.json['fechaReserva']
 
-    avuelos = Vuelo.query.get(id)
-    avuelos.Vuelo = aerolinea
-    avuelos.Vuelo = ciudadOrigen
-    avuelos.Vuelo = ciudadDestino
-    avuelos.Vuelo = fechaHSalida
-    avuelos.Vuelo = fechaHLlegada
-    avuelos.Vuelo = asientosDisponibles
-    avuelos.Vuelo = precio
-    avuelos.Vuelo = tipoAvion
-    avuelos.Vuelo = numeroEscalas
-    avuelos.Vuelo = duracionVuelo
+    areser = Reserva.query.get(id)
+    areser.Reserva = id_usuario
+    areser.Reserva = id_vuelo
+    areser.Reserva = estadoreserva
+    areser.Reserva = asientosReservados
+    areser.Reserva = fechaReserva
 
+    db.session.commit()
+    return redirect('/reserva')
+
+@routes_reserva.route('/guardarreserva', methods=['POST'] )
+def guardar_reserva():
+    rese = request.json['id_usuario','id_vuelo', 'estadoreserva', 'asientosReservados', 'fechaReserva']
+    new_reser = Reserva(rese)
+    db.session.add(new_reser)
     db.session.commit()
     return redirect('/vuelo')
