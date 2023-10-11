@@ -5,7 +5,7 @@ from config.db import db, app, ma
 class Aeropuerto(db.Model):
     __tablename__ = "tblaeropuertos"
     
-    id= db.Columm(db.Integer, primary_key=True, autoincrement=True)
+    id= db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombre = db.Column(db.String(300))
     ubicacion = db.Column(db.String(300))
     correo = db.Column(db.String(200))
@@ -14,8 +14,7 @@ class Aeropuerto(db.Model):
     serviciosdisponibles = db.Column(db.Text)
     
     
-    def __init__(self, id, nombre,ubicacion, correo, telefono, direccion, serviciosdisponibles):
-        self.id = id
+    def __init__(self, nombre,ubicacion, correo, telefono, direccion, serviciosdisponibles):
         self.nombre = nombre
         self.ubicacion = ubicacion
         self.correo = correo

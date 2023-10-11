@@ -5,7 +5,7 @@ from config.db import db, app, ma
 class Aerolinea(db.Model):
     __tablename__ = "tblaerolinea"
     
-    id= db.Columm(db.Integer, primary_key=True, autoincrement=True)
+    id= db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombre = db.Column(db.String(300))
     correo = db.Column(db.String(200))
     telefono = db.Column(db.Integer)

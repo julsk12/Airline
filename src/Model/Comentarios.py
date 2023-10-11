@@ -5,18 +5,18 @@ from config.db import db, app, ma
 class Comentario(db.Model):
     __tablename__ = "tblcomentarios"
     
-    id= db.Columm(db.Integer, primary_key=True, autoincrement=True)
+    id= db.Column(db.Integer, primary_key=True, autoincrement=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('tblsusuarios.id'))
-    id_vuelo = db.Column(db.Integer, db.ForeignKey('tblvuelos.id'))
+    id_reserva = db.Column(db.Integer, db.ForeignKey('tblreservas.id'))
     calificacion = db.Column(db.Integer)
     comentario = db.Column(db.Text)
     fechacomen = db.Column(db.Date)
     
     
-    def __init__(self, id, id_usuario,id_vuelo, calificacion, comentario, fechacomen):
+    def __init__(self, id, id_usuario,id_reserva, calificacion, comentario, fechacomen):
         self.id = id
         self.id_usuario = id_usuario
-        self.id_vuelo = id_vuelo
+        self.id_reserva = id_reserva
         self.calificacion = calificacion
         self.comentario = comentario
         self.fechacomen = fechacomen
@@ -27,4 +27,4 @@ class Comentario(db.Model):
             
 class ComentarSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'id_usuario', 'id_vuelo', 'calificacion', 'comentario', 'fechacomen')
+        fields = ('id', 'id_usuario', 'id_reserva', 'calificacion', 'comentario', 'fechacomen')

@@ -5,7 +5,7 @@ from config.db import db, app, ma
 class Pagos(db.Model):
     __tablename__ = "tblpagos"
     
-    id = db.Columm(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     metodopago = db.Column(db.String(200))
     fechaPago = db.Column(db.Date)
     monto = db.Column(db.Double)

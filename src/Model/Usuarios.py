@@ -5,7 +5,7 @@ from config.db import db, app, ma
 class Users(db.Model):
     __tablename__ = "tblsusuarios"
     
-    id= db.Columm(db.Integer, primary_key=True, autoincrement=False)
+    id= db.Column(db.Integer, primary_key=True, autoincrement=False)
     nombre = db.Column(db.String(200))
     correo = db.Column(db.String(200))
     password = db.Column(db.String(200))
