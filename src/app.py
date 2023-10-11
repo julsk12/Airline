@@ -25,7 +25,7 @@ app.register_blueprint(routes_detalles, url_prefix="/api")
 @app.route("/")
 def index():
     titulo= "Pagina Princiapl"
-    return "hola mundo"
+    return  render_template('index.html', titles=titulo)
 
 @app.route("/algo")
 def otr():
