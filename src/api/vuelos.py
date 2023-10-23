@@ -1,6 +1,8 @@
-from common.Toke import *
+#from common.Toke import *
 from config.db import db, app, ma
 from flask import Flask, Blueprint, redirect, request, jsonify, json, session, render_template
+from datetime import datetime, timedelta
+import random
 
 from Model.Vuelos import Vuelo, FliesSchema
 
@@ -60,3 +62,91 @@ def guardar_vuelos():
     db.session.add(new_vuelo)
     db.session.commit()
     return redirect('/vuelo')
+vuelos_nacionales = [
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Medellín, Colombia",
+        "destino_aeropuerto": "Aeropuerto Internacional José María Córdova (MDE), Medellín, Colombia",
+        "duracion_total": "1 hora",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Cali, Colombia",
+        "destino_aeropuerto": "Aeropuerto Internacional Alfonso Bonilla Aragón (CLO), Cali, Colombia",
+        "duracion_total": "1 hora",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Barranquilla, Colombia",
+        "destino_aeropuerto": "Aeropuerto Internacional Ernesto Cortissoz (BAQ), Barranquilla, Colombia",
+        "duracion_total": "1 hora",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Pereira, Colombia",
+        "destino_aeropuerto": "Aeropuerto Internacional Matecaña (PEI), Pereira, Colombia",
+        "duracion_total": "1 hora",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Cúcuta, Colombia",
+        "destino_aeropuerto": "Aeropuerto Internacional Camilo Daza (CUC), Cúcuta, Colombia",
+        "duracion_total": "1 hora",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Santa Marta, Colombia",
+        "destino_aeropuerto": "Aeropuerto Internacional Simón Bolívar (SMR), Santa Marta, Colombia",
+        "duracion_total": "1 hora",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Pasto, Colombia",
+        "destino_aeropuerto": "Aeropuerto Antonio Nariño (PSO), Pasto, Colombia",
+        "duracion_total": "1 hora",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Leticia, Colombia",
+        "destino_aeropuerto": "Aeropuerto Alfredo Vásquez Cobo (LET), Leticia, Colombia",
+        "duracion_total": "2 horas",
+    },
+]
+@app.route('/crear_vuelos', methods=['POST'])
+def crear_vuelos():
+    # Obtener los datos del formulario
+    origen = "Barranquilla"
+    destino = "Madrid"
+
+    # Obtener la fecha actual
+    fecha_actual = datetime.now()
+    
+    
+    # Crear 5 vuelos
+    for i in range(5):
+        # Calcular la fecha del vuelo (puede ser el mismo día o días después)
+        fecha_vuelo = fecha_actual + timedelta(days=i)
+
+        # Generar una hora de salida aleatoria en formato "HH:MM"
+        hora_salida = f"{random.randint(0, 23):02d}:{random.randint(0, 59):02d}"
+
+        # Crear un diccionario para representar el vuelo
+        vuelo = {
+            'origen': origen,
+            'destino': destino,
+            'fecha': fecha_vuelo.strftime('%Y-%m-%d'),
+            'hora_salida': hora_salida
+        }
+
+        
+        Vuelo.append(vuelo)
+
+    return jsonify({'message': 'Se han creado 5 vuelos exitosamente'})

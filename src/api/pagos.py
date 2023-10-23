@@ -1,4 +1,4 @@
-from common.Toke import *
+#from common.Toke import *
 from config.db import db, app, ma
 from flask import Flask, Blueprint, redirect, request, jsonify, json, session, render_template
 

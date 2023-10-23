@@ -11,13 +11,13 @@
     </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-const apiUrl= 'https://api.aviationstack.com/v1/'
-const apikey= 'eb8eb4b91f0aa9bbb00a5bb88b9a1520'
-const config = {
-headers: {
-'Authorization': 'Bearer ${apikey}'}
-}
-axios.get(apiUrl, config)
+const apiUrl= 'https://api.aviationstack.com/v1/flights';
+const apiKey= 'c7685d5851bc8a3fa67068e29dc4e970';
+const params = {
+    access_key: apiKey,
+    limit: 100,
+};
+axios.get(apiUrl, { params })
     .then(response => {
         console.log('datos', response.data);
 })

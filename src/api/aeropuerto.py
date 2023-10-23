@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, redirect, jsonify, json, session, render_template, request
-from common.Toke import *
+#from common.Toke import *
 from config.db import db, app, ma
 
 from Model.Aeropuertos import Aeropuerto, AirportSchema

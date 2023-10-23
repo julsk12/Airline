@@ -22,6 +22,8 @@ app.register_blueprint(routes_comentar, url_prefix="/api")
 app.register_blueprint(routes_detalles, url_prefix="/api")
 
 
+
+
 @app.route("/")
 def index():
     titulo= "Pagina Princiapl"
