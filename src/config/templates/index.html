@@ -11,18 +11,23 @@
     </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-const apiUrl= 'https://api.aviationstack.com/v1/flights';
-const apiKey= 'c7685d5851bc8a3fa67068e29dc4e970';
-const params = {
-    access_key: apiKey,
-    limit: 100,
-};
-axios.get(apiUrl, { params })
-    .then(response => {
-        console.log('datos', response.data);
-})
-.catch(error => {
-    console.error('error:', error)
-});
+
+    axios.post('/api/crear_vuelos', {
+        origen: "1",
+        destino: "2",
+        
+    }, {
+        headers: {
+        'Content-Type': 'multipart/form-data'
+
+        }
+    }
+    ).then((res) => {
+        console.log(res.data)
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+
 </script>
 </html>
