@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, redirect, jsonify, json, session, render_template, request
-from common.Toke import *
+#from common.Toke import *
 from config.db import db, app, ma
 
 class Vuelo(db.Model):
@@ -18,9 +18,9 @@ class Vuelo(db.Model):
     duracionVuelo = db.Column(db.String(300))
     
     
-    def __init__(self, aerolinea, ciudadOrigen, ciudadDestino, fechaHSalida, fechaHLlegada,
+    def __init__(self, id_aerolinea, ciudadOrigen, ciudadDestino, fechaHSalida, fechaHLlegada,
                  asientosDisponibles, precio, tipoAvion, numeroEscalas, duracionVuelo):
-        self.aerolinea = aerolinea
+        self.id_aerolinea = id_aerolinea
         self.ciudadOrigen = ciudadOrigen
         self.ciudadDestino = ciudadDestino
         self.fechaHSalida = fechaHSalida
@@ -39,5 +39,5 @@ class Vuelo(db.Model):
 
 class FliesSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'aerolinea', 'ciudadOrigen', 'ciudadDestino', 'fechaHSalida', 'fechaHLlegada',
+        fields = ('id', 'id_aerolinea', 'ciudadOrigen', 'ciudadDestino', 'fechaHSalida', 'fechaHLlegada',
                   'asientosDisponibles', 'precio', 'tipoAvion', 'numeroEscalas', 'duracionVuelo')

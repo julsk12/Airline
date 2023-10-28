@@ -24,6 +24,8 @@ app.register_blueprint(routes_detalles, url_prefix="/api")
 
 CORS(app)
 
+
+
 @app.route("/")
 def index():
     titulo= "Pagina Princiapl"
