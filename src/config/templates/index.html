@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="" rel="stylesheet">
-    </head>
-    <body>
-    <div id="pan">hola</div>
-    </body>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-const apiUrl= 'https://api.aviationstack.com/v1/'
-const apikey= 'eb8eb4b91f0aa9bbb00a5bb88b9a1520'
-const config = {
-headers: {
-'Authorization': 'Bearer ${apikey}'}
-}
-axios.get(apiUrl, config)
-    .then(response => {
-        console.log('datos', response.data);
-})
-.catch(error => {
-    console.error('error:', error)
-});
-</script>
+<head>
+    <title>Consulta de Vuelos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div id="resultado"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static', filename = 'server.js')}}"></script>
+    <script>
+        const apiUrl = 'http://127.0.0.1:5000/api/v1/shopping/flight-offers';
+        const apiKey = 'wvF1EyLpezAZ5OhrUkZ38dPGToUIX3Rk';
+
+        const params = {
+            originLocationCode: 'JFK',
+            destinationLocationCode: 'LAX',
+            departureDate: '2023-10-15',
+            adults: 1,
+            nonStop: true
+        };
+
+        // Realizar la solicitud a la API de Amadeus
+        axios.get(apiUrl, {
+            params,
+            headers: {
+                'Authorization': `Bearer ${apiKey}`
+            }
+        })
+        .then(response => {
+            // Manejar la respuesta exitosa
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = '<h1>Datos de Vuelos:</h1><pre>' + JSON.stringify(response.data, null, 2) + '</pre>';
+        })
+        .catch(error => {
+            // Manejar errores
+            console.error('Error al realizar la solicitud a la API de Amadeus:', error);
+        });
+    </script>
+</body>
 </html>
