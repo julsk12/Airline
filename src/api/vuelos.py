@@ -257,6 +257,7 @@ vuelos_dos_escalas = [
     },
     {
         "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "escala1": "Buenos Aires, Argentina",
         "escala1_aeropuerto": "Aeropuerto Internacional Ministro Pistarini (EZE), Buenos Aires, Argentina",
         "escala2": "Lisboa, Portugal",
@@ -267,6 +268,7 @@ vuelos_dos_escalas = [
     },
     {
         "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "escala1": "Londres, Reino Unido",
         "escala1_aeropuerto": "Aeropuerto Heathrow de Londres (LHR), Londres, Reino Unido",
         "escala2": "París, Francia",
@@ -287,6 +289,7 @@ vuelos_dos_escalas = [
     },
     {
         "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "escala1": "San Francisco, EE. UU.",
         "escala1_aeropuerto": "Aeropuerto Internacional de San Francisco (SFO), San Francisco, EE. UU.",
         "escala2": "Toronto, Canadá",
@@ -311,13 +314,30 @@ def crear_vuelos():
         # Calcular la fecha del vuelo (puede ser el mismo día o días después)
         fecha_vuelo = fecha_actual + timedelta(days=i)
 
+        # Obtener la hora de salida aleatoria
         hora_salida = f"{random.randint(0, 23):02d}:{random.randint(0, 59):02d}"
 
-        # Crear un diccionario para representar el vuelo
-        vuelo = Vuelo(id_aerolinea="1", ciudadOrigen=origen, ciudadDestino=destino, duracionVuelo="2", asientosDisponibles="4",
-                      fechaHLlegada="2023-10-30 00:00", fechaHSalida=hora_salida, numeroEscalas="0", precio="4000000", tipoAvion="RXD112")
-        db.session.add(vuelo)
-    db.session.commit()
-       # Vuelo.append(vuelo)
+        # Inicializar el número de escalas en 0 y la fecha de llegada en None
+        numero_escalas = 0
+        fecha_llegada = None
 
+        # Verificar si el par origen y destino existe en vuelos_dos_escalas
+        for vuelo in vuelos_dos_escalas:
+            if origen in vuelo.values() and destino in vuelo.values():
+                numero_escalas = 2
+                duracion_total = vuelo.get("duracion_total")
+
+                # Calcular la fecha de llegada sumando la duración total al datetime de salida
+                fecha_salida = datetime.combine(fecha_vuelo, datetime.strptime(hora_salida, '%H:%M').time())
+                duracion_horas, duracion_minutos = map(int, duracion_total.split(" horas ")[0].split(" horas y "))
+                fecha_llegada = fecha_salida + timedelta(hours=duracion_horas, minutes=duracion_minutos)
+
+        # Crear un nuevo vuelo y guardarlo en la base de datos
+        vuelo = Vuelo(id_aerolinea="1", ciudadOrigen="1", ciudadDestino="2", duracionVuelo="2",
+                      asientosDisponibles="4", fechaHLlegada=fecha_llegada, fechaHSalida=hora_salida,
+                      numeroEscalas=numero_escalas, precio="4000000", tipoAvion="RXD112")
+        db.session.add(vuelo)
+
+    db.session.commit()
+    
     return jsonify({'message': 'Se han creado 5 vuelos exitosamente'})
