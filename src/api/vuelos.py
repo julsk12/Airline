@@ -129,6 +129,7 @@ vuelos_nacionales = [
 ]
 
 
+
 @routes_vuelos.route('/crear_vuelos', methods=['POST'])
 def crear_vuelos():
     # Obtener los datos del formulario
@@ -140,15 +141,15 @@ def crear_vuelos():
 
     # Crear 5 vuelos
     for i in range(5):
-        # Calcular la fecha del vuelo (puede ser el mismo día o días después)
-        fecha_vuelo = fecha_actual + timedelta(days=i)
-
+        if i < 2:
+            fecha_vuelo = fecha_actual + timedelta(days=i, hours=random.randint(0,23), minutes=random.randint(0, 59))
+        else:
         # Generar una hora de salida aleatoria en formato "HH:MM"
-        hora_salida = f"{random.randint(0, 23):02d}:{random.randint(0, 59):02d}"
+            fecha_vuelo = fecha_actual +  timedelta(days=i, hours=random.randint(0,23), minutes=random.randint(0, 59))
 
         # Crear un diccionario para representar el vuelo
         vuelo = Vuelo(id_aerolinea="1", ciudadOrigen=origen, ciudadDestino=destino, duracionVuelo="2", asientosDisponibles="4",
-                      fechaHLlegada="2023-10-30 00:00", fechaHSalida=hora_salida, numeroEscalas="0", precio="4000000", tipoAvion="RXD112")
+                      fechaHLlegada="2023-10-30 00:00", fechaHSalida=fecha_vuelo, numeroEscalas="0", precio="4000000", tipoAvion="RXD112")
         db.session.add(vuelo)
     db.session.commit()
        # Vuelo.append(vuelo)
