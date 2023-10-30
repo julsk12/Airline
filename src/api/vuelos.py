@@ -127,7 +127,175 @@ vuelos_nacionales = [
         "duracion_total": "2 horas",
     },
 ]
-
+vuelos_directos = [
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Miami, EE. UU.",
+        "destino-aeropuerto": "Aeropuerto Internacional de Miami (MIA), Miami, EE. UU.",
+        "duracion_total": "4 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Madrid, España",
+        "destino_aeropuerto": "Aeropuerto Adolfo Suárez Madrid-Barajas (MAD), Madrid, España",
+        "duracion_total": "10 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Nueva York, EE. UU.",
+        "destino-aeropuerto": "Aeropuerto Internacional John F. Kennedy (JFK), Nueva York, EE. UU.",
+        "duracion_total": "6 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Sao Paulo, Brasil",
+        "destino_aeropuerto": "Aeropuerto Internacional de Guarulhos (GRU), Sao Paulo, Brasil",
+        "duracion_total": "8 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Ciudad de México, México",
+        "destino_aeropuerto": "Aeropuerto Internacional de la Ciudad de México (MEX), Ciudad de México, México",
+        "duracion_total": "5 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "París, Francia",
+        "destino_aeropuerto": "Aeropuerto Charles de Gaulle (CDG), París, Francia",
+        "duracion_total": "11 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Buenos Aires, Argentina",
+        "destino_aeropuerto": "Aeropuerto Internacional Ministro Pistarini (EZE), Buenos Aires, Argentina",
+        "duracion_total": "9 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Lima, Perú",
+        "destino_aeropuerto": "Aeropuerto Internacional Jorge Chávez (LIM), Lima, Perú",
+        "duracion_total": "6 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Roma, Italia",
+        "destino_aeropuerto": "Aeropuerto de Roma-Fiumicino (FCO), Roma, Italia",
+        "duracion_total": "12 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "destino": "Toronto, Canadá",
+        "destino_aeropuerto": "Aeropuerto Internacional Toronto Pearson (YYZ), Toronto, Canadá",
+        "duracion_total": "8 horas",
+    },
+]
+vuelos_dos_escalas = [
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "escala1": "Londres, Reino Unido",
+        "escala1_aeropuerto": "Aeropuerto Heathrow de Londres (LHR), Londres, Reino Unido",
+        "escala2": "París, Francia",
+        "escala2_aeropuerto": "Aeropuerto Charles de Gaulle (CDG), París, Francia",
+        "destino": "Sídney, Australia",
+        "destino_aeropuerto": "Aeropuerto Kingsford Smith de Sídney (SYD), Sídney, Australia",
+        "duracion_total": "26 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "escala1": "Miami, EE. UU.",
+        "escala1_aeropuerto": "Aeropuerto Internacional de Miami (MIA), Miami, EE. UU.",
+        "escala2": "Madrid, España",
+        "escala2_aeropuerto": "Aeropuerto Adolfo Suárez Madrid-Barajas (MAD), Madrid, España",
+        "destino": "Brisbane, Australia",
+        "destino_aeropuerto": "Aeropuerto de Brisbane (BNE), Brisbane, Australia",
+        "duracion_total": "30 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "escala1": "Lima, Perú",
+        "escala1_aeropuerto": "Aeropuerto Internacional Jorge Chávez (LIM), Lima, Perú",
+        "escala2": "Los Ángeles, EE. UU.",
+        "escala2_aeropuerto": "Aeropuerto Internacional de Los Ángeles (LAX), Los Ángeles, EE. UU.",
+        "destino": "Nueva Delhi, India",
+        "destino_aeropuerto": "Aeropuerto Internacional Indira Gandhi (DEL), Nueva Delhi, India",
+        "duracion_total": "28 horas",
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "escala1": "Miami, EE. UU.",
+        "escala1_aeropuerto": "Aeropuerto Internacional de Miami (MIA), Miami, EE. UU.",
+        "escala2": "Atlanta, EE. UU.",
+        "escala2_aeropuerto": "Aeropuerto Internacional Hartsfield-Jackson (ATL), Atlanta, EE. UU.",
+        "destino": "Nueva Orleans, EE. UU.",
+        "destino_aeropuerto": "Aeropuerto Internacional Louis Armstrong (MSY), Nueva Orleans, EE. UU.",
+        "duracion_total": "16 horas"
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
+        "escala1": "Caracas, Venezuela",
+        "escala1_aeropuerto": "Aeropuerto Internacional Simón Bolívar (CCS), Caracas, Venezuela",
+        "escala2": "San Juan, Puerto Rico",
+        "escala2_aeropuerto": "Aeropuerto Internacional Luis Muñoz Marín (SJU), San Juan, Puerto Rico",
+        "destino": "La Habana, Cuba",
+        "destino_aeropuerto": "Aeropuerto Internacional José Martí (HAV), La Habana, Cuba",
+        "duracion_total": "14 horas"
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "escala1": "Buenos Aires, Argentina",
+        "escala1_aeropuerto": "Aeropuerto Internacional Ministro Pistarini (EZE), Buenos Aires, Argentina",
+        "escala2": "Lisboa, Portugal",
+        "escala2_aeropuerto": "Aeropuerto Humberto Delgado (LIS), Lisboa, Portugal",
+        "destino": "Moscú, Rusia",
+        "destino_aeropuerto": "Aeropuerto Internacional de Sheremétievo (SVO), Moscú, Rusia",
+        "duracion_total": "28 horas"
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "escala1": "Londres, Reino Unido",
+        "escala1_aeropuerto": "Aeropuerto Heathrow de Londres (LHR), Londres, Reino Unido",
+        "escala2": "París, Francia",
+        "escala2_aeropuerto": "Aeropuerto Charles de Gaulle (CDG), París, Francia",
+        "destino": "Roma, Italia",
+        "destino_aeropuerto": "Aeropuerto Leonardo da Vinci-Fiumicino (FCO), Roma, Italia",
+        "duracion_total": "26 horas"
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "escala1": "Los Ángeles, EE. UU.",
+        "escala1_aeropuerto": "Aeropuerto Internacional de Los Ángeles (LAX), Los Ángeles, EE. UU.",
+        "escala2": "Tokio, Japón",
+        "escala2_aeropuerto": "Aeropuerto Internacional de Narita (NRT), Tokio, Japón",
+        "destino": "Pekín, China",
+        "destino_aeropuerto": "Aeropuerto Internacional de Pekín-Capital (PEK), Pekín, China",
+        "duracion_total": "32 horas"
+    },
+    {
+        "origen": "Bogotá, Colombia",
+        "escala1": "San Francisco, EE. UU.",
+        "escala1_aeropuerto": "Aeropuerto Internacional de San Francisco (SFO), San Francisco, EE. UU.",
+        "escala2": "Toronto, Canadá",
+        "escala2_aeropuerto": "Aeropuerto Internacional de Toronto Pearson (YYZ), Toronto, Canadá",
+        "destino": "Londres, Reino Unido",
+        "destino_aeropuerto": "Aeropuerto Heathrow de Londres (LHR), Londres, Reino Unido",
+        "duracion_total": "26 horas"
+    }
+]
 
 
 @routes_vuelos.route('/crear_vuelos', methods=['POST'])
@@ -141,11 +309,10 @@ def crear_vuelos():
 
     # Crear 5 vuelos
     for i in range(5):
-        if i < 2:
-            fecha_vuelo = fecha_actual + timedelta(days=i, hours=random.randint(0,23), minutes=random.randint(0, 59))
-        else:
-        # Generar una hora de salida aleatoria en formato "HH:MM"
-            fecha_vuelo = fecha_actual +  timedelta(days=i, hours=random.randint(0,23), minutes=random.randint(0, 59))
+        # Calcular la fecha del vuelo (puede ser el mismo día o días después)
+        fecha_vuelo = fecha_actual + timedelta(days=i)
+
+        hora_salida = f"{random.randint(0, 23):02d}:{random.randint(0, 59):02d}"
 
         # Crear un diccionario para representar el vuelo
         vuelo = Vuelo(id_aerolinea="1", ciudadOrigen=origen, ciudadDestino=destino, duracionVuelo="2", asientosDisponibles="4",

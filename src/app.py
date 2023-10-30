@@ -1,5 +1,6 @@
 from flask import Flask,  redirect, request, jsonify, json, session, render_template, Blueprint
 from config.db import db, app, ma
+from flask_cors import CORS
 
 from api.Users import routes_users
 from api.aerolinea import routes_aerolinea
@@ -21,6 +22,7 @@ app.register_blueprint(routes_reserva, url_prefix="/api")
 app.register_blueprint(routes_comentar, url_prefix="/api")
 app.register_blueprint(routes_detalles, url_prefix="/api")
 
+CORS(app)
 
 
 
