@@ -300,6 +300,7 @@ vuelos_dos_escalas = [
     }
 ]
 
+
 @routes_vuelos.route('/crear_vuelos', methods=['POST'])
 def crear_vuelos():
     # Obtener los datos del formulario

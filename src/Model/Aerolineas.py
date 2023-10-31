@@ -5,18 +5,16 @@ from config.db import db, app, ma
 class Aerolinea(db.Model):
     __tablename__ = "tblaerolinea"
     
-    id= db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nombre = db.Column(db.String(300))
-    correo = db.Column(db.String(200))
+    id= db.Column(db.Integer, autoincrement=True)
+    nombre = db.Column(db.String(300), primary_key=True, autoincrement=False)
     telefono = db.Column(db.Integer)
     direccion = db.Column(db.String(200))
     politicaequipaje = db.Column(db.Text)
     
     
-    def __init__(self, id, nombre, correo, telefono, direccion, politicaequipaje):
+    def __init__(self, id, nombre, telefono, direccion, politicaequipaje):
         self.id = id
         self.nombre = nombre
-        self.correo = correo
         self.telefono = telefono
         self.direccion = direccion
         self.politicaequipaje = politicaequipaje
@@ -27,4 +25,4 @@ class Aerolinea(db.Model):
             
 class AirlineSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'nombre', 'correo', 'telefono', 'direccion', 'politicaequipaje')
+        fields = ('id', 'nombre', 'telefono', 'direccion', 'politicaequipaje')

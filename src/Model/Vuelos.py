@@ -6,9 +6,9 @@ class Vuelo(db.Model):
     __tablename__ = "tblvuelos"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_aerolinea = db.Column(db.Integer, db.ForeignKey('tblaerolinea.id'))
-    ciudadOrigen = db.Column(db.Integer, db.ForeignKey('tblaeropuertos.id'))
-    ciudadDestino = db.Column(db.Integer, db.ForeignKey('tblaeropuertos.id'))
+    id_aerolinea = db.Column(db.String(300), db.ForeignKey('tblaerolinea.nombre'))
+    ciudadOrigen = db.Column(db.String(300), db.ForeignKey('tblaeropuertos.direccion'))
+    ciudadDestino = db.Column(db.String(300), db.ForeignKey('tblaeropuertos.direccion'))
     fechaHSalida = db.Column(db.DateTime)
     fechaHLlegada = db.Column(db.DateTime)
     asientosDisponibles = db.Column(db.String(300))
