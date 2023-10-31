@@ -310,48 +310,47 @@ def crear_vuelos():
     # Obtener la fecha y hora actual
     fecha_hora_actual = datetime.now()
 
-
-    # Buscar si hay un vuelo en vuelos_dos_escalas con el mismo origen y destino
-    vuelo_dos_escalas = None
-    for vuelo in vuelos_dos_escalas:
-        if vuelo['origen'] == origen and vuelo['destino'] == destino:
-            vuelo_dos_escalas = vuelo
-            break
-
     # Crear 5 vuelos y guardarlos en la base de datos
     for i in range(5):
         # Calcular la fecha y hora del vuelo
         if i < 2:
-            # Para los primeros 2 vuelos, usa una fecha futura y una hora aleatoria
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i, hours=random.randint(0, 23))
         else:
-            # Para los demás, usa fechas y horas futuras
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
+
+        duracion_total = "2"
+        numero_escalas = 0
+
+        # Verificar si los datos de origen y destino están contenidos en vuelos_nacionales
+        for vuelo in vuelos_nacionales:
+            if origen == vuelo['origen'] and destino == vuelo['destino']:
+                duracion_total = vuelo['duracion_total']
+                numero_escalas = 0
+                break
+
+        # Verificar si los datos de origen y destino están contenidos en vuelos_directos
+        for vuelo in vuelos_directos:
+            if origen == vuelo['origen'] and destino == vuelo['destino']:
+                duracion_total = vuelo['duracion_total']
+                numero_escalas = 0
+                break
 
         # Verificar si los datos de origen y destino están contenidos en vuelos_dos_escalas
         for vuelo in vuelos_dos_escalas:
-            if origen in vuelo['origen'] and destino in vuelo['destino']:
-                # Si hay coincidencia, utiliza los datos de ese vuelo
+            if origen == vuelo['origen'] and destino == vuelo['destino']:
                 duracion_total = vuelo['duracion_total']
                 numero_escalas = 2
                 break
-        else:
-            # Si no hay coincidencia, utiliza los valores por defecto
-            duracion_total = "2"
-            numero_escalas = 0
 
-        # Calcula la fecha de llegada sumando la duración total en horas
         fecha_salida = fecha_hora_vuelo
         duracion_total_horas = int(duracion_total)
 
-        # Convierte la duración total de horas a un objeto timedelta
         duracion_total_timedelta = timedelta(hours=duracion_total_horas)
 
-        # Suma la duración total al momento de salida para obtener la fecha de llegada
         fecha_llegada = fecha_salida + duracion_total_timedelta
 
         # Crea un objeto Vuelo y guárdalo en la base de datos
-        vuelo = Vuelo(id_aerolinea="1", ciudadOrigen='1', ciudadDestino='2', duracionVuelo=duracion_total, asientosDisponibles="4",
+        vuelo = Vuelo(id_aerolinea="avianca", ciudadOrigen=origen, ciudadDestino=destino, duracionVuelo=duracion_total, asientosDisponibles="4",
                       fechaHLlegada=fecha_llegada, fechaHSalida=fecha_hora_vuelo, numeroEscalas=numero_escalas, precio="4000000", tipoAvion="RXD112")
         db.session.add(vuelo)
 
