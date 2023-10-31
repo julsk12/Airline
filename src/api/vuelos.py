@@ -75,56 +75,56 @@ vuelos_nacionales = [
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Medellín, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional José María Córdova (MDE), Medellín, Colombia",
-        "duracion_total": "1 hora",
+        "duracion_total": "1",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Cali, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Alfonso Bonilla Aragón (CLO), Cali, Colombia",
-        "duracion_total": "1 hora",
+        "duracion_total": "1",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Barranquilla, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Ernesto Cortissoz (BAQ), Barranquilla, Colombia",
-        "duracion_total": "1 hora",
+        "duracion_total": "1",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Pereira, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Matecaña (PEI), Pereira, Colombia",
-        "duracion_total": "1 hora",
+        "duracion_total": "1",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Cúcuta, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Camilo Daza (CUC), Cúcuta, Colombia",
-        "duracion_total": "1 hora",
+        "duracion_total": "1",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Santa Marta, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Simón Bolívar (SMR), Santa Marta, Colombia",
-        "duracion_total": "1 hora",
+        "duracion_total": "1",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Pasto, Colombia",
         "destino_aeropuerto": "Aeropuerto Antonio Nariño (PSO), Pasto, Colombia",
-        "duracion_total": "1 hora",
+        "duracion_total": "1",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Leticia, Colombia",
         "destino_aeropuerto": "Aeropuerto Alfredo Vásquez Cobo (LET), Leticia, Colombia",
-        "duracion_total": "2 horas",
+        "duracion_total": "2",
     },
 ]
 vuelos_directos = [
@@ -209,7 +209,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Charles de Gaulle (CDG), París, Francia",
         "destino": "Sídney, Australia",
         "destino_aeropuerto": "Aeropuerto Kingsford Smith de Sídney (SYD), Sídney, Australia",
-        "duracion_total": "26 horas",
+        "duracion_total": "26",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -220,7 +220,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Adolfo Suárez Madrid-Barajas (MAD), Madrid, España",
         "destino": "Brisbane, Australia",
         "destino_aeropuerto": "Aeropuerto de Brisbane (BNE), Brisbane, Australia",
-        "duracion_total": "30 horas",
+        "duracion_total": "30",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -231,7 +231,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Internacional de Los Ángeles (LAX), Los Ángeles, EE. UU.",
         "destino": "Nueva Delhi, India",
         "destino_aeropuerto": "Aeropuerto Internacional Indira Gandhi (DEL), Nueva Delhi, India",
-        "duracion_total": "28 horas",
+        "duracion_total": "28",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -242,7 +242,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Internacional Hartsfield-Jackson (ATL), Atlanta, EE. UU.",
         "destino": "Nueva Orleans, EE. UU.",
         "destino_aeropuerto": "Aeropuerto Internacional Louis Armstrong (MSY), Nueva Orleans, EE. UU.",
-        "duracion_total": "16 horas"
+        "duracion_total": "16"
     },
     {
         "origen": "Bogotá, Colombia",
@@ -253,7 +253,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Internacional Luis Muñoz Marín (SJU), San Juan, Puerto Rico",
         "destino": "La Habana, Cuba",
         "destino_aeropuerto": "Aeropuerto Internacional José Martí (HAV), La Habana, Cuba",
-        "duracion_total": "14 horas"
+        "duracion_total": "14"
     },
     {
         "origen": "Bogotá, Colombia",
@@ -264,7 +264,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Humberto Delgado (LIS), Lisboa, Portugal",
         "destino": "Moscú, Rusia",
         "destino_aeropuerto": "Aeropuerto Internacional de Sheremétievo (SVO), Moscú, Rusia",
-        "duracion_total": "28 horas"
+        "duracion_total": "28"
     },
     {
         "origen": "Bogotá, Colombia",
@@ -275,7 +275,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Charles de Gaulle (CDG), París, Francia",
         "destino": "Roma, Italia",
         "destino_aeropuerto": "Aeropuerto Leonardo da Vinci-Fiumicino (FCO), Roma, Italia",
-        "duracion_total": "26 horas"
+        "duracion_total": "26"
     },
     {
         "origen": "Bogotá, Colombia",
@@ -285,7 +285,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Internacional de Narita (NRT), Tokio, Japón",
         "destino": "Pekín, China",
         "destino_aeropuerto": "Aeropuerto Internacional de Pekín-Capital (PEK), Pekín, China",
-        "duracion_total": "32 horas"
+        "duracion_total": "32"
     },
     {
         "origen": "Bogotá, Colombia",
@@ -296,7 +296,7 @@ vuelos_dos_escalas = [
         "escala2_aeropuerto": "Aeropuerto Internacional de Toronto Pearson (YYZ), Toronto, Canadá",
         "destino": "Londres, Reino Unido",
         "destino_aeropuerto": "Aeropuerto Heathrow de Londres (LHR), Londres, Reino Unido",
-        "duracion_total": "26 horas"
+        "duracion_total": "26"
     }
 ]
 
@@ -306,38 +306,54 @@ def crear_vuelos():
     origen = request.form['origen']
     destino = request.form['destino']
 
-    # Obtener la fecha actual
-    fecha_actual = datetime.now()
+    # Obtener la fecha y hora actual
+    fecha_hora_actual = datetime.now()
 
-    # Crear 5 vuelos
+
+    # Buscar si hay un vuelo en vuelos_dos_escalas con el mismo origen y destino
+    vuelo_dos_escalas = None
+    for vuelo in vuelos_dos_escalas:
+        if vuelo['origen'] == origen and vuelo['destino'] == destino:
+            vuelo_dos_escalas = vuelo
+            break
+
+    # Crear 5 vuelos y guardarlos en la base de datos
     for i in range(5):
-        # Calcular la fecha del vuelo (puede ser el mismo día o días después)
-        fecha_vuelo = fecha_actual + timedelta(days=i)
+        # Calcular la fecha y hora del vuelo
+        if i < 2:
+            # Para los primeros 2 vuelos, usa una fecha futura y una hora aleatoria
+            fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i, hours=random.randint(0, 23))
+        else:
+            # Para los demás, usa fechas y horas futuras
+            fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
 
-        # Obtener la hora de salida aleatoria
-        hora_salida = f"{random.randint(0, 23):02d}:{random.randint(0, 59):02d}"
-
-        # Inicializar el número de escalas en 0 y la fecha de llegada en None
-        numero_escalas = 0
-        fecha_llegada = None
-
-        # Verificar si el par origen y destino existe en vuelos_dos_escalas
+        # Verificar si los datos de origen y destino están contenidos en vuelos_dos_escalas
         for vuelo in vuelos_dos_escalas:
-            if origen in vuelo.values() and destino in vuelo.values():
+            if origen in vuelo['origen'] and destino in vuelo['destino']:
+                # Si hay coincidencia, utiliza los datos de ese vuelo
+                duracion_total = vuelo['duracion_total']
                 numero_escalas = 2
-                duracion_total = vuelo.get("duracion_total")
+                break
+        else:
+            # Si no hay coincidencia, utiliza los valores por defecto
+            duracion_total = "2"
+            numero_escalas = 0
 
-                # Calcular la fecha de llegada sumando la duración total al datetime de salida
-                fecha_salida = datetime.combine(fecha_vuelo, datetime.strptime(hora_salida, '%H:%M').time())
-                duracion_horas, duracion_minutos = map(int, duracion_total.split(" horas ")[0].split(" horas y "))
-                fecha_llegada = fecha_salida + timedelta(hours=duracion_horas, minutes=duracion_minutos)
+        # Calcula la fecha de llegada sumando la duración total en horas
+        fecha_salida = fecha_hora_vuelo
+        duracion_total_horas = int(duracion_total)
 
-        # Crear un nuevo vuelo y guardarlo en la base de datos
-        vuelo = Vuelo(id_aerolinea="1", ciudadOrigen="1", ciudadDestino="2", duracionVuelo="2",
-                      asientosDisponibles="4", fechaHLlegada=fecha_llegada, fechaHSalida=hora_salida,
-                      numeroEscalas=numero_escalas, precio="4000000", tipoAvion="RXD112")
+        # Convierte la duración total de horas a un objeto timedelta
+        duracion_total_timedelta = timedelta(hours=duracion_total_horas)
+
+        # Suma la duración total al momento de salida para obtener la fecha de llegada
+        fecha_llegada = fecha_salida + duracion_total_timedelta
+
+        # Crea un objeto Vuelo y guárdalo en la base de datos
+        vuelo = Vuelo(id_aerolinea="1", ciudadOrigen='1', ciudadDestino='2', duracionVuelo=duracion_total, asientosDisponibles="4",
+                      fechaHLlegada=fecha_llegada, fechaHSalida=fecha_hora_vuelo, numeroEscalas=numero_escalas, precio="4000000", tipoAvion="RXD112")
         db.session.add(vuelo)
 
     db.session.commit()
-    
+
     return jsonify({'message': 'Se han creado 5 vuelos exitosamente'})
