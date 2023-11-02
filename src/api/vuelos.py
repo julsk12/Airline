@@ -106,6 +106,12 @@ vuelos_nacionales = [
         "destino": "Cúcuta, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Camilo Daza (CUC), Cúcuta, Colombia",
         "duracion_total": "1",
+        "idaN": "317.580",
+        "vueltaN": "334.580", 
+        "idaF": "491.420",
+        "vueltaF": "304.580",
+        "solo_idaN": "317.580",
+        "solo_idaF": "410.600",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -139,10 +145,12 @@ vuelos_nacionales = [
         "destino": "Leticia, Colombia",
         "destino_aeropuerto": "Aeropuerto Alfredo Vásquez Cobo (LET), Leticia, Colombia",
         "duracion_total": "2",
-        "ida_y_vueltaN": "289.700",
-        "ida_y_vueltaF": "489.700",
+        "idaN": "289.700",
+        "vueltaN": "290.480", 
+        "idaF": "489.700",
+        "vueltaF": "324.580",
         "solo_idaN": "289.700",
-        "solo_idaF": "489.700",
+        "solo_idaF": "290.900",
     },
 ]
 vuelos_directos = [
