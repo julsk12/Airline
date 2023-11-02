@@ -68,7 +68,9 @@ def guardar_vuelos():
     db.session.commit()
     return redirect('/vuelo')
 
-
+#para tarifa S sumale 60
+#para tarifa M sumale 100
+#para tarifa L sumale 140
 vuelos_nacionales = [
     {
         "origen": "Bogotá, Colombia",
@@ -111,13 +113,25 @@ vuelos_nacionales = [
         "destino": "Santa Marta, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Simón Bolívar (SMR), Santa Marta, Colombia",
         "duracion_total": "1",
+        "idaN": "317.580",
+        "vueltaN": "334.580", 
+        "idaF": "491.420",
+        "vueltaF": "304.580",
+        "solo_idaN": "317.580",
+        "solo_idaF": "410.600",
     },
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Pasto, Colombia",
         "destino_aeropuerto": "Aeropuerto Antonio Nariño (PSO), Pasto, Colombia",
-        "duracion_total": "1",
+        "duracion_total": "1", 
+        "idaN": "213.060",
+        "vueltaN": "219.480", 
+        "idaF": "315.580",
+        "vueltaF": "324.580",
+        "solo_idaN": "213.060",
+        "solo_idaF": "309.330",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -125,6 +139,10 @@ vuelos_nacionales = [
         "destino": "Leticia, Colombia",
         "destino_aeropuerto": "Aeropuerto Alfredo Vásquez Cobo (LET), Leticia, Colombia",
         "duracion_total": "2",
+        "ida_y_vueltaN": "289.700",
+        "ida_y_vueltaF": "489.700",
+        "solo_idaN": "289.700",
+        "solo_idaF": "489.700",
     },
 ]
 vuelos_directos = [
@@ -351,7 +369,7 @@ def crear_vuelos():
 
         # Crea un objeto Vuelo y guárdalo en la base de datos
         vuelo = Vuelo(id_aerolinea="avianca", ciudadOrigen=origen, ciudadDestino=destino, duracionVuelo=duracion_total, asientosDisponibles="4",
-                      fechaHLlegada=fecha_llegada, fechaHSalida=fecha_hora_vuelo, numeroEscalas=numero_escalas, precio="4000000", tipoAvion="RXD112")
+                      fechaHLlegada=fecha_llegada, fechaHSalida=fecha_hora_vuelo, numeroEscalas=numero_escalas, precio="4000000")
         db.session.add(vuelo)
 
     db.session.commit()

@@ -5,7 +5,6 @@ from config.db import db, app, ma
 class Aeropuerto(db.Model):
     __tablename__ = "tblaeropuertos"
     
-    id= db.Column(db.Integer, autoincrement=True)
     nombre = db.Column(db.String(300))
     telefono = db.Column(db.Integer)
     direccion = db.Column(db.String(200), primary_key=True, autoincrement=False)
@@ -24,4 +23,4 @@ class Aeropuerto(db.Model):
             
 class AirportSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'nombre', 'telefono', 'direccion', 'serviciosdisponibles')
+        fields = ('nombre', 'telefono', 'direccion', 'serviciosdisponibles')

@@ -13,13 +13,12 @@ class Vuelo(db.Model):
     fechaHLlegada = db.Column(db.DateTime)
     asientosDisponibles = db.Column(db.String(300))
     precio = db.Column(db.Double)
-    tipoAvion = db.Column(db.String(300))
     numeroEscalas = db.Column(db.Integer)
     duracionVuelo = db.Column(db.String(300))
     
     
     def __init__(self, id_aerolinea, ciudadOrigen, ciudadDestino, fechaHSalida, fechaHLlegada,
-                 asientosDisponibles, precio, tipoAvion, numeroEscalas, duracionVuelo):
+                 asientosDisponibles, precio, numeroEscalas, duracionVuelo):
         self.id_aerolinea = id_aerolinea
         self.ciudadOrigen = ciudadOrigen
         self.ciudadDestino = ciudadDestino
@@ -27,7 +26,6 @@ class Vuelo(db.Model):
         self.fechaHLlegada = fechaHLlegada
         self.asientosDisponibles = asientosDisponibles
         self.precio = precio
-        self.tipoAvion = tipoAvion
         self.numeroEscalas = numeroEscalas
         self.duracionVuelo = duracionVuelo
         
@@ -40,4 +38,4 @@ class Vuelo(db.Model):
 class FliesSchema(ma.Schema):
     class Meta:
         fields = ('id', 'id_aerolinea', 'ciudadOrigen', 'ciudadDestino', 'fechaHSalida', 'fechaHLlegada',
-                  'asientosDisponibles', 'precio', 'tipoAvion', 'numeroEscalas', 'duracionVuelo')
+                  'asientosDisponibles', 'precio', 'numeroEscalas', 'duracionVuelo')
