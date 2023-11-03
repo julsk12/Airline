@@ -18,8 +18,23 @@ $(document).ready(function() {
 });
 
 function buscar_vuelos(){
+    const origen = document.getElementById("OrigenL").value;
+    const destino = document.getElementById("DestinoL").value;
     const Fsalida = document.getElementById("fechaS").value;
     const Fregreso = document.getElementById("fechaR").value;
 
-    window.alert("su fecha de salida es :"+Fsalida+"su fecha de Retorno es :"+Fregreso);
+    axios.get('/consulvuelos', {
+            responseType: 'json'
+        })
+        .then(function(response) {
+            for (let i = 1; i <= Object.keys(datos).length; i++) {
+                if (datos[i].origen == origen && datos[i].destino == destino) {
+                    window.alert("su fecha de salida es :"+Fsalida+" su fecha de Retorno es :"+Fregreso);
+                    window.alert("salio de :"+origen+" llego a :"+destino);
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 }
