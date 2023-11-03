@@ -16,3 +16,10 @@ $(document).ready(function() {
         $("#fechaR").datepicker("show");
     });
 });
+
+function buscar_vuelos(){
+    const Fsalida = document.getElementById("fechaS").value;
+    const Fregreso = document.getElementById("fechaR").value;
+
+    window.alert("su fecha de salida es :"+Fsalida+"su fecha de Retorno es :"+Fregreso);
+}
