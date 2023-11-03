@@ -5,11 +5,37 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="" rel="stylesheet">
+
+        <!-- bibliotecas de jQuery y jQuery UI para el calendario-->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     <body>
     <div id="pan">hola</div>
+    <div id="calendario">
+        <label for="OrigenL">Origen:</label>
+        <select id="OrigenL">
+            <option value="0" selected>Selecciona una opción</option>
+            <option value="Bogota">Bogota</option>
+            <option value="Barranquilla">Barranquilla.</option>
+        </select>
+        <label for="DestinoL">Destino:</label>
+        <select id="DestinoL">
+            <option value="0" selected>Selecciona una opción</option>
+            <option value="Bogota">Bogota</option>
+            <option value="Barranquilla">Barranquilla.</option>
+        </select>
+        <label for="fechaS">Fecha De Salida:</label>
+        <input size="16" type="text" class="form-control" id="fechaS" readonly>
+        <label for="fechaR">Fecha De Retorno:</label>
+        <input size="16" type="text" class="form-control" id="fechaR" readonly>
+        <br><br>
+        <button type="button" onclick="">Buscar</button>
+    </div>
     </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{{url_for('static', filename='calendario.js')}}"></script>
 <script>
 
     axios.post('/api/crear_vuelos', {
