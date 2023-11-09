@@ -1,5 +1,6 @@
 from flask import Flask,  redirect, request, jsonify, json, session, render_template, Blueprint
 from config.db import db, app, ma
+from api.aeropuerto import routes_aeropuerto, guardaraeropuerto
 
 
 from api.Users import routes_users
@@ -34,6 +35,9 @@ def index():
 def otr():
     return "hola mundo"
 
+@app.before_first_request
+def autollenar_aeropuertos():
+    guardaraeropuerto()
 
 if __name__ == '__main__':
    # load_dotenv()
