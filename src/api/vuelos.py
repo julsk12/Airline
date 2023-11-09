@@ -69,9 +69,10 @@ def guardar_vuelos():
     db.session.commit()
     return redirect('/vuelo')
 
-#para tarifa S sumale 60
-#para tarifa M sumale 100
-#para tarifa L sumale 140
+
+# para tarifa S sumale 60
+# para tarifa M sumale 100
+# para tarifa L sumale 140
 vuelos_nacionales = [
     {
         "origen": "Bogotá, Colombia",
@@ -79,6 +80,12 @@ vuelos_nacionales = [
         "destino": "Medellín, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional José María Córdova (MDE), Medellín, Colombia",
         "duracion_total": "1",
+        "idaN": "205.080",
+        "vueltaN": "155.500",
+        "idaF": "361.080",
+        "vueltaF": "227.555",
+        "solo_idaN": "205.080",
+        "solo_idaF": "361.080",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -86,6 +93,12 @@ vuelos_nacionales = [
         "destino": "Cali, Colombia",
         "destino_aeropuerto": "Aeropuerto Internacional Alfonso Bonilla Aragón (CLO), Cali, Colombia",
         "duracion_total": "1",
+        "idaN": "186.605",
+        "vueltaN": "189.605",
+        "idaF": "269.385",
+        "vueltaF": "213.355",
+        "solo_idaN": "186.605",
+        "solo_idaF": "269.385",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -94,7 +107,7 @@ vuelos_nacionales = [
         "destino_aeropuerto": "Aeropuerto Internacional Ernesto Cortissoz (BAQ), Barranquilla, Colombia",
         "duracion_total": "1",
         "idaN": "220.670",
-        "vueltaN": "231.770", 
+        "vueltaN": "231.770",
         "idaF": "197.555",
         "vueltaF": "197.555",
         "solo_idaN": "176.555",
@@ -107,7 +120,7 @@ vuelos_nacionales = [
         "destino_aeropuerto": "Aeropuerto Internacional Matecaña (PEI), Pereira, Colombia",
         "duracion_total": "1",
         "idaN": "176.555",
-        "vueltaN": "176.555", 
+        "vueltaN": "176.555",
         "idaF": "197.555",
         "vueltaF": "197.555",
         "solo_idaN": "176.555",
@@ -120,7 +133,7 @@ vuelos_nacionales = [
         "destino_aeropuerto": "Aeropuerto Internacional Camilo Daza (CUC), Cúcuta, Colombia",
         "duracion_total": "1",
         "idaN": "317.580",
-        "vueltaN": "334.580", 
+        "vueltaN": "334.580",
         "idaF": "491.420",
         "vueltaF": "304.580",
         "solo_idaN": "317.580",
@@ -133,7 +146,7 @@ vuelos_nacionales = [
         "destino_aeropuerto": "Aeropuerto Internacional Simón Bolívar (SMR), Santa Marta, Colombia",
         "duracion_total": "1",
         "idaN": "317.580",
-        "vueltaN": "334.580", 
+        "vueltaN": "334.580",
         "idaF": "491.420",
         "vueltaF": "304.580",
         "solo_idaN": "317.580",
@@ -144,9 +157,9 @@ vuelos_nacionales = [
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
         "destino": "Pasto, Colombia",
         "destino_aeropuerto": "Aeropuerto Antonio Nariño (PSO), Pasto, Colombia",
-        "duracion_total": "1", 
+        "duracion_total": "1",
         "idaN": "213.060",
-        "vueltaN": "219.480", 
+        "vueltaN": "219.480",
         "idaF": "315.580",
         "vueltaF": "324.580",
         "solo_idaN": "213.060",
@@ -159,7 +172,7 @@ vuelos_nacionales = [
         "destino_aeropuerto": "Aeropuerto Alfredo Vásquez Cobo (LET), Leticia, Colombia",
         "duracion_total": "2",
         "idaN": "289.700",
-        "vueltaN": "290.480", 
+        "vueltaN": "290.480",
         "idaF": "489.700",
         "vueltaF": "324.580",
         "solo_idaN": "289.700",
@@ -173,6 +186,12 @@ vuelos_directos = [
         "destino": "Miami, EE. UU.",
         "destino-aeropuerto": "Aeropuerto Internacional de Miami (MIA), Miami, EE. UU.",
         "duracion_total": "4 horas",
+        "idaN": "1.084.590",
+        "vueltaN": "831.770", 
+        "idaF": "197.555",
+        "vueltaF": "197.555",
+        "solo_idaN": "176.555",
+        "solo_idaF": "197.555",
     },
     {
         "origen": "Bogotá, Colombia",
@@ -353,7 +372,8 @@ def crear_vuelos():
     for i in range(5):
         # Calcular la fecha y hora del vuelo
         if i < 2:
-            fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i, hours=random.randint(0, 23))
+            fecha_hora_vuelo = fecha_hora_actual + \
+                timedelta(days=i, hours=random.randint(0, 23))
         else:
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
 
@@ -397,13 +417,16 @@ def crear_vuelos():
 
     return jsonify({'message': 'Se han creado 5 vuelos exitosamente'})
 
-# consultar los vuelos guardados en la tabla 
+# consultar los vuelos guardados en la tabla
+
+
 @routes_vuelos.route('/consulvuelos', methods=['GET'])
 def consulvuelos():
     datos = {}
     vuelos_table = db.Model.metadata.tables['tblvuelos']
     aerolinia_table = db.Model.metadata.tables['tblaerolinea']
-    resultado = db.session.query(Vuelo, Aerolinea).select_from(vuelos_table).join(aerolinia_table).all()
+    resultado = db.session.query(Vuelo, Aerolinea).select_from(
+        vuelos_table).join(aerolinia_table).all()
     i = 0
     for Vuelo, Aerolinea in resultado:
         i += 1
