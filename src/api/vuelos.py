@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import random
 
 from Model.Vuelos import Vuelo, FliesSchema
+from Model.Aerolineas import Aerolinea
 
 routes_vuelos = Blueprint("routes_vuelos",  __name__)
 
@@ -395,3 +396,27 @@ def crear_vuelos():
     db.session.commit()
 
     return jsonify({'message': 'Se han creado 5 vuelos exitosamente'})
+
+# consultar los vuelos guardados en la tabla 
+@routes_vuelos.route('/consulvuelos', methods=['GET'])
+def consulvuelos():
+    datos = {}
+    vuelos_table = db.Model.metadata.tables['tblvuelos']
+    aerolinia_table = db.Model.metadata.tables['tblaerolinea']
+    resultado = db.session.query(Vuelo, Aerolinea).select_from(vuelos_table).join(aerolinia_table).all()
+    i = 0
+    for Vuelo, Aerolinea in resultado:
+        i += 1
+        datos[i] = {
+            'id': Vuelo.id,
+            'aerolinea': Aerolinea.nombre,
+            'origen': Vuelo.ciudadOrigen,
+            'destino': Vuelo.ciudadDestino,
+            'Fsalida': Vuelo.fechaHSalida,
+            'Fllegada': Vuelo.fechaHLlegada,
+            'asientosD': Vuelo.asientosDisponibles,
+            'precio': Vuelo.precio,
+            '#escalas': Vuelo.numeroEscalas,
+            'duracion': Vuelo.duracionVuelo
+        }
+    return jsonify(datos)
