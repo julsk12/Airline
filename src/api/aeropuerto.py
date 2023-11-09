@@ -235,10 +235,49 @@ aeropuertos_nacionales = [
         "Dirección": "Yopal/Casanare"
     }
 ]
+
+aeropuertos_extranjeros = [
+    {
+        "Nombre": "Aeropuerto Internacional John F. Kennedy (JFK)",
+        "Dirección": "Estados Unidos, Nueva York"
+    },
+    {
+        "Nombre": "Aeropuerto Heathrow de Londres (LHR)",
+        "Dirección": "Reino Unido, Londres"
+    },
+    {
+        "Nombre": "Aeropuerto Internacional de Dubái (DXB)",
+        "Dirección": "Emiratos Árabes Unidos, Dubái"
+    },
+    {
+        "Nombre": "Aeropuerto Internacional de Narita (NRT)",
+        "Dirección": "Japón, Tokio"
+    },
+    {
+        "Nombre": "Aeropuerto Internacional de Hamad (DOH)",
+        "Dirección": "Catar, Doha"
+    },
+    {
+        "Nombre": "Aeropuerto Changi de Singapur (SIN)",
+        "Dirección": "Singapur, Singapur"
+    },
+    {
+        "Nombre": "Aeropuerto Suvarnabhumi de Bangkok (BKK)",
+        "Dirección": "Tailandia, Bangkok"
+    },
+    {
+        "Nombre": "Aeropuerto Kingsford Smith de Sídney (SYD)",
+        "Dirección": "Australia, Sídney"
+    },
+    {
+        "Nombre": "Aeropuerto Internacional de Pekín-Capital (PEK)",
+        "Dirección": "China, Pekín"
+    }
+]
 #---------------Lista aeropuertos Fin-----------------------------
 @routes_aeropuerto.route('/guardaraeropuerto', methods=['POST'])
 def guardaraeropuerto():
-    for aeropuerto_data in aeropuertos_nacionales:
+    for aeropuerto_data in aeropuertos_nacionales + aeropuertos_extranjeros:
         nombre = aeropuerto_data['Nombre']
         direccion = aeropuerto_data['Dirección']
 
