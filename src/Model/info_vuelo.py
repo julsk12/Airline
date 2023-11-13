@@ -21,10 +21,14 @@ class Informacion(db.Model):
     solo_idaN = db.Column(db.Double)
     solo_idaF = db.Column(db.Double)
     tarifaS = db.Column(db.Text)
+    RestriccionestarifaS = db.Column(db.Text)
     tarifaM = db.Column(db.Text)
+    RestriccionestarifaM = db.Column(db.Text)
     tarifaL = db.Column(db.Text)
+    RestriccionestarifaL = db.Column(db.Text)
     
-    def __init__(self, origen, origen_aeropuerto, escala1, escala1_aeropuerto, escala2, escala2_aeropuerto, destino, destino_aeropuerto, idaN, vueltaN, idaF, vueltaF, solo_idaN, solo_idaF, tarifaS, tarifaM, tarifaL):
+    
+    def __init__(self, origen, origen_aeropuerto, escala1, escala1_aeropuerto, escala2, escala2_aeropuerto, destino, destino_aeropuerto, idaN, vueltaN, idaF, vueltaF, solo_idaN, solo_idaF, tarifaS, RestriccionestarifaS, tarifaM, RestriccionestarifaM, tarifaL, RestriccionestarifaL):
         self.origen = origen
         self.origen_aeropuerto = origen_aeropuerto
         self.escala1 = escala1
@@ -40,8 +44,11 @@ class Informacion(db.Model):
         self.solo_idaN = solo_idaN
         self.solo_idaF = solo_idaF
         self.tarifaS = tarifaS
+        self.RestriccionestarifaS = RestriccionestarifaS
         self.tarifaM = tarifaM
+        self.RestriccionestarifaM = RestriccionestarifaM
         self.tarifaL = tarifaL
+        self.RestriccionestarifaL = RestriccionestarifaL
         
 vuelos_nacionales = [
     {
@@ -598,10 +605,6 @@ vuelos_dos_escalas = [
     },
 ]
 
-# for vuelo_data in vuelos_nacionales + vuelos_directos + vuelos_dos_escalas:
-#     vuelo_data.setdefault('destino_aeropuerto', '')
-#     vuelo_data.setdefault('origen_aeropuerto', '')
-
 def create_aero():
     if Informacion.query.count() == 0:
         for aeropuerto_data in vuelos_nacionales + vuelos_directos + vuelos_dos_escalas:
@@ -621,8 +624,11 @@ def create_aero():
             solo_idaN = aeropuerto_data.get('solo_idaN', 0)
             solo_idaF = aeropuerto_data.get('solo_idaF', 0)
             tarifaS = aeropuerto_data.get('tarifaS', '')
+            RestriccionestarifaS = aeropuerto_data.get('RestriccionestarifaS', '')
             tarifaM = aeropuerto_data.get('tarifaM', '')
+            RestriccionestarifaM = aeropuerto_data.get('RestriccionestarifaM', '')
             tarifaL = aeropuerto_data.get('tarifaL', '')
+            RestriccionestarifaL = aeropuerto_data.get('RestriccionestarifaL', '')
             print("Valores antes de crear el objeto Informacion:")
             print(origen, origen_aeropuerto, escala1, escala1_aeropuerto, destino, destino_aeropuerto, idaN, vueltaN, idaF, vueltaF, solo_idaN, solo_idaF, tarifaS, tarifaM, tarifaL)
 
@@ -642,8 +648,11 @@ def create_aero():
                 solo_idaN=solo_idaN,
                 solo_idaF=solo_idaF,
                 tarifaS=tarifaS,
+                RestriccionestarifaS = RestriccionestarifaS,
                 tarifaM=tarifaM,
+                RestriccionestarifaM = RestriccionestarifaM,
                 tarifaL=tarifaL,
+                RestriccionestarifaL = RestriccionestarifaL,
             )
 
             print(nuevo_infor)
