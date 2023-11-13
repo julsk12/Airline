@@ -183,11 +183,8 @@ aeropuertos_extranjeros = [
     }
 ]
 
-print("entré")
 
 def create_aero():
-    print("entré")
-    # Verificamos si ya existen registros en la tabla
     if Aeropuerto.query.count() == 0:
         for aeropuerto_data in aeropuertos_nacionales + aeropuertos_extranjeros:
             nombre = aeropuerto_data['Nombre']
@@ -195,7 +192,6 @@ def create_aero():
             telefono = aeropuerto_data.get('Teléfono', '')
             serviciosdisponibles = aeropuerto_data.get('ServiciosDisponibles', '')
 
-            # Creamos un nuevo objeto Aeropuerto
             nuevo_aeropuerto = Aeropuerto(
                 nombre=nombre,
                 telefono=telefono,

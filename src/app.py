@@ -10,6 +10,7 @@ from api.pagos import routes_pagos
 from api.reservas import routes_reserva
 from api.comentario import routes_comentar
 from api.detallespago import routes_detalles
+from api.info_vuelos import routes_info
 from api.algo import routes_algo
 
 app = Flask(__name__)
@@ -22,6 +23,8 @@ app.register_blueprint(routes_pagos, url_prefix="/api")
 app.register_blueprint(routes_reserva, url_prefix="/api")
 app.register_blueprint(routes_comentar, url_prefix="/api")
 app.register_blueprint(routes_detalles, url_prefix="/api")
+app.register_blueprint(routes_info, url_prefix="/api")
+app.register_blueprint(routes_algo, url_prefix="/api")
 
 @app.route("/")
 def index():

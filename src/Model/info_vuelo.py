@@ -1,98 +1,48 @@
-# from common.Toke import *
+from flask import Flask, Blueprint, redirect, jsonify, json, session, render_template, request
+#from common.Toke import *
 from config.db import db, app, ma
-from flask import (
-    Flask,
-    Blueprint,
-    redirect,
-    request,
-    jsonify,
-    json,
-    session,
-    render_template,
-)
-from datetime import datetime, timedelta
-import random
 
-from Model.Vuelos import Vuelo, FliesSchema
-from Model.Aerolineas import Aerolinea
-
-routes_vuelos = Blueprint("routes_vuelos", __name__)
-
-vuelo_schema = FliesSchema()
-flies_Schema = FliesSchema(many=True)
-
-
-@routes_vuelos.route("/vuelo", methods=["GET"])
-def obtenervuelos():
-    returnall = Vuelo.query.all()
-    result_flies = flies_Schema.dump(returnall)
-    return jsonify(result_flies)
-
-
-# -------------------CRUD---------------------------------
-
-
-@routes_vuelos.route("/eliminarvuelos/<id>", methods=["GET"])
-def eliminarvuelos(id):
-    fly = Vuelo.query.get(id)
-    db.session.delete(fly)
-    db.session.commit()
-    return jsonify(vuelo_schema.dump(fly))
-
-
-@routes_vuelos.route("/actualizarvuelos", methods=["POST"])
-def actualizarvuelos():
-    id = request.json["id"]
-    aerolinea = request.json["aerolinea"]
-    ciudadOrigen = request.json["ciudadOrigen"]
-    ciudadDestino = request.json["ciudadDestino"]
-    fechaHSalida = request.json["fechaHSalida"]
-    fechaHLlegada = request.json["fechaHLlegada"]
-    asientosDisponibles = request.json["asientosDisponibles"]
-    precio = request.json["precio"]
-    tipoAvion = request.json["tipoAvion"]
-    numeroEscalas = request.json["numeroEscalas"]
-    duracionVuelo = request.json["duracionVuelo"]
-
-    avuelos = Vuelo.query.get(id)
-    avuelos.Vuelo = aerolinea
-    avuelos.Vuelo = ciudadOrigen
-    avuelos.Vuelo = ciudadDestino
-    avuelos.Vuelo = fechaHSalida
-    avuelos.Vuelo = fechaHLlegada
-    avuelos.Vuelo = asientosDisponibles
-    avuelos.Vuelo = precio
-    avuelos.Vuelo = tipoAvion
-    avuelos.Vuelo = numeroEscalas
-    avuelos.Vuelo = duracionVuelo
-
-    db.session.commit()
-    return redirect("/vuelo")
-
-
-@routes_vuelos.route("/guardarvuelos", methods=["POST"])
-def guardar_vuelos():
-    fly = request.json[
-        "aerolinea",
-        "ciudadOrigen",
-        "ciudadDestino",
-        "fechaHSalida",
-        "fechaHLlegada",
-        "asientosDisponibles",
-        "precio",
-        "tipoAvion",
-        "numeroEscalas",
-        "duracionVuelo",
-    ]
-    new_vuelo = Vuelo(fly)
-    db.session.add(new_vuelo)
-    db.session.commit()
-    return redirect("/vuelo")
-
-
-# para tarifa S sumale 60
-# para tarifa M sumale 100
-# para tarifa L sumale 140
+class Informacion(db.Model):
+    __tablename__ = "tblinfo_vuelo"
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    origen = db.Column(db.String(300))
+    origen_aeropuerto = db.Column(db.String(300))
+    escala1 = db.Column(db.String(300))
+    escala1_aeropuerto = db.Column(db.String(300))
+    escala2 = db.Column(db.String(300))
+    escala2_aeropuerto = db.Column(db.String(300))
+    destino = db.Column(db.String(300))
+    destino_aeropuerto = db.Column(db.String(300))
+    idaN = db.Column(db.Integer)
+    vueltaN = db.Column(db.Double)
+    idaF = db.Column(db.Double)
+    vueltaF = db.Column(db.Double)
+    solo_idaN = db.Column(db.Double)
+    solo_idaF = db.Column(db.Double)
+    tarifaS = db.Column(db.Text)
+    tarifaM = db.Column(db.Text)
+    tarifaL = db.Column(db.Text)
+    
+    def __init__(self, origen, origen_aeropuerto, escala1, escala1_aeropuerto, escala2, escala2_aeropuerto, destino, destino_aeropuerto, idaN, vueltaN, idaF, vueltaF, solo_idaN, solo_idaF, tarifaS, tarifaM, tarifaL):
+        self.origen = origen
+        self.origen_aeropuerto = origen_aeropuerto
+        self.escala1 = escala1
+        self.escala1_aeropuerto = escala1_aeropuerto
+        self.escala2 = escala2
+        self.escala2_aeropuerto = escala2_aeropuerto
+        self.destino = destino
+        self.destino_aeropuerto = destino_aeropuerto
+        self.idaN = idaN
+        self.vueltaN = vueltaN
+        self.idaF = idaF
+        self.vueltaF = vueltaF
+        self.solo_idaN = solo_idaN
+        self.solo_idaF = solo_idaF
+        self.tarifaS = tarifaS
+        self.tarifaM = tarifaM
+        self.tarifaL = tarifaL
+        
 vuelos_nacionales = [
     {
         "origen": "Bogotá, Colombia",
@@ -648,103 +598,64 @@ vuelos_dos_escalas = [
     },
 ]
 
+# for vuelo_data in vuelos_nacionales + vuelos_directos + vuelos_dos_escalas:
+#     vuelo_data.setdefault('destino_aeropuerto', '')
+#     vuelo_data.setdefault('origen_aeropuerto', '')
 
-@routes_vuelos.route("/crear_vuelos", methods=["POST"])
-def crear_vuelos():
-    # Obtener los datos del formulario
-    origen = request.form["origen"]
-    destino = request.form["destino"]
+def create_aero():
+    if Informacion.query.count() == 0:
+        for aeropuerto_data in vuelos_nacionales + vuelos_directos + vuelos_dos_escalas:
+            print("Aeropuerto Data:", aeropuerto_data)
+            origen = aeropuerto_data.get('origen', '')
+            origen_aeropuerto = aeropuerto_data.get('origen_aeropuerto', '')
+            escala1 = aeropuerto_data.get('escala1', '')
+            escala1_aeropuerto = aeropuerto_data.get('escala1_aeropuerto', '')
+            escala2 = aeropuerto_data.get('escala2', '')
+            escala2_aeropuerto = aeropuerto_data.get('escala2_aeropuerto', '')
+            destino = aeropuerto_data.get('destino', '')
+            destino_aeropuerto = aeropuerto_data.get('destino_aeropuerto', '')
+            idaN = aeropuerto_data.get('idaN', 0)
+            vueltaN = aeropuerto_data.get('vueltaN', 0)
+            idaF = aeropuerto_data.get('idaF', 0)
+            vueltaF = aeropuerto_data.get('vueltaF', 0)
+            solo_idaN = aeropuerto_data.get('solo_idaN', 0)
+            solo_idaF = aeropuerto_data.get('solo_idaF', 0)
+            tarifaS = aeropuerto_data.get('tarifaS', '')
+            tarifaM = aeropuerto_data.get('tarifaM', '')
+            tarifaL = aeropuerto_data.get('tarifaL', '')
+            print("Valores antes de crear el objeto Informacion:")
+            print(origen, origen_aeropuerto, escala1, escala1_aeropuerto, destino, destino_aeropuerto, idaN, vueltaN, idaF, vueltaF, solo_idaN, solo_idaF, tarifaS, tarifaM, tarifaL)
 
-    # Obtener la fecha y hora actual
-    fecha_hora_actual = datetime.now()
-
-    # Crear 5 vuelos y guardarlos en la base de datos
-    for i in range(5):
-        # Calcular la fecha y hora del vuelo
-        if i < 2:
-            fecha_hora_vuelo = fecha_hora_actual + timedelta(
-                days=i, hours=random.randint(0, 23)
+            nuevo_infor = Informacion(
+                origen=origen,
+                origen_aeropuerto=origen_aeropuerto,
+                escala1=escala1,
+                escala1_aeropuerto=escala1_aeropuerto,
+                escala2=escala2,
+                escala2_aeropuerto=escala2_aeropuerto,
+                destino=destino,
+                destino_aeropuerto=destino_aeropuerto,
+                idaN=idaN,
+                vueltaN=vueltaN,
+                idaF=idaF,
+                vueltaF=vueltaF,
+                solo_idaN=solo_idaN,
+                solo_idaF=solo_idaF,
+                tarifaS=tarifaS,
+                tarifaM=tarifaM,
+                tarifaL=tarifaL,
             )
-        else:
-            fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
 
-        duracion_total = "2"
-        numero_escalas = 0
+            print(nuevo_infor)
+            db.session.add(nuevo_infor)
 
-        # Verificar si los datos de origen y destino están contenidos en vuelos_nacionales
-        for vuelo in vuelos_nacionales:
-            if origen == vuelo["origen"] and destino == vuelo["destino"]:
-                duracion_total = vuelo["duracion_total"]
-                numero_escalas = 0
-                break
+        db.session.commit()
 
-        # Verificar si los datos de origen y destino están contenidos en vuelos_directos
-        for vuelo in vuelos_directos:
-            if origen == vuelo["origen"] and destino == vuelo["destino"]:
-                duracion_total = vuelo["duracion_total"]
-                numero_escalas = 0
-                break
-
-        # Verificar si los datos de origen y destino están contenidos en vuelos_dos_escalas
-        for vuelo in vuelos_dos_escalas:
-            if origen == vuelo["origen"] and destino == vuelo["destino"]:
-                duracion_total = vuelo["duracion_total"]
-                numero_escalas = 2
-                break
-
-        fecha_salida = fecha_hora_vuelo
-        duracion_total_horas = int(duracion_total)
-
-        duracion_total_timedelta = timedelta(hours=duracion_total_horas)
-
-        fecha_llegada = fecha_salida + duracion_total_timedelta
-
-        # Crea un objeto Vuelo y guárdalo en la base de datos
-        vuelo = Vuelo(
-            id_aerolinea="avianca",
-            ciudadOrigen=origen,
-            ciudadDestino=destino,
-            duracionVuelo=duracion_total,
-            asientosDisponibles="4",
-            fechaHLlegada=fecha_llegada,
-            fechaHSalida=fecha_hora_vuelo,
-            numeroEscalas=numero_escalas,
-            precio="4000000",
-        )
-        db.session.add(vuelo)
-
-    db.session.commit()
-
-    return jsonify({"message": "Se han creado 5 vuelos exitosamente"})
-
-
-# consultar los vuelos guardados en la tabla
-
-
-@routes_vuelos.route("/consulvuelos", methods=["GET"])
-def consulvuelos():
-    datos = {}
-    vuelos_table = db.Model.metadata.tables["tblvuelos"]
-    aerolinia_table = db.Model.metadata.tables["tblaerolinea"]
-    resultado = (
-        db.session.query(Vuelo, Aerolinea)
-        .select_from(vuelos_table)
-        .join(aerolinia_table)
-        .all()
-    )
-    i = 0
-    for Vuelo, Aerolinea in resultado:
-        i += 1
-        datos[i] = {
-            "id": Vuelo.id,
-            "aerolinea": Aerolinea.nombre,
-            "origen": Vuelo.ciudadOrigen,
-            "destino": Vuelo.ciudadDestino,
-            "Fsalida": Vuelo.fechaHSalida,
-            "Fllegada": Vuelo.fechaHLlegada,
-            "asientosD": Vuelo.asientosDisponibles,
-            "precio": Vuelo.precio,
-            "#escalas": Vuelo.numeroEscalas,
-            "duracion": Vuelo.duracionVuelo,
-        }
-    return jsonify(datos)
+with app.app_context():
+    db.create_all()
+    create_aero()
+            
+            
+class InfoSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'origen', 'origen_aeropuerto', 'destino', 'destino_aeropuerto', 'idaN', 'vueltaN', 'idaF', 'vueltaF', 'solo_idaN', 'solo_idaF', 'tarifaS', 'tarifaM', 'tarifaL')
