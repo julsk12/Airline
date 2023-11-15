@@ -639,7 +639,6 @@ vuelos_dos_escalas = [
 def create_aero():
     if Informacion.query.count() == 0:
         for aeropuerto_data in vuelos_nacionales + vuelos_directos + vuelos_dos_escalas:
-            print("Aeropuerto Data:", aeropuerto_data)
             origen = aeropuerto_data.get('origen', '')
             origen_aeropuerto = aeropuerto_data.get('origen_aeropuerto', '')
             escala1 = aeropuerto_data.get('escala1', '')
@@ -662,9 +661,7 @@ def create_aero():
             RestriccionestarifaM = aeropuerto_data.get('RestriccionestarifaM', '')
             tarifaL = aeropuerto_data.get('tarifaL', '')
             RestriccionestarifaL = aeropuerto_data.get('RestriccionestarifaL', '')
-            print("Valores antes de crear el objeto Informacion:")
-            print(origen, origen_aeropuerto, escala1, escala1_aeropuerto, destino, destino_aeropuerto, idaN, vueltaN, idaF, vueltaF, solo_idaN, solo_idaF, tarifaS, tarifaM, tarifaL)
-
+           
             nuevo_infor = Informacion(
                 origen=origen,
                 origen_aeropuerto=origen_aeropuerto,
@@ -690,7 +687,6 @@ def create_aero():
                 RestriccionestarifaL = RestriccionestarifaL,
             )
 
-            print(nuevo_infor)
             db.session.add(nuevo_infor)
 
         db.session.commit()

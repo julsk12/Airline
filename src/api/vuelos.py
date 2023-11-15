@@ -97,9 +97,12 @@ def guardar_vuelos():
 
 @routes_vuelos.route("/crear_vuelos", methods=["POST"])
 def crear_vuelos():
-    # Obtener los datos del formulario
+    
     origen = request.form["origen"]
     destino = request.form["destino"]
+    mascota = request.form["mascota"]
+
+
 
     resultado = db.session.query(Informacion).filter(
         Informacion.origen == origen,
@@ -108,11 +111,13 @@ def crear_vuelos():
 
     fecha_hora_actual = datetime.now()
 
-    for i in range(5):
+    for i in range(6):
         if i < 2:
             fecha_hora_vuelo = fecha_hora_actual + timedelta(
                 days=i, hours=random.randint(0, 23)
             )
+        elif i == 3 and mascota == "si" or mascota == "Si":
+            fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
         else:
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
 
@@ -151,7 +156,6 @@ def crear_vuelos():
             idaN_total += datos['idaN']
             vueltaN_total += datos['vueltaN']
 
-        print(idaN_total, "numero 1", duracion_total)
         precio = idaN_total + vueltaN_total
         fecha_salida = fecha_hora_vuelo
         duracion_total_horas = duracion_total
@@ -165,10 +169,11 @@ def crear_vuelos():
             id_aerolinea="avianca",
             ciudadOrigen=origen,
             ciudadDestino=destino,
-            duracionVuelo=duracion_total,
-            asientosDisponibles="4",
             fechaHLlegada=fecha_llegada,
             fechaHSalida=fecha_hora_vuelo,
+            mascotas = mascota,
+            duracionVuelo=duracion_total,
+            asientosDisponibles="4",
             numeroEscalas=numero_escalas,
             precio=precio,
         )
