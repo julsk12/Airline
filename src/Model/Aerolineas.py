@@ -5,24 +5,32 @@ from config.db import db, app, ma
 class Aerolinea(db.Model):
     __tablename__ = "tblaerolinea"
     
-    id= db.Column(db.Integer, autoincrement=True)
     nombre = db.Column(db.String(300), primary_key=True, autoincrement=False)
     telefono = db.Column(db.Integer)
-    direccion = db.Column(db.String(200))
-    politicaequipaje = db.Column(db.Text)
     
     
-    def __init__(self, id, nombre, telefono, direccion, politicaequipaje):
-        self.id = id
+    def __init__(self, nombre, telefono):
         self.nombre = nombre
         self.telefono = telefono
-        self.direccion = direccion
-        self.politicaequipaje = politicaequipaje
-        
-    with app.app_context():
-            db.create_all()
+
+
+def create_roles():
+
+    if Aerolinea.query.count() == 0:
+        avianca = Aerolinea('Avianca', '018000953434')
+        airlatam = Aerolinea('Airline Latam', '018000949490')
+        wingo = Aerolinea('Wingo', '018000111115')
+       
+        db.session.add(avianca)
+        db.session.add(airlatam)
+        db.session.add(wingo)
+        db.session.commit()
+
+with app.app_context():
+    db.create_all()
+    create_roles()
             
             
 class AirlineSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'nombre', 'telefono', 'direccion', 'politicaequipaje')
+        fields = ('nombre', 'telefono')
