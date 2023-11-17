@@ -5,22 +5,57 @@ window.addEventListener('load', function() {
 function viewtarifas() {
   let morfismo = document.getElementById('tarifas');
 
-  axios.get('/api/crear_vuelos', {
+
+  axios.get('/api/info_tarifa', {
     responseType: 'json'
   })
-    .then(function (response) {
-      let datos = response.data;
+    .then(function (res) {
+      console.log(res.data);
+      let datos = res.data; 
       var length = Object.keys(datos).length + 1;
       let listper = '';
       
       for (let index = 1; index < length; index++) {
-        listper += `<h2 class="card__heading">Tarifa S</h2>
-        <p class="card__price">Viaje ligero</p>
-        <ul role="list" class="card__bullets flow">
-          <li>${datos[index].tarifaS}</li>
-          <li>Email support</li>
-        </ul>`;
+          listper += `
+          <div class="cards__card card">
+            <p class="card__price">Tarifa S</p>
+            <h2 class="card__heading">Viaje ligero</h2>
+            <ul role="list" class="card__bullets flow">
+                <li>${datos[index].tarifaS}</li>
+            </ul>
+            <h2 class="card__heading">Restricciones</h2>
+            <ul role="list" class="card__bullets flow">
+                <li>${datos[index].RestriccionestarifaS}</li>
+            </ul>
+                </div>
+          
+                <div class="cards__card card">
+                  <p class="card__price">Tarifa M</p>
+                  <h2 class="card__heading">Mas confort</h2>
+                  <ul role="list" class="card__bullets flow">
+                    <li>${datos[index].tarifaM}</li>
+                  </ul>
+                  <h2 class="card__heading">Restricciones</h2>
+                  <ul role="list" class="card__bullets flow">
+                      <li>${datos[index].RestriccionestarifaM}</li>
+                  </ul>
+                </div>
+          
+                <div class="cards__card card">
+                  <p class="card__price">Tarifa L</p>
+                  <h2 class="card__heading">Mas flexible</h2>
+                  <ul role="list" class="card__bullets flow">
+                    <li>${datos[index].tarifaL}</li>
+                  </ul>
+                  <h2 class="card__heading">Restricciones</h2>
+                  <ul role="list" class="card__bullets flow">
+                      <li>${datos[index].RestriccionestarifaL}</li>
+                  </ul>
+                </div>
+              
+          `;
       }
+      
       morfismo.innerHTML = listper;
 
     })

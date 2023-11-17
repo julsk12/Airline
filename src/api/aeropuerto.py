@@ -53,245 +53,31 @@ def guardar_port():
     return redirect('/aeropuerto')
 
 #---------------Lista aeropuertos---------------------------------
-aeropuertos_nacionales = [
-    {
-        "Nombre": "Antonio Roldán Betancourt",
-        "Teléfono": "6045208543",
-        "Dirección": "Kilómetro 10, vía Zungo Embarcadero, Apartadó/Carepa, Antioquia"
-    },
-    {
-        "Nombre": "Santiago Pérez Quiroz",
-        "Teléfono": "078852297",
-        "Dirección": "81001 Arauca/Arauca"
-    },
-    {
-        "Nombre": "José Celestino Mutis",
-        "Teléfono": "3184512723",
-        "Dirección": "27075 Bahía Solano/Chocó"
-    },
-    {
-        "Nombre": "Yariguíes",
-        "Teléfono": "3175180631",
-        "Dirección": "Barrancabermeja/Santander"
-    },
-    {
-        "Nombre": "Guaymaral",
-        "Teléfono": "14251000",
-        "Dirección": "Av. El Dorado #103-15, Bogotá/Distrito Capital"
-    },
-    {
-        "Nombre": "Juan H. White",
-        "Teléfono": "3104294246",
-        "Dirección": "Carrera 16 #calle 14, Caucasia/Antioquia"
-    },
-    {
-        "Nombre": "Gustavo Artunduaga",
-        "Teléfono": "84351495",
-        "Dirección": "18001 Florencia/Caquetá"
-    },
-    {
-        "Nombre": "Juan Casiano",
-        "Teléfono": "28400188",
-        "Dirección": "19318 Guapi/Departamento de Cauca"
-    },
-    {
-        "Nombre": "Perales",
-        "Teléfono": "6014251000",
-        "Dirección": "Via Aeropuerto Ibagué Km 1, Ibagué/Tolima"
-    },
-    {
-        "Nombre": "San Luis",
-        "Teléfono": "6027739714",
-        "Dirección": "Aeropuerto de San Luis, Ipiales/Aldana, Nariño"
-    },
-    {
-        "Nombre": "Javier Noreña Valencia",
-        "Teléfono": "3102802054",
-        "Dirección": "La Macarena/Meta"
-    },
-    {
-        "Nombre": "La Nubia",
-        "Teléfono": "6068745451",
-        "Dirección": "Nubia, Manizales/Caldas"
-    },
-    {
-        "Nombre": "Enrique Olaya Herrera",
-        "Teléfono": "6043656100",
-        "Dirección": "Cra. 65 #13-157, Guayabal, Medellín/Antioquia"
-    },
-    {
-        "Nombre": "Villagarzón",
-        "Teléfono": "3112546898",
-        "Dirección": "Mocoa/Villagarzón, Putumayo"
-    },
-    {
-        "Nombre": "Jorge Isaacs",
-        "Teléfono": "53505145",
-        "Dirección": "Maicao/Albania, La Guajira"
-    },
-    {
-        "Nombre": "Fabio Alberto León Bentley",
-        "Teléfono": "3162716002",
-        "Dirección": "Mitú/Vaupés"
-    },
-    {
-        "Nombre": "Benito Salas",
-        "Teléfono": "7887570",
-        "Dirección": "Neiva/Huila"
-    },
-    {
-        "Nombre": "Reyes Murillo",
-        "Teléfono": "3229447375",
-        "Dirección": "Nuquí/Chocó"
-    },
-    {
-        "Nombre": "Antonio Nariño",
-        "Teléfono": "3167185787",
-        "Dirección": "Pasto/Chachagüí, Nariño"
-    },
-    {
-        "Nombre": "Contador",
-        "Teléfono": "3155529858",
-        "Dirección": "Pitalito/Huila"
-    },
-    {
-        "Nombre": "Guillermo León Valencia",
-        "Teléfono": "28231900",
-        "Dirección": "Cl. 4 Nte., Comuna 1, Popayán/Cauca"
-    },
-    {
-        "Nombre": "El Embrujo",
-        "Teléfono": "85148176",
-        "Dirección": "88564 Providencia/San Andrés y Providencia"
-    },
-    {
-        "Nombre": "Tres de Mayo",
-        "Teléfono": "3202921317",
-        "Dirección": "Cra. 20, Puerto Asís/Putumayo"
-    },
-    {
-        "Nombre": "Morelia",
-        "Teléfono": "",
-        "Dirección": "Puerto Gaitán/Meta"
-    },
-    {
-        "Nombre": "César Gaviria Trujillo",
-        "Teléfono": "85656069",
-        "Dirección": "Puerto Inírida/Guainía"
-    },
-    {
-        "Nombre": "Caucaya",
-        "Teléfono": "3115610628",
-        "Dirección": "86573 Puerto Leguízamo/Putumayo"
-    },
-    {
-        "Nombre": "Germán Olano",
-        "Teléfono": "3102880476",
-        "Dirección": "Puerto Carreño/Vichada"
-    },
-    {
-        "Nombre": "El Caraño",
-        "Teléfono": "46711537",
-        "Dirección": "Quibdó/Chocó"
-    },
-    {
-        "Nombre": "Jorge Enrique González",
-        "Teléfono": "3228546866",
-        "Dirección": "San José del Guaviare"
-    },
-    {
-        "Nombre": "Los Colonizadores",
-        "Teléfono": "3193909388",
-        "Dirección": "Saravena/Arauca"
-    },
-    {
-        "Nombre": "Las Brujas",
-        "Teléfono": "52499735",
-        "Dirección": "25, Corozal, Sincelejo/Corozal, Sucre"
-    },
-    {
-        "Nombre": "La Florida",
-        "Teléfono": "2272598",
-        "Dirección": "Tumaco, San Andres de Tumaco/Nariño"
-    },
-    {
-        "Nombre": "Puerto Bolívar",
-        "Teléfono": "3215431281",
-        "Dirección": "Puerto Bolivar/Uribia/La Guajira"
-    },
-    {
-        "Nombre": "Alfonso López Pumarejo",
-        "Teléfono": "6055582323",
-        "Dirección": "km 5 de, Valledupar/Cesar"
-    },
-    {
-        "Nombre": "Vanguardia",
-        "Teléfono": "3217622520",
-        "Dirección": "Villavicencio/Meta"
-    },
-    {
-        "Nombre": "El Alcaraván",
-        "Teléfono": "86358352",
-        "Dirección": "Yopal/Casanare"
-    }
-]
+@routes_aeropuerto.route('/select', methods=['GET'])
+def obteneropciones():
+    query = request.args.get('query', '').lower()
+    returnall = Aeropuerto.query.filter(Aeropuerto.nombre.ilike(f"%{query}%")).all()
+    
+    datos = {}
+    i = 0
+    for vuelo in returnall:
+        i += 1
+        datos[i] = {
+            'nombre': vuelo.nombre,
+            'direccion': vuelo.direccion,            
+        }
 
-aeropuertos_extranjeros = [
-    {
-        "Nombre": "Aeropuerto Internacional John F. Kennedy (JFK)",
-        "Dirección": "Estados Unidos, Nueva York"
-    },
-    {
-        "Nombre": "Aeropuerto Heathrow de Londres (LHR)",
-        "Dirección": "Reino Unido, Londres"
-    },
-    {
-        "Nombre": "Aeropuerto Internacional de Dubái (DXB)",
-        "Dirección": "Emiratos Árabes Unidos, Dubái"
-    },
-    {
-        "Nombre": "Aeropuerto Internacional de Narita (NRT)",
-        "Dirección": "Japón, Tokio"
-    },
-    {
-        "Nombre": "Aeropuerto Internacional de Hamad (DOH)",
-        "Dirección": "Catar, Doha"
-    },
-    {
-        "Nombre": "Aeropuerto Changi de Singapur (SIN)",
-        "Dirección": "Singapur, Singapur"
-    },
-    {
-        "Nombre": "Aeropuerto Suvarnabhumi de Bangkok (BKK)",
-        "Dirección": "Tailandia, Bangkok"
-    },
-    {
-        "Nombre": "Aeropuerto Kingsford Smith de Sídney (SYD)",
-        "Dirección": "Australia, Sídney"
-    },
-    {
-        "Nombre": "Aeropuerto Internacional de Pekín-Capital (PEK)",
-        "Dirección": "China, Pekín"
-    }
-]
-#---------------Lista aeropuertos Fin-----------------------------
-@routes_aeropuerto.route('/guardaraeropuerto', methods=['POST'])
-def guardaraeropuerto():
-    for aeropuerto_data in aeropuertos_nacionales + aeropuertos_extranjeros:
-        nombre = aeropuerto_data['Nombre']
-        direccion = aeropuerto_data['Dirección']
+    return jsonify(datos)
 
-        aeropuerto_existente = Aeropuerto.query.filter_by(nombre=nombre, direccion=direccion).first()
+@routes_aeropuerto.route('obtener_sugerencias', methods=['GET'])
+def obtener_sugerencias():
+    query = request.args.get('query', '').lower()
 
-        if aeropuerto_existente is None:
-            nuevo_aeropuerto = Aeropuerto(
-                nombre=nombre,
-                telefono=aeropuerto_data.get('Teléfono', ''),
-                direccion=direccion,
-                serviciosdisponibles=''
-            )
-            db.session.add(nuevo_aeropuerto)
+    # Filtrar aeropuertos basándose en la consulta
+    sugerencias_base = Aeropuerto.query.filter(Aeropuerto.nombre.ilike(f"%{query}%")).all()
 
-    db.session.commit()
-    return redirect('/aeropuerto')
+    # Obtener nombres de aeropuertos como sugerencias
+    sugerencias = [aeropuerto.nombre for aeropuerto in sugerencias_base]
+
+    return jsonify(sugerencias)
 

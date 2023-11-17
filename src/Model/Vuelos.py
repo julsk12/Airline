@@ -11,7 +11,7 @@ class Vuelo(db.Model):
     ciudadDestino = db.Column(db.String(300), db.ForeignKey('tblaeropuertos.direccion'))
     fechaHSalida = db.Column(db.DateTime)
     fechaHLlegada = db.Column(db.DateTime)
-    mascotas = db.Column(db.Boolean)
+    mascotas = db.Column(db.String(100))
     asientosDisponibles = db.Column(db.String(300))
     precio = db.Column(db.Double)
     numeroEscalas = db.Column(db.Integer)

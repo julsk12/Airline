@@ -94,16 +94,17 @@ def guardar_vuelos():
 # para tarifa S sumale 12%
 # para tarifa M sumale 24%
 # para tarifa L sumale 30.6%
+origen = ""
+destino = ""
 
 @routes_vuelos.route("/crear_vuelos", methods=["POST"])
 def crear_vuelos():
     
+    global origen, destino
     origen = request.form["origen"]
     destino = request.form["destino"]
     mascota = request.form["mascota"]
-
-
-
+    mascotas_creadas = False
     resultado = db.session.query(Informacion).filter(
         Informacion.origen == origen,
         Informacion.destino == destino,
@@ -116,11 +117,12 @@ def crear_vuelos():
             fecha_hora_vuelo = fecha_hora_actual + timedelta(
                 days=i, hours=random.randint(0, 23)
             )
-        elif i == 3 and mascota == "si" or mascota == "Si":
+        elif i == 3 and (mascota == "si" or mascota == "Si") and not mascotas_creadas:
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
+            mascotas_creadas = True
         else:
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
-
+            
         datos = {}
         idaN_total = 0  
         vueltaN_total = 0
@@ -171,7 +173,7 @@ def crear_vuelos():
             ciudadDestino=destino,
             fechaHLlegada=fecha_llegada,
             fechaHSalida=fecha_hora_vuelo,
-            mascotas = mascota,
+            mascotas = mascota if mascotas_creadas else None,
             duracionVuelo=duracion_total,
             asientosDisponibles="4",
             numeroEscalas=numero_escalas,
@@ -181,7 +183,7 @@ def crear_vuelos():
 
     db.session.commit()
 
-    return jsonify({"message": "Se han creado 5 vuelos exitosamente"})
+    return jsonify(datos)
 
 
 # consultar los vuelos guardados en la tabla
@@ -214,4 +216,45 @@ def consulvuelos():
             "#escalas": Vuelo.numeroEscalas,
             "duracion": Vuelo.duracionVuelo,
         }
+    return jsonify(datos)
+
+@routes_vuelos.route("/info_tarifa", methods=["GET"])
+def mostrar_tarifa():
+
+    origen
+    destino
+    print(origen, destino)
+    resultado = db.session.query(Informacion).filter(
+        Informacion.origen == origen,
+        Informacion.destino == destino,
+    ).all()
+    datos = {}
+    i=0
+    for vuelo in resultado:
+        i+= 1
+        datos[i] = {
+            'origen': vuelo.origen,
+            'origen_aeropuerto': vuelo.origen_aeropuerto,
+            'escala1': vuelo.escala1,
+            'escala1_aeropuerto': vuelo.escala1_aeropuerto,
+            'escala2': vuelo.escala2,
+            'escala2_aeropuerto': vuelo.escala2_aeropuerto,
+            'destino': vuelo.destino,
+            'destino_aeropuerto': vuelo.destino_aeropuerto,
+            'numero_escalas': vuelo.numero_escalas,
+            'duracion_total': vuelo.duracion_total,
+            'idaN': vuelo.idaN,
+            'vueltaN': vuelo.vueltaN,
+            'idaF': vuelo.idaF,
+            'vueltaF': vuelo.vueltaF,
+            'solo_idaN': vuelo.solo_idaN,
+            'solo_idaF': vuelo.solo_idaF,
+            'tarifaS': vuelo.tarifaS,
+            'RestriccionestarifaS': vuelo.RestriccionestarifaS,
+            'tarifaM': vuelo.tarifaM,
+            'RestriccionestarifaM': vuelo.RestriccionestarifaM,
+            'tarifaL': vuelo.tarifaL,
+            'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+        }
+
     return jsonify(datos)

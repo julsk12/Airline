@@ -166,3 +166,184 @@ ul {
   --lightness: 95%;
   background: hsla(var(--hsl), 0.1);
 }
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+button.text-field-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+button.text-field-button:focus + .dropdown-content {
+    display: block;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button.search-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+    overflow: hidden;
+}
+
+button.search-button:before {
+    content: '\1F50D'; /* Unicode character for the magnifying glass icon */
+    font-size: 20px;
+    margin-right: 10px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.origen{
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+    display: flex;
+    align-items: center;
+}
+.columna1{
+  border: 1px solid #ccc;
+  display: flex;
+  border-right: none;
+  box-sizing: border-box;
+}
+.columna2{
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-left: none;
+  display: flex;
+}
+.icon{
+  flex: 1;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+.inputs{
+  flex: 8;
+}
+.icon i {
+  font-size: 20px;
+  color:rgb(0, 102, 255);
+}
+.inputs input {
+  box-sizing: border-box;
+  border: none; 
+  
+}
+.columna3{
+  border: 1px solid #ccc;
+  display: flex;
+  border-right: none;
+  box-sizing: border-box;
+}
+.columna4{
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-left: none;
+  display: flex;
+}
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Estilo para el icono del calendario cuando el input está vacío */
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: #ffffff;
+  
+}
+
+/* Cambia el fondo del calendario cuando el input está vacío */
+input[type="date"]:invalid::-webkit-calendar-picker-indicator {
+  background: #f7f7f7;
+  
+}
+
+/* Personaliza el estilo del calendario desplegado */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  color: #333;
+}
+
+/* Personaliza la flecha del calendario desplegado */
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+.sugerencias-panel {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .origen{
+    flex: 100%;
+  }
+}
