@@ -37,10 +37,8 @@ function configurarAutocompletado(inputId, panelId) {
             sugerenciaItem.classList.add('sugerencia-item');
             sugerenciaItem.innerHTML = `<strong>${sugerencia.nombre}</strong><br>${sugerencia.direccion}`;
             sugerenciaItem.addEventListener('click', function () {
-                input.value = sugerencia.nombre;
-                origen = sugerencia.direccion;
-                destino = sugerencia.direccion;
-                console.log(origen, destino);
+                input.value = sugerencia.direccion;
+                
                 ocultarSugerencias();
             });
             sugerenciasPanel.appendChild(sugerenciaItem);
@@ -61,6 +59,9 @@ function configurarAutocompletado(inputId, panelId) {
 }
 
 function crear_vuelo(){
+    origen = document.getElementById('origen').value;
+    destino = document.getElementById('destino').value;
+    console.log(origen, destino);
     axios.post('/api/crear_vuelos', {
         origen: origen,
         destino: destino,

@@ -260,7 +260,7 @@ vuelos_directos = [
     {
         "origen": "Bogotá, Colombia",
         "origen_aeropuerto": "Aeropuerto Internacional El Dorado (BOG), Bogotá, Colombia",
-        "destino": "Nueva York, EE. UU.",
+        "destino": "Nueva York, Estados Unidos",
         "destino-aeropuerto": "Aeropuerto Internacional John F. Kennedy (JFK), Nueva York, EE. UU.",
         "numero_escalas": "0",
         "duracion_total": "6",
