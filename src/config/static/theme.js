@@ -366,12 +366,8 @@ var scrollToTop = function scrollToTop() {
       window.location.hash = id;
     });
   });
-}; // /* -------------------------------------------------------------------------- */
-// /*                            Theme Initialization                            */
-// /* -------------------------------------------------------------------------- */
-
+};
 
 docReady(navbarInit);
 docReady(detectorInit);
 docReady(scrollToTop);
-//# sourceMappingURL=theme.js.map
