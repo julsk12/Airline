@@ -12,6 +12,8 @@ from api.comentario import routes_comentar
 from api.detallespago import routes_detalles
 from api.info_vuelos import routes_info
 from api.algo import routes_algo
+from rutas.rutas import routes_home
+
 
 app.register_blueprint(routes_users, url_prefix="/api")
 app.register_blueprint(routes_aerolinea, url_prefix="/api")
@@ -24,6 +26,7 @@ app.register_blueprint(routes_detalles, url_prefix="/api")
 app.register_blueprint(routes_info, url_prefix="/api")
 app.register_blueprint(routes_algo, url_prefix="/api")
 
+app.register_blueprint(routes_home, url_prefix="/fronted")
 
 @app.route("/")
 def index():

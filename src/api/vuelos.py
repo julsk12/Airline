@@ -23,6 +23,7 @@ vuelo_schema = FliesSchema()
 flies_Schema = FliesSchema(many=True)
 
 
+
 @routes_vuelos.route("/vuelo", methods=["GET"])
 def obtenervuelos():
     returnall = Vuelo.query.all()
