@@ -52,190 +52,210 @@ mascota = ""
 @routes_vuelos.route("/crear_vuelos", methods=["POST"])
 def crear_vuelos():
     
-    global origen, destino, fecha_vuelta, mascota
+    global origen, destino, mascota, fecha_vuelta
     origen = request.form["origen"]
     destino = request.form["destino"]
     mascota = request.form["mascota"]
-    fecha_vuelta = request.form["fecha_vuelta"]
+    fecha_date = request.form["fecha_vuelta"]
+    fecha_vuelta = datetime.strptime(fecha_date, "%Y-%m-%d").date()
     mascotas = ""
-  
-    resultado = db.session.query(Informacion).filter(
-        Informacion.origen == origen,
-        Informacion.destino == destino,
-    ).all()
-
     fecha_hora_actual = datetime.now()
+    
+    nueva_fecha = fecha_hora_actual + timedelta(days=6)
+    consulta = Vuelo.query.filter(
+    Vuelo.fechaHSalida.between(fecha_hora_actual, nueva_fecha),
+    Vuelo.ciudadOrigen == origen,
+    Vuelo.ciudadDestino == destino).all()
+    
+    if not consulta:
+        resultado = db.session.query(Informacion).filter(
+            Informacion.origen == origen,
+            Informacion.destino == destino,
+        ).all()
 
-    for i in range(6):
-        if i < 2:
-            if i == 1 and mascota == "si":
-                fecha_hora_vuelo = fecha_hora_actual + timedelta(
-                    days=i, hours=random.randint(0, 23)
-                )
-                mascotas = "si"
+        for i in range(6):
+            if i < 2:
+                if i == 1 and mascota == "si":
+                    fecha_hora_vuelo = fecha_hora_actual + timedelta(
+                        days=i, hours=random.randint(0, 23)
+                    )
+                    mascotas = "si"
+                else:
+                    fecha_hora_vuelo = fecha_hora_actual + timedelta(
+                        days=i, hours=random.randint(0, 23)
+                    )
+                    mascotas = "no"    
             else:
-                fecha_hora_vuelo = fecha_hora_actual + timedelta(
-                    days=i, hours=random.randint(0, 23)
-                )
-                mascotas = "no"    
-        else:
-            fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
-            mascotas = "no"  
-            
-        datos = {}
-        idaN_total = 0  
-        vueltaN_total = 0
-        duracion_total = 0
-        numero_escalas = 0
-        for vuelo in resultado:
-            datos = {
-                'origen': vuelo.origen,
-                'origen_aeropuerto': vuelo.origen_aeropuerto,
-                'escala1': vuelo.escala1,
-                'escala1_aeropuerto': vuelo.escala1_aeropuerto,
-                'escala2': vuelo.escala2,
-                'escala2_aeropuerto': vuelo.escala2_aeropuerto,
-                'destino': vuelo.destino,
-                'destino_aeropuerto': vuelo.destino_aeropuerto,
-                'numero_escalas': vuelo.numero_escalas,
-                'duracion_total': vuelo.duracion_total,
-                'idaN': vuelo.idaN,
-                'vueltaN': vuelo.vueltaN,
-                'idaF': vuelo.idaF,
-                'vueltaF': vuelo.vueltaF,
-                'solo_idaN': vuelo.solo_idaN,
-                'solo_idaF': vuelo.solo_idaF,
-                'tarifaS': vuelo.tarifaS,
-                'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-                'tarifaM': vuelo.tarifaM,
-                'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-                'tarifaL': vuelo.tarifaL,
-                'RestriccionestarifaL': vuelo.RestriccionestarifaL,
-            }
-            duracion_total += datos['duracion_total']
-            numero_escalas += datos['numero_escalas']
-            idaN_total += datos['idaN']
-            vueltaN_total += datos['vueltaN']
+                fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
+                mascotas = "no"  
+                
+            datos = {}
+            idaN_total = 0  
+            vueltaN_total = 0
+            duracion_total = 0
+            numero_escalas = 0
+            for vuelo in resultado:
+                datos = {
+                    'origen': vuelo.origen,
+                    'origen_aeropuerto': vuelo.origen_aeropuerto,
+                    'escala1': vuelo.escala1,
+                    'escala1_aeropuerto': vuelo.escala1_aeropuerto,
+                    'escala2': vuelo.escala2,
+                    'escala2_aeropuerto': vuelo.escala2_aeropuerto,
+                    'destino': vuelo.destino,
+                    'destino_aeropuerto': vuelo.destino_aeropuerto,
+                    'numero_escalas': vuelo.numero_escalas,
+                    'duracion_total': vuelo.duracion_total,
+                    'idaN': vuelo.idaN,
+                    'vueltaN': vuelo.vueltaN,
+                    'idaF': vuelo.idaF,
+                    'vueltaF': vuelo.vueltaF,
+                    'solo_idaN': vuelo.solo_idaN,
+                    'solo_idaF': vuelo.solo_idaF,
+                    'tarifaS': vuelo.tarifaS,
+                    'RestriccionestarifaS': vuelo.RestriccionestarifaS,
+                    'tarifaM': vuelo.tarifaM,
+                    'RestriccionestarifaM': vuelo.RestriccionestarifaM,
+                    'tarifaL': vuelo.tarifaL,
+                    'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+                }
+                duracion_total += datos['duracion_total']
+                numero_escalas += datos['numero_escalas']
+                idaN_total += datos['idaN']
+                vueltaN_total += datos['vueltaN']
 
-        precio = idaN_total + vueltaN_total
-        fecha_salida = fecha_hora_vuelo
-        duracion_total_horas = duracion_total
+            precio = idaN_total + vueltaN_total
+            fecha_salida = fecha_hora_vuelo
+            duracion_total_horas = duracion_total
 
-        duracion_total_timedelta = timedelta(hours=duracion_total_horas)
+            duracion_total_timedelta = timedelta(hours=duracion_total_horas)
 
-        fecha_llegada = fecha_salida + duracion_total_timedelta
+            fecha_llegada = fecha_salida + duracion_total_timedelta
 
-        vuelo = Vuelo(
-            id_aerolinea="avianca",
-            ciudadOrigen=origen,
-            ciudadDestino=destino,
-            fechaHLlegada=fecha_llegada,
-            fechaHSalida=fecha_hora_vuelo,
-            mascotas = mascotas,
-            duracionVuelo=duracion_total,
-            asientosDisponibles="4",
-            numeroEscalas=numero_escalas,
-            precio=precio,
-        )
-        db.session.add(vuelo)
+            # Crea un objeto Vuelo y guárdalo en la base de datos
+            vuelo = Vuelo(
+                id_aerolinea="avianca",
+                ciudadOrigen=origen,
+                ciudadDestino=destino,
+                fechaHLlegada=fecha_llegada,
+                fechaHSalida=fecha_hora_vuelo,
+                mascotas = mascotas,
+                duracionVuelo=duracion_total,
+                asientosDisponibles="4",
+                numeroEscalas=numero_escalas,
+                precio=precio,
+            )
+            db.session.add(vuelo)
 
-    db.session.commit()
+        db.session.commit()
 
-    return jsonify({"message": "Se han creado 5 vuelos exitosamente"})
+        return jsonify({"message": "Se han creado 5 vuelos exitosamente"})
+    else:
+        return jsonify({"message": "ya existe el vuelo"})
 
 @routes_vuelos.route("/crear_vuelta", methods=["POST"])
-def crear_regreso():
+def crear_vuel():
     
-    origen
-    destino
-    fecha_vuelta
+    origen 
+    destino 
     mascota
+    fecha_vuelta
     mascotas = ""
-  
-    resultado = db.session.query(Informacion).filter(
-        Informacion.origen == origen,
-        Informacion.destino == destino,
-    ).all()
+    nueva_fecha = fecha_vuelta + timedelta(days=6)
+    consulta = Vuelo.query.filter(
+    Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
+    Vuelo.ciudadOrigen == origen,
+    Vuelo.ciudadDestino == destino).all()
+    
+    if not consulta:
+        resultado = db.session.query(Informacion).filter(
+            Informacion.origen == origen,
+            Informacion.destino == destino,
+        ).all()
+        hora_actual = datetime.now().time()
+        fecha_hora_actual = datetime.combine(fecha_vuelta, hora_actual)
+        print(fecha_hora_actual)
 
-    fecha_hora_actual = fecha_vuelta+timedelta(days=i, hours=random.randint(0, 23))
-
-    for i in range(6):
-        if i < 2:
-            if i == 1 and mascota == "si":
-                fecha_hora_vuelo = fecha_hora_actual + timedelta(
-                    days=i, hours=random.randint(0, 23)
-                )
-                mascotas = "si"
+        for i in range(6):
+            if i < 2:
+                if i == 1 and mascota == "si":
+                    fecha_hora_vuelo = fecha_hora_actual + timedelta(
+                        days=i, hours=random.randint(0, 23)
+                    )
+                    mascotas = "si"
+                else:
+                    fecha_hora_vuelo = fecha_hora_actual + timedelta(
+                        days=i, hours=random.randint(0, 23)
+                    )
+                    mascotas = "no"    
             else:
-                fecha_hora_vuelo = fecha_hora_actual + timedelta(
-                    days=i, hours=random.randint(0, 23)
-                )
-                mascotas = "no"    
-        else:
-            fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
-            mascotas = "no"  
-            
-        datos = {}
-        idaN_total = 0  
-        vueltaN_total = 0
-        duracion_total = 0
-        numero_escalas = 0
-        for vuelo in resultado:
-            datos = {
-                'origen': vuelo.origen,
-                'origen_aeropuerto': vuelo.origen_aeropuerto,
-                'escala1': vuelo.escala1,
-                'escala1_aeropuerto': vuelo.escala1_aeropuerto,
-                'escala2': vuelo.escala2,
-                'escala2_aeropuerto': vuelo.escala2_aeropuerto,
-                'destino': vuelo.destino,
-                'destino_aeropuerto': vuelo.destino_aeropuerto,
-                'numero_escalas': vuelo.numero_escalas,
-                'duracion_total': vuelo.duracion_total,
-                'idaN': vuelo.idaN,
-                'vueltaN': vuelo.vueltaN,
-                'idaF': vuelo.idaF,
-                'vueltaF': vuelo.vueltaF,
-                'solo_idaN': vuelo.solo_idaN,
-                'solo_idaF': vuelo.solo_idaF,
-                'tarifaS': vuelo.tarifaS,
-                'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-                'tarifaM': vuelo.tarifaM,
-                'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-                'tarifaL': vuelo.tarifaL,
-                'RestriccionestarifaL': vuelo.RestriccionestarifaL,
-            }
-            duracion_total += datos['duracion_total']
-            numero_escalas += datos['numero_escalas']
-            idaN_total += datos['idaN']
-            vueltaN_total += datos['vueltaN']
+                fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
+                mascotas = "no"  
+                
+            datos = {}
+            idaN_total = 0  
+            vueltaN_total = 0
+            duracion_total = 0
+            numero_escalas = 0
+            for vuelo in resultado:
+                datos = {
+                    'origen': vuelo.origen,
+                    'origen_aeropuerto': vuelo.origen_aeropuerto,
+                    'escala1': vuelo.escala1,
+                    'escala1_aeropuerto': vuelo.escala1_aeropuerto,
+                    'escala2': vuelo.escala2,
+                    'escala2_aeropuerto': vuelo.escala2_aeropuerto,
+                    'destino': vuelo.destino,
+                    'destino_aeropuerto': vuelo.destino_aeropuerto,
+                    'numero_escalas': vuelo.numero_escalas,
+                    'duracion_total': vuelo.duracion_total,
+                    'idaN': vuelo.idaN,
+                    'vueltaN': vuelo.vueltaN,
+                    'idaF': vuelo.idaF,
+                    'vueltaF': vuelo.vueltaF,
+                    'solo_idaN': vuelo.solo_idaN,
+                    'solo_idaF': vuelo.solo_idaF,
+                    'tarifaS': vuelo.tarifaS,
+                    'RestriccionestarifaS': vuelo.RestriccionestarifaS,
+                    'tarifaM': vuelo.tarifaM,
+                    'RestriccionestarifaM': vuelo.RestriccionestarifaM,
+                    'tarifaL': vuelo.tarifaL,
+                    'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+                }
+                duracion_total += datos['duracion_total']
+                numero_escalas += datos['numero_escalas']
+                idaN_total += datos['idaN']
+                vueltaN_total += datos['vueltaN']
 
-        precio = idaN_total + vueltaN_total
-        fecha_salida = fecha_hora_vuelo
-        duracion_total_horas = duracion_total
+            precio = idaN_total + vueltaN_total
+            fecha_salida = fecha_hora_vuelo
+            duracion_total_horas = duracion_total
 
-        duracion_total_timedelta = timedelta(hours=duracion_total_horas)
+            duracion_total_timedelta = timedelta(hours=duracion_total_horas)
 
-        fecha_llegada = fecha_salida + duracion_total_timedelta
+            fecha_llegada = fecha_salida + duracion_total_timedelta
 
-        # Crea un objeto Vuelo y guárdalo en la base de datos
-        vuelo = Vuelo(
-            id_aerolinea="avianca",
-            ciudadOrigen=origen,
-            ciudadDestino=destino,
-            fechaHLlegada=fecha_llegada,
-            fechaHSalida=fecha_hora_vuelo,
-            mascotas = mascotas,
-            duracionVuelo=duracion_total,
-            asientosDisponibles="4",
-            numeroEscalas=numero_escalas,
-            precio=precio,
-        )
-        db.session.add(vuelo)
+            # Crea un objeto Vuelo y guárdalo en la base de datos
+            vuelo = Vuelo(
+                id_aerolinea="avianca",
+                ciudadOrigen=origen,
+                ciudadDestino=destino,
+                fechaHLlegada=fecha_llegada,
+                fechaHSalida=fecha_hora_vuelo,
+                mascotas = mascotas,
+                duracionVuelo=duracion_total,
+                asientosDisponibles="4",
+                numeroEscalas=numero_escalas,
+                precio=precio,
+            )
+            db.session.add(vuelo)
 
-    db.session.commit()
-
-    return jsonify({"message": "Se han creado 5 vuelos exitosamente"})
+        db.session.commit()
+        
+        return jsonify({"message": "exitoso"})
+    else:
+        return jsonify({"message": "vuelos ya existen"})
+        
 
 
 @routes_vuelos.route("/consulvuelos", methods=["GET"])
@@ -290,6 +310,3 @@ def mostrar_tarifa():
         }
 
     return jsonify(datos)
-
-
-
