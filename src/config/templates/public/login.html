@@ -16,6 +16,13 @@
             height: 100vh;
         }
 
+        .background-shape {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Cambiado para que esté detrás del contenido */
+        }
+
         form {
             background-color: #ffffff;
             border-radius: 8px;
@@ -23,6 +30,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
             text-align: center;
+            position: relative;
         }
 
         h2 {
@@ -78,9 +86,15 @@
             text-decoration: underline;
         }
         
+        .icon img {
+            height: 100px; /* Ajusta el tamaño del icono según tus necesidades */
+        }
     </style>
 </head>
 <body>
+    <div class="background-shape">
+        <img class="pt-7 pt-md-0 hero-img" src="../../static/img/hero/shape.svg" alt="Decorative Shape">
+    </div>
 
     <form id="loginForm">
         <a class="navbar-brand" href="/../index.html"><img src="../../static/img/logo.svg" height="34"
@@ -90,7 +104,6 @@
         
         <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
 
-        
         <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
 
         <button type="button" onclick="iniciarSesion()">Iniciar Sesión</button>
