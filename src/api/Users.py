@@ -47,3 +47,30 @@ def guardar_users():
     db.session.add(new_user)
     db.session.commit()
     return redirect('/autores')
+
+@routes_users.route("/logiarse", methods=["GET"])
+def logiarse():
+    datos = {}
+    usuarios_table = db.Model.metadata.tables["tblsusuarios"]
+    resultado = (
+        db.session.query(id)
+        .select_from(usuarios_table)
+        .all()
+    )
+    
+    i = 0
+    for Vuelo in resultado:
+        i += 1
+        datos[i] = {
+            "id": Vuelo.id,
+            "aerolinea": Aerolinea.nombre,
+            "origen": Vuelo.ciudadOrigen,
+            "destino": Vuelo.ciudadDestino,
+            "Fsalida": Vuelo.fechaHSalida,
+            "Fllegada": Vuelo.fechaHLlegada,
+            "asientosD": Vuelo.asientosDisponibles,
+            "precio": Vuelo.precio,
+            "#escalas": Vuelo.numeroEscalas,
+            "duracion": Vuelo.duracionVuelo,
+        }
+    return jsonify(datos)
