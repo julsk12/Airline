@@ -90,7 +90,6 @@ def crear_vuelos():
                 mascotas = "no"  
                 
             datos = {}
-            i=0
             idaN_total = 0  
             vueltaN_total = 0
             duracion_total = 0
@@ -124,7 +123,7 @@ def crear_vuelos():
                 numero_escalas += datos['numero_escalas']
                 idaN_total += datos['idaN']
                 vueltaN_total += datos['vueltaN']
-
+            print(duracion_total, numero_escalas, idaN_total, vueltaN_total)
             precio = idaN_total + vueltaN_total
             fecha_salida = fecha_hora_vuelo
             duracion_total_horas = duracion_total
@@ -149,7 +148,8 @@ def crear_vuelos():
             db.session.add(vuelo)
 
         db.session.commit()
-
+        i=0
+        save={}
         mostrar = db.session.query(Vuelo).filter(
             Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
             Vuelo.ciudadOrigen == origen,
@@ -157,7 +157,7 @@ def crear_vuelos():
         ).all()
         for fly in mostrar:
             i += 1
-            datos[i] = {
+            save[i] = {
             'id_aerolinea':fly.id_aerolinea,
             'ciudadOrigen':fly.ciudadOrigen,
             'ciudadDestino':fly.ciudadDestino,
@@ -165,9 +165,24 @@ def crear_vuelos():
             'fechaHLlegada':fly.fechaHLlegada,
             'numeroEscalas':fly.numeroEscalas      
             }
-        return jsonify(datos)
+        return jsonify(save)
     else:
-        return jsonify({"message": "ya existe el vuelo"})
+        muestra = db.session.query(Vuelo).filter(
+            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
+            Vuelo.ciudadOrigen == origen,
+            Vuelo.ciudadDestino == destino,
+        ).all()
+        for lie in muestra:
+            i += 1
+            save[i] = {
+            'id_aerolinea':lie.id_aerolinea,
+            'ciudadOrigen':lie.ciudadOrigen,
+            'ciudadDestino':lie.ciudadDestino,
+            'fechaHSalida':lie.fechaHSalida,
+            'fechaHLlegada':lie.fechaHLlegada,
+            'numeroEscalas':lie.numeroEscalas      
+            }
+        return jsonify(save)
 
 @routes_vuelos.route("/crear_vuelta", methods=["POST"])
 def crear_vuel():
