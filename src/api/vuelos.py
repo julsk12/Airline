@@ -90,6 +90,7 @@ def crear_vuelos():
                 mascotas = "no"  
                 
             datos = {}
+            i=0
             idaN_total = 0  
             vueltaN_total = 0
             duracion_total = 0
@@ -149,7 +150,22 @@ def crear_vuelos():
 
         db.session.commit()
 
-        return jsonify({"message": "Se han creado 5 vuelos exitosamente"})
+        mostrar = db.session.query(Vuelo).filter(
+            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
+            Vuelo.ciudadOrigen == origen,
+            Vuelo.ciudadDestino == destino,
+        ).all()
+        for fly in mostrar:
+            i += 1
+            datos[i] = {
+            'id_aerolinea':fly.id_aerolinea,
+            'ciudadOrigen':fly.ciudadOrigen,
+            'ciudadDestino':fly.ciudadDestino,
+            'fechaHSalida':fly.fechaHSalida,
+            'fechaHLlegada':fly.fechaHLlegada,
+            'numeroEscalas':fly.numeroEscalas      
+            }
+        return jsonify(datos)
     else:
         return jsonify({"message": "ya existe el vuelo"})
 
@@ -193,6 +209,7 @@ def crear_vuel():
                 mascotas = "no"  
                 
             datos = {}
+            i=0
             idaN_total = 0  
             vueltaN_total = 0
             duracion_total = 0
@@ -251,10 +268,40 @@ def crear_vuel():
             db.session.add(vuelo)
 
         db.session.commit()
-        
-        return jsonify({"message": "exitoso"})
+        mostrar = db.session.query(Vuelo).filter(
+            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
+            Vuelo.ciudadOrigen == origen,
+            Vuelo.ciudadDestino == destino,
+        ).all()
+        for fly in mostrar:
+            i += 1
+            datos[i] = {
+            'id_aerolinea':fly.id_aerolinea,
+            'ciudadOrigen':fly.ciudadOrigen,
+            'ciudadDestino':fly.ciudadDestino,
+            'fechaHSalida':fly.fechaHSalida,
+            'fechaHLlegada':fly.fechaHLlegada,
+            'numeroEscalas':fly.numeroEscalas      
+            }
+        return jsonify(datos)
     else:
-        return jsonify({"message": "vuelos ya existen"})
+        muestra = db.session.query(Vuelo).filter(
+            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
+            Vuelo.ciudadOrigen == origen,
+            Vuelo.ciudadDestino == destino,
+        ).all()
+        i=0
+        for lie in muestra:
+            i += 1
+            datos[i] = {
+            'id_aerolinea':lie.id_aerolinea,
+            'ciudadOrigen':lie.ciudadOrigen,
+            'ciudadDestino':lie.ciudadDestino,
+            'fechaHSalida':lie.fechaHSalida,
+            'fechaHLlegada':lie.fechaHLlegada,
+            'numeroEscalas':lie.numeroEscalas      
+            }
+        return jsonify(datos)
         
 
 

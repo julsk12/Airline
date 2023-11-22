@@ -61,11 +61,13 @@ function configurarAutocompletado(inputId, panelId) {
 function crear_vuelo(){
     origen = document.getElementById('origen').value;
     destino = document.getElementById('destino').value;
+    fecha_vuelta = document.getElementById('fecha_vuelta').value;
     console.log(origen, destino);
     axios.post('/api/crear_vuelos', {
         origen: origen,
         destino: destino,
-        mascota: "si"
+        mascota: "si",
+        fecha_vuelta: fecha_vuelta,
         
     }, {
         headers: {
