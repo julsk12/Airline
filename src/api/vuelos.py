@@ -66,7 +66,7 @@ def crear_vuelos():
     Vuelo.fechaHSalida.between(fecha_hora_actual, nueva_fecha),
     Vuelo.ciudadOrigen == origen,
     Vuelo.ciudadDestino == destino).all()
-    
+    i=0
     if not consulta:
         resultado = db.session.query(Informacion).filter(
             Informacion.origen == origen,
@@ -90,6 +90,10 @@ def crear_vuelos():
                 mascotas = "no"  
                 
             datos = {}
+            
+            save={}
+            
+            trato = []
             idaN_total = 0  
             vueltaN_total = 0
             duracion_total = 0
@@ -123,7 +127,6 @@ def crear_vuelos():
                 numero_escalas += datos['numero_escalas']
                 idaN_total += datos['idaN']
                 vueltaN_total += datos['vueltaN']
-            print(duracion_total, numero_escalas, idaN_total, vueltaN_total)
             precio = idaN_total + vueltaN_total
             fecha_salida = fecha_hora_vuelo
             duracion_total_horas = duracion_total
@@ -131,8 +134,17 @@ def crear_vuelos():
             duracion_total_timedelta = timedelta(hours=duracion_total_horas)
 
             fecha_llegada = fecha_salida + duracion_total_timedelta
-
-            # Crea un objeto Vuelo y guárdalo en la base de datos
+            i += 1
+            save[i]={
+            'id_aerolinea':"avianca",
+            'ciudadOrigen':origen,
+            'ciudadDestino':destino,
+            'fechaHSalida':fecha_hora_vuelo,
+            'fechaHLlegada':fecha_llegada,
+            'numeroEscalas':numero_escalas  
+            }
+            trato.append(save)
+            print(trato)
             vuelo = Vuelo(
                 id_aerolinea="avianca",
                 ciudadOrigen=origen,
@@ -148,41 +160,24 @@ def crear_vuelos():
             db.session.add(vuelo)
 
         db.session.commit()
-        i=0
-        save={}
-        mostrar = db.session.query(Vuelo).filter(
-            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
-            Vuelo.ciudadOrigen == origen,
-            Vuelo.ciudadDestino == destino,
-        ).all()
-        for fly in mostrar:
-            i += 1
-            save[i] = {
-            'id_aerolinea':fly.id_aerolinea,
-            'ciudadOrigen':fly.ciudadOrigen,
-            'ciudadDestino':fly.ciudadDestino,
-            'fechaHSalida':fly.fechaHSalida,
-            'fechaHLlegada':fly.fechaHLlegada,
-            'numeroEscalas':fly.numeroEscalas      
-            }
         return jsonify(save)
     else:
-        muestra = db.session.query(Vuelo).filter(
-            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
-            Vuelo.ciudadOrigen == origen,
-            Vuelo.ciudadDestino == destino,
-        ).all()
-        for lie in muestra:
-            i += 1
-            save[i] = {
-            'id_aerolinea':lie.id_aerolinea,
-            'ciudadOrigen':lie.ciudadOrigen,
-            'ciudadDestino':lie.ciudadDestino,
-            'fechaHSalida':lie.fechaHSalida,
-            'fechaHLlegada':lie.fechaHLlegada,
-            'numeroEscalas':lie.numeroEscalas      
+        block={}
+        trry = []
+        for lie in consulta:
+            
+            block= {
+                'id_aerolinea': lie.id_aerolinea,
+                'ciudadOrigen': lie.ciudadOrigen,
+                'ciudadDestino': lie.ciudadDestino,
+                'fechaHSalida': lie.fechaHSalida,
+                'fechaHLlegada': lie.fechaHLlegada,
+                'numeroEscalas': lie.numeroEscalas      
             }
-        return jsonify(save)
+            trry.append(block)
+
+        print("ayuda", trry)
+        return jsonify(block)
 
 @routes_vuelos.route("/crear_vuelta", methods=["POST"])
 def crear_vuel():
@@ -300,23 +295,22 @@ def crear_vuel():
             }
         return jsonify(datos)
     else:
-        muestra = db.session.query(Vuelo).filter(
-            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
-            Vuelo.ciudadOrigen == origen,
-            Vuelo.ciudadDestino == destino,
-        ).all()
-        i=0
-        for lie in muestra:
-            i += 1
-            datos[i] = {
-            'id_aerolinea':lie.id_aerolinea,
-            'ciudadOrigen':lie.ciudadOrigen,
-            'ciudadDestino':lie.ciudadDestino,
-            'fechaHSalida':lie.fechaHSalida,
-            'fechaHLlegada':lie.fechaHLlegada,
-            'numeroEscalas':lie.numeroEscalas      
+        block={}
+        trry = []
+        for lie in consulta:
+            
+            block= {
+                'id_aerolinea': lie.id_aerolinea,
+                'ciudadOrigen': lie.ciudadOrigen,
+                'ciudadDestino': lie.ciudadDestino,
+                'fechaHSalida': lie.fechaHSalida,
+                'fechaHLlegada': lie.fechaHLlegada,
+                'numeroEscalas': lie.numeroEscalas      
             }
-        return jsonify(datos)
+            trry.append(block)
+
+        print("ayuda", trry)
+        return jsonify(block)
         
 
 
