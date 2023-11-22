@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .background-shape {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Cambiado para que esté detrás del contenido */
+        }
+
+        form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        h2 {
+            color: #000; 
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            color: #333;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .icon img {
+            height: 100px; /* Ajusta el tamaño del icono según tus necesidades */
+        }
+    </style>
+</head>
+<body>
+    <div class="background-shape">
+        <img class="pt-7 pt-md-0 hero-img" src="../../static/img/hero/shape.svg" alt="Decorative Shape">
+    </div>
+
+    <form id="loginForm">
+        <a class="navbar-brand" href="/../index.html"><img src="../../static/img/logo.svg" height="34"
+            alt="logo" /></a>
+
+        <h2>Iniciar Sesión</h2>
+        
+        <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+
+        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+
+        <button type="button" onclick="iniciarSesion()">Iniciar Sesión</button>
+        <br>
+        <p class="mt-3">¿Ya tienes una cuenta? <a href="/fronted/indexregistro">Registrarme</a></p>
+    </form>
+
+    <script>
+        function iniciarSesion() {
+            var usuario = document.getElementById('usuario').value;
+            var contrasena = document.getElementById('contrasena').value;
+
+            // Verifica las credenciales, implementa lógica de autenticación
+            // Mensaje en consola
+            if (usuario === 'Admino' && contrasena === 'contra123') {
+                console.log('¡Bienvenido, ' + usuario + '!');
+            } else {
+                console.log('Credenciales incorrectas. Intenta de nuevo.');
+            }
+        }
+    </script>
+
+</body>
+</html>
