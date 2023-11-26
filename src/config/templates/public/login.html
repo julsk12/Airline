@@ -102,9 +102,9 @@
 
         <h2>Iniciar Sesión</h2>
         
-        <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+        <input type="text" id="usuario" name="usuario" placeholder="Correo Electrónico" required>
 
-        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+        <input type="password" id="contrasena" name="contrasena" placeholder="Numero Identificacion" required>
 
         <button type="button" onclick="iniciarSesion()">Iniciar Sesión</button>
         <br>
@@ -118,10 +118,48 @@
 
             // Verifica las credenciales, implementa lógica de autenticación
             // Mensaje en consola
+            if(usuario.trim() === "" || contrasena.trim() === ""){
+                alert('No deben quedar campos vacios');
+                return;
+            }
+
+            if (!/^\d+$/.test(contrasena)) {
+                alert('Solo numeros en este campo');
+                return;
+            }
+
+            if (!validarCorreo(usuario)) {
+                alert('Correo Electrónico invalido');
+                return;
+            }
+
             if (usuario === 'Admino' && contrasena === 'contra123') {
                 console.log('¡Bienvenido, ' + usuario + '!');
+                return;
+            }
+
+            axios.get('/ingresar', {
+                responseType: 'json'}).then(function(response) {
+                    let datos = response.data
+                    let nombre = usuario.value;
+                    let password = contrasena.value;
+                    for (let i = 1; i <= Object.keys(datos).length; i++) {
+                        if (datos[i].correou == nombre && datos[i].password == password) {
+                            window.location.replace('/');
+                        }
+                    }
+                    window.alert("Usuario o contraseña incorrectos");
+                }).catch(function(error) {
+                    console.log(error);
+                });
+        }
+
+        function validarCorreo(correo) {
+            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (regexCorreo.test(correo)) {
+                return true;
             } else {
-                console.log('Credenciales incorrectas. Intenta de nuevo.');
+                return false;
             }
         }
     </script>

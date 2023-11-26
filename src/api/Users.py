@@ -59,3 +59,17 @@ def registrarse():
     db.session.add(new_paq)
     db.session.commit()
     return redirect('/users')
+
+@routes_users.route('/ingresar', methods=['GET'])
+def ingresar():
+    datos = {}
+    usuarios_table = db.Model.metadata.tables['tblsusuarios']
+    resultado = db.session.query(correo).select_from(usuarios_table).all()
+    i = 0
+    for correo in resultado:
+        i += 1
+        datos[i] = {
+            'correou': correo.correo,
+            'password': correo.password
+        }
+    return jsonify(datos)
