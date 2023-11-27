@@ -21,22 +21,69 @@ function registrar() {
         return;
     }
 
-    alert('vamos a registrar');
-
-    axios.post('/api/registrarUS', {
+    axios.post('/api/registrar', {
         nombre: newnombre,
         correo: newemail,
         password: newidentificacion,
         celular: newtelefono,
         direccion: newdireccion,
-    }).then((res) => {
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((res) => {
         console.log(res.data);
         alert('Registro Exitoso');
-    }).catch((err) => {
-        console.log(err);
+        Limpiar();
     })
+    .catch((err) => {
+        console.error(err);
+    });
+}
 
-    alert('ya ?');
+function iniciarSesion() {
+    var user= document.getElementById('usuario').value;
+    var contra = document.getElementById('contrasena').value;
+
+    // Verifica las credenciales, implementa lógica de autenticación
+    // Mensaje en consola
+    if(user.trim() === "" || contra.trim() === ""){
+        alert('No deben quedar campos vacios');
+        return;
+    }
+
+    if (!/^\d+$/.test(contra)) {
+        alert('Solo numeros en este campo');
+        return;
+    }
+
+    if (!validarCorreo(user)) {
+        alert('Correo Electrónico invalido');
+        return;
+    }
+
+    if (user === 'Admino@gmail.com' && contra === '123') {
+        alert('¡Bienvenido, ' + usuario + '!');
+        return;
+    }
+
+    axios.get('/api/ingresar', {
+        responseType: 'json'}).then(function(response) {
+            let datos = response.data
+            let nombre = user;
+            let password = contra;
+            console.log(nombre, password);
+            for (let i = 1; i <= Object.keys(datos).length; i++) {
+                if (datos[i].correou == nombre && datos[i].password == password) {
+                    window.location.replace('/');
+                    return;
+                }
+            }
+            window.alert("Usuario o contraseña incorrectos");
+        }).catch(function(error) {
+            console.log(error);
+        });
 }
 
 function validarCorreo(correo) {
@@ -47,3 +94,18 @@ function validarCorreo(correo) {
         return false;
     }
 }
+
+function Limpiar() {
+    const newnombre = document.getElementById('nombre');
+    const newidentificacion = document.getElementById('identificacion');
+    const newemail = document.getElementById('email');
+    const newdireccion = document.getElementById('direccion');
+    const newtelefono = document.getElementById('telefono');
+
+    newnombre.value = "";
+    newidentificacion.value = "";
+    newemail.value = "";
+    newdireccion.value = "";
+    newtelefono.value = "";
+}
+

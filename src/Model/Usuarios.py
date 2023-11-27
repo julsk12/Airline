@@ -5,17 +5,15 @@ from config.db import db, app, ma
 class Users(db.Model):
     __tablename__ = "tblsusuarios"
     
-    id= db.Column(db.Integer, primary_key=True, autoincrement=False)
+    correo = db.Column(db.String(200), primary_key=True)
     nombre = db.Column(db.String(200))
-    correo = db.Column(db.String(200))
     password = db.Column(db.String(200))
     celular = db.Column(db.Integer)
     direccion = db.Column(db.String(200))
     
-    def __init__(self, id, nombre, correo, password, celular, direccion):
-        self.id = id
-        self.nombre = nombre
+    def __init__(self,  correo, nombre, password, celular, direccion):
         self.correo = correo
+        self.nombre = nombre
         self.password = password
         self.celular = celular
         self.direccion = direccion
@@ -26,5 +24,5 @@ class Users(db.Model):
             
 class UsuariosSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'nombre', 'correo', 'password', 'celular', 'direccion')
+        fields = ('correo', 'nombre', 'password', 'celular', 'direccion')
     

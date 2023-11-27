@@ -6,7 +6,7 @@ class Comentario(db.Model):
     __tablename__ = "tblcomentarios"
     
     id= db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('tblsusuarios.id'))
+    id_usuario = db.Column(db.String(200), db.ForeignKey('tblsusuarios.correo'))
     id_reserva = db.Column(db.Integer, db.ForeignKey('tblreservas.id'))
     calificacion = db.Column(db.Integer)
     comentario = db.Column(db.Text)
