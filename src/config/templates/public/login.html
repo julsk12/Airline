@@ -111,58 +111,8 @@
         <p class="mt-3">¿Ya tienes una cuenta? <a href="/fronted/indexregistro">Registrarme</a></p>
     </form>
 
-    <script>
-        function iniciarSesion() {
-            var usuario = document.getElementById('usuario').value;
-            var contrasena = document.getElementById('contrasena').value;
-
-            // Verifica las credenciales, implementa lógica de autenticación
-            // Mensaje en consola
-            if(usuario.trim() === "" || contrasena.trim() === ""){
-                alert('No deben quedar campos vacios');
-                return;
-            }
-
-            if (!/^\d+$/.test(contrasena)) {
-                alert('Solo numeros en este campo');
-                return;
-            }
-
-            if (!validarCorreo(usuario)) {
-                alert('Correo Electrónico invalido');
-                return;
-            }
-
-            if (usuario === 'Admino' && contrasena === 'contra123') {
-                console.log('¡Bienvenido, ' + usuario + '!');
-                return;
-            }
-
-            axios.get('/ingresar', {
-                responseType: 'json'}).then(function(response) {
-                    let datos = response.data
-                    let nombre = usuario.value;
-                    let password = contrasena.value;
-                    for (let i = 1; i <= Object.keys(datos).length; i++) {
-                        if (datos[i].correou == nombre && datos[i].password == password) {
-                            window.location.replace('/');
-                        }
-                    }
-                    window.alert("Usuario o contraseña incorrectos");
-                }).catch(function(error) {
-                    console.log(error);
-                });
-        }
-
-        function validarCorreo(correo) {
-            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (regexCorreo.test(correo)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
+    <script src="{{url_for('static', filename='js/main/registro.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </body>
 </html>

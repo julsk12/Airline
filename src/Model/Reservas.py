@@ -6,7 +6,7 @@ class Reserva(db.Model):
     __tablename__ = "tblreservas"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('tblsusuarios.id'))
+    id_usuario = db.Column(db.String(200), db.ForeignKey('tblsusuarios.correo'))
     estadoreserva = db.Column(db.String(200))
     asientosReservados = db.Column(db.Integer)
     fechaReserva = db.Column(db.Date)
