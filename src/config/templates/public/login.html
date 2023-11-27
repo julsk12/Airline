@@ -133,12 +133,12 @@
                 return;
             }
 
-            if (usuario === 'Admino' && contrasena === 'contra123') {
-                console.log('¡Bienvenido, ' + usuario + '!');
+            if (usuario === 'Admino@gmail.com' && contrasena === '123') {
+                alert('¡Bienvenido, ' + usuario + '!');
                 return;
             }
 
-            axios.get('/ingresar', {
+            axios.get('/api/ingresarUS', {
                 responseType: 'json'}).then(function(response) {
                     let datos = response.data
                     let nombre = usuario.value;

@@ -48,20 +48,20 @@ def guardar_users():
     db.session.commit()
     return redirect('/autores')
 
-@routes_users.route('/registrarse', methods=['POST'])
-def registrarse():
+@routes_users.route('/registrarUS', methods=['POST'])
+def registrarUS():
     data = request.json
-    new_paq = Usuarios(nombre=data['nombre'], 
-                       correo=data['correo'], 
-                       password=data['password'], 
-                       celular=data['celular'], 
-                       direccion=data['direccion'],)
+    new_paq = Users(nombre=data['nombre'],
+                    correo=data['correo'], 
+                    password=data['password'], 
+                    celular=data['celular'], 
+                    direccion=data['direccion'],)
     db.session.add(new_paq)
     db.session.commit()
     return redirect('/users')
 
-@routes_users.route('/ingresar', methods=['GET'])
-def ingresar():
+@routes_users.route('/ingresarUS', methods=['GET'])
+def ingresarUS():
     datos = {}
     usuarios_table = db.Model.metadata.tables['tblsusuarios']
     resultado = db.session.query(correo).select_from(usuarios_table).all()

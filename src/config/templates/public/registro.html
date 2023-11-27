@@ -115,13 +115,13 @@
 
         <input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" required>
 
-        <input type="text" id="identificacion" name="identificacion" placeholder="Numero Identificacion" required>
+        <input type="number" id="identificacion" name="identificacion" placeholder="Numero Identificacion" required>
 
         <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
 
-        <input type="tel" id="direccion" name="direccion" placeholder="Direccion" required>
+        <input type="text" id="direccion" name="direccion" placeholder="Direccion" required>
 
-        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+        <input type="number" id="telefono" name="telefono" placeholder="Teléfono" required>
 
         <button type="button" onclick="registrar()">Registrar</button>
         <p>¿Ya tienes una cuenta? <a href="/fronted/indexlogin">Inicia sesión</a></p>
@@ -132,53 +132,7 @@
         <img src="../../static/img/category/icon2.png" alt="Icono">
     </div>
 
-    <script>
-        function registrar() {
-            var NEWnombre = document.getElementById('nombre').value;
-            var NEWidentificacion = document.getElementById('apellido').value;
-            var NEWemail = document.getElementById('email').value;
-            var NEWdireccion = document.getElementById('direccion').value;
-            var NEWtelefono = document.getElementById('telefono').value;
-
-            if(NEWnombre.trim() === "" || NEWidentificacion.trim() === "" || NEWemail.trim() === "" || NEWdireccion.trim() === "" || NEWtelefono.trim() === ""){
-                alert('No deben quedar campos vacios');
-                return;
-            }
-
-            if (!/^\d+$/.test(NEWtelefono) || !/^\d+$/.test(NEWidentificacion)) {
-                alert('Solo numeros en estos campos');
-                return;
-            }
-
-            if (!validarCorreo(NEWemail)) {
-                alert('Email invalido');
-                return;
-            }
-
-            axios.post('/registrarse', {
-                nombre: NEWnombre,
-                correo: NEWemail,
-                password: NEWidentificacion,
-                celular: NEWtelefono,
-                direccion: NEWdireccion,
-            }).then((res) => {
-                console.log(res.data);
-                alert('Registro Exitoso');
-            }).catch((err) => {
-                console.log(err);
-            })
-            return;
-        }
-
-        function validarCorreo(correo) {
-            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (regexCorreo.test(correo)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
+    <script src="{{url_for('static', filename='js/main/registro.js')}}"></script>
 
 </body>
 
