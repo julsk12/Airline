@@ -1,108 +1,151 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>AIRTOON</title>
+    <link rel="stylesheet" href="../../static/css/theme.css">
+    <link rel="stylesheet" href="../../static/css/theme-rtl.css.map">
+    <link rel="stylesheet" href="../../static/css/theme-rtl.min.css">
+    <link rel="stylesheet" href="../../static/css/theme.css.map">
+    <link rel="stylesheet" href="../../static/css/theme.min.css.map">
+    <link rel="stylesheet" href="../../static/css/theme-rtl.min.css.map">
+    <link rel="stylesheet" href="../../static/css/theme-rtl.css">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+    <meta name="msapplication-TileImage"
+      content="../../static/img/favicons/mstile-150x150.png">
+    <link href="../../static/img/logo.svg" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <title>AIRTOON</title>
-  <link rel="stylesheet" href="../../static/css/style.css">
-  <link rel="stylesheet" href="../../static/css/theme.css">
-  <meta name="msapplication-TileImage" content="../../static/img/favicons/mstile-150x150.png">
-  <meta name="theme-color" content="#ffffff">
-  <link href="../../static/img/logo.svg" rel="stylesheet" />
-</head>
+  </head>
 
-<body>
+  <body>
+    <style>
+    .row { 
+      display: inline-flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    }
+    .cards-vuelos{
+      max-width: 400px;
+      aspect-ratio: 3/2;
+      flex-grow: 1;
+    }
+  </style>
 
-  <div id="calendario">
-    <div class="container">
-      <h1 class="hero-title">Buscador de Vuelos</h1>
-      <div class="checkout">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Ida y venida
-          </label>
+    <div id="calendario">
+      <div class="container">
+        <h1 class="hero-title">Buscador de Vuelos</h1>
+        <div class="checkout">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault"
+              id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Ida y venida
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault"
+              id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              Solo ida
+            </label>
+          </div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-            Solo ida
-          </label>
-        </div>
-      </div>
-      <form action="#" method="post">
-        <div class="form-group">
-          <div class="origen">
-            <div class="columna1">
-              <div class="icon"><i class="fas fa-plane-departure"></i></div>
-              <div class="inputs">
-                <label for="origen">Origen:</label>
-                <input type="text" id="origen" name="origen" placeholder="Ciudad de origen" required>
-                <div id="sugerencias-panel" class="sugerencias-panel"></div>
+        <form action="#" method="post">
+          <div class="form-group">
+            <div class="origen">
+              <div class="columna1">
+                <div class="icon"><i class="fas fa-plane-departure"></i></div>
+                <div class="inputs">
+                  <label for="origen">Origen:</label>
+                  <input type="text" id="origen" name="origen"
+                    placeholder="Ciudad de origen" required>
+                  <div id="sugerencias-panel" class="sugerencias-panel"></div>
+                </div>
               </div>
-            </div>
-            <div class="columna2">
-              <div class="icon"><i class="fas fa-plane-departure"></i></div>
-              <div class="inputs">
-                <label for="destino">Destino:</label>
-                <input type="text" id="destino" name="destino" placeholder="Ciudad de origen" required>
-                <div id="sugerencias-modal" class="sugerencias-panel">
-                  
+              <div class="columna2">
+                <div class="icon"><i class="fas fa-plane-departure"></i></div>
+                <div class="inputs">
+                  <label for="destino">Destino:</label>
+                  <input type="text" id="destino" name="destino"
+                    placeholder="Ciudad de origen" required>
+                  <div id="sugerencias-modal" class="sugerencias-panel">
+
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="columna3">
+                  <label for="fecha">Ida:</label>
+                  <input type="date" id="fecha_ida" name="fecha" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="columna4">
+                  <label for="fecha">vuelta</label>
+                  <input type="date" id="fecha_vuelta" name="fecha" required>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <div class="columna3">
-                <label for="fecha">Ida:</label>
-                <input type="date" id="fecha" name="fecha" required>
-              </div>
+              <label for="pasajeros">Número de Pasajeros:</label>
+              <input type="number" id="pasajeros" name="pasajeros" min="1"
+                value="1" required>
             </div>
-            <div class="form-group">
-              <div class="columna4">
-                <label for="fecha">vuelta</label>
-                <input type="date" id="fecha" name="fecha" required>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="pasajeros">Número de Pasajeros:</label>
-            <input type="number" id="pasajeros" name="pasajeros" min="1" value="1" required>
           </div>
         </div>
+
+      </form>
     </div>
-    
-  </form>
-</div>
-<button class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow" type="button" onclick="crear_vuelo()">Buscar</button>
+    <button
+      class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
+      type="button" onclick="crear_vuelo()">Buscar</button>
 
-  <div class="tarifas">
-    <main class="main flow">
-      <h1 class="main__heading">Tarifas</h1>
-      <div class="main__cards cards">
-        <div class="cards__inner" id="tarifas">
+    <div class="tarifas">
+      <main class="main flow">
+        <h1 class="main__heading">Tarifas</h1>
+        <div class="main__cards cards">
+          <div class="cards__inner" id="tarifas">
+          </div>
+          <br>
+          <div class="overlay cards__inner"></div>
         </div>
-        <br>
-        <div class="overlay cards__inner"></div>
-      </div>
-    </main>
-  </div>
+      </main>
+    </div>
 
-</body>
-<script src="../../static/js/bootstrap.min.js"></script>
-<script src="../../static/js/popper.min.js"></script>
-<script src="../../static/js/is.min.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-<script src="../../static/js/all.min.js"></script>
-<script src="/../static/js/theme.js.map"></script>
-<script src="../../static/js/theme.js"></script>
-<script src="../../static/theme.js"></script>
-<script src="../../static/bootstrap-navbar.js"></script>
+    <div id="vuelos" class="row">
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-  rel="stylesheet">
+    </div>
+
+  </body>
+  <script src="../../static/js/bootstrap.min.js"></script>
+  <script src="../../static/js/popper.min.js"></script>
+  <script src="../../static/js/is.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+  <script src="../../static/js/all.min.js"></script>
+  <script src="/../static/js/theme.js.map"></script>
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/theme.js"></script>
+  <script src="../../static/bootstrap-navbar.js"></script>
+  <script src="../../static/js/script.js"></script>
+  <script src="../../static/js/vuelos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+    rel="stylesheet">
 </html>

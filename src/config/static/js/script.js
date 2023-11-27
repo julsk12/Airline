@@ -1,9 +1,6 @@
-window.addEventListener('load', function() {
-  viewtarifas();
-});
-
+window.onload = viewtarifas()
 function viewtarifas() {
-  let morfismo = document.getElementById('tarifas');
+  var morfismo = document.getElementById('tarifas');
 
 
   axios.get('/api/info_tarifa', {

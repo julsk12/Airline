@@ -65,20 +65,60 @@ function crear_vuelo(){
     axios.post('/api/crear_vuelos', {
         origen: origen,
         destino: destino,
-        mascota: "si"
-        
+        mascota: "no"
     }, {
         headers: {
         'Content-Type': 'multipart/form-data'
-    
         }
     }
     ).then((res) => {
         console.log(res.data)
+        window.onload = buscarvuelos()
     })
     .catch((err) => {
         console.log(err);
     })
-    
-    
 }
+
+function buscarvuelos() {
+    morfismo = document.getElementById('vuelos');
+    axios.get('/api/consulvuelos', {
+        responseType: 'json'
+      })
+        .then(function (res) {
+          console.log(res.data);
+          let datos = res.data;
+          var length = Object.keys(datos).length + 1;
+          let listper = '';
+          
+          for (let index = 1; index < length; index++) {
+              listper += `
+              <div class="cards-vuelos col-md-4 mb-4">
+              <div class="card overflow-hidden shadow"> <img class="card-img-top" src="../../static/img/dest/dest1.jpg"
+                  alt="Rome, Italty" />
+                <div class="card-body py-4 px-3">
+                  <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                    <h6 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
+                        href="#!">${datos[index].origen}</a>
+                    </h5>
+                    <h6 class="text-secondary fw-medium">${datos[index].destino}
+                    </h6>
+                    <span class="fs-1 fw-medium">precio</span>
+                  </div>
+                  <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
+                      style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${datos[index].duracion}</span></div>
+                </div>
+              </div>
+            </div>
+              `;
+          }
+          
+          morfismo.innerHTML = listper;
+    
+        })
+        .catch(function (error) {
+          // Maneja los errores aquí
+          console.log(error);
+        });
+    }
+    console.clear();

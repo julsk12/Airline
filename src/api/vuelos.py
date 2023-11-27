@@ -23,7 +23,6 @@ vuelo_schema = FliesSchema()
 flies_Schema = FliesSchema(many=True)
 
 
-
 @routes_vuelos.route("/vuelo", methods=["GET"])
 def obtenervuelos():
     returnall = Vuelo.query.all()
@@ -41,6 +40,7 @@ def eliminarvuelos(id):
     db.session.commit()
     return jsonify(vuelo_schema.dump(fly))
 
+
 origen = ""
 destino = ""
 fecha_vuelta = ""
@@ -49,20 +49,24 @@ mascota = ""
 # para tarifa M sumale 24%
 # para tarifa L sumale 30.6%
 
+
 @routes_vuelos.route("/crear_vuelos", methods=["POST"])
 def crear_vuelos():
-    
     global origen, destino, fecha_vuelta, mascota
     origen = request.form["origen"]
     destino = request.form["destino"]
     mascota = request.form["mascota"]
-    fecha_vuelta = request.form["fecha_vuelta"]
+    fecha_vuelta = ""
     mascotas = ""
-  
-    resultado = db.session.query(Informacion).filter(
-        Informacion.origen == origen,
-        Informacion.destino == destino,
-    ).all()
+
+    resultado = (
+        db.session.query(Informacion)
+        .filter(
+            Informacion.origen == origen,
+            Informacion.destino == destino,
+        )
+        .all()
+    )
 
     fecha_hora_actual = datetime.now()
 
@@ -77,45 +81,45 @@ def crear_vuelos():
                 fecha_hora_vuelo = fecha_hora_actual + timedelta(
                     days=i, hours=random.randint(0, 23)
                 )
-                mascotas = "no"    
+                mascotas = "no"
         else:
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
-            mascotas = "no"  
-            
+            mascotas = "no"
+
         datos = {}
-        idaN_total = 0  
+        idaN_total = 0
         vueltaN_total = 0
         duracion_total = 0
         numero_escalas = 0
         for vuelo in resultado:
             datos = {
-                'origen': vuelo.origen,
-                'origen_aeropuerto': vuelo.origen_aeropuerto,
-                'escala1': vuelo.escala1,
-                'escala1_aeropuerto': vuelo.escala1_aeropuerto,
-                'escala2': vuelo.escala2,
-                'escala2_aeropuerto': vuelo.escala2_aeropuerto,
-                'destino': vuelo.destino,
-                'destino_aeropuerto': vuelo.destino_aeropuerto,
-                'numero_escalas': vuelo.numero_escalas,
-                'duracion_total': vuelo.duracion_total,
-                'idaN': vuelo.idaN,
-                'vueltaN': vuelo.vueltaN,
-                'idaF': vuelo.idaF,
-                'vueltaF': vuelo.vueltaF,
-                'solo_idaN': vuelo.solo_idaN,
-                'solo_idaF': vuelo.solo_idaF,
-                'tarifaS': vuelo.tarifaS,
-                'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-                'tarifaM': vuelo.tarifaM,
-                'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-                'tarifaL': vuelo.tarifaL,
-                'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+                "origen": vuelo.origen,
+                "origen_aeropuerto": vuelo.origen_aeropuerto,
+                "escala1": vuelo.escala1,
+                "escala1_aeropuerto": vuelo.escala1_aeropuerto,
+                "escala2": vuelo.escala2,
+                "escala2_aeropuerto": vuelo.escala2_aeropuerto,
+                "destino": vuelo.destino,
+                "destino_aeropuerto": vuelo.destino_aeropuerto,
+                "numero_escalas": vuelo.numero_escalas,
+                "duracion_total": vuelo.duracion_total,
+                "idaN": vuelo.idaN,
+                "vueltaN": vuelo.vueltaN,
+                "idaF": vuelo.idaF,
+                "vueltaF": vuelo.vueltaF,
+                "solo_idaN": vuelo.solo_idaN,
+                "solo_idaF": vuelo.solo_idaF,
+                "tarifaS": vuelo.tarifaS,
+                "RestriccionestarifaS": vuelo.RestriccionestarifaS,
+                "tarifaM": vuelo.tarifaM,
+                "RestriccionestarifaM": vuelo.RestriccionestarifaM,
+                "tarifaL": vuelo.tarifaL,
+                "RestriccionestarifaL": vuelo.RestriccionestarifaL,
             }
-            duracion_total += datos['duracion_total']
-            numero_escalas += datos['numero_escalas']
-            idaN_total += datos['idaN']
-            vueltaN_total += datos['vueltaN']
+            duracion_total += datos["duracion_total"]
+            numero_escalas += datos["numero_escalas"]
+            idaN_total += datos["idaN"]
+            vueltaN_total += datos["vueltaN"]
 
         precio = idaN_total + vueltaN_total
         fecha_salida = fecha_hora_vuelo
@@ -131,7 +135,7 @@ def crear_vuelos():
             ciudadDestino=destino,
             fechaHLlegada=fecha_llegada,
             fechaHSalida=fecha_hora_vuelo,
-            mascotas = mascotas,
+            mascotas=mascotas,
             duracionVuelo=duracion_total,
             asientosDisponibles="4",
             numeroEscalas=numero_escalas,
@@ -143,21 +147,25 @@ def crear_vuelos():
 
     return jsonify({"message": "Se han creado 5 vuelos exitosamente"})
 
+
 @routes_vuelos.route("/crear_vuelta", methods=["POST"])
 def crear_regreso():
-    
     origen
     destino
     fecha_vuelta
     mascota
     mascotas = ""
-  
-    resultado = db.session.query(Informacion).filter(
-        Informacion.origen == origen,
-        Informacion.destino == destino,
-    ).all()
 
-    fecha_hora_actual = fecha_vuelta+timedelta(days=i, hours=random.randint(0, 23))
+    resultado = (
+        db.session.query(Informacion)
+        .filter(
+            Informacion.origen == origen,
+            Informacion.destino == destino,
+        )
+        .all()
+    )
+
+    fecha_hora_actual = fecha_vuelta + timedelta(days=i, hours=random.randint(0, 23))
 
     for i in range(6):
         if i < 2:
@@ -170,45 +178,45 @@ def crear_regreso():
                 fecha_hora_vuelo = fecha_hora_actual + timedelta(
                     days=i, hours=random.randint(0, 23)
                 )
-                mascotas = "no"    
+                mascotas = "no"
         else:
             fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
-            mascotas = "no"  
-            
+            mascotas = "no"
+
         datos = {}
-        idaN_total = 0  
+        idaN_total = 0
         vueltaN_total = 0
         duracion_total = 0
         numero_escalas = 0
         for vuelo in resultado:
             datos = {
-                'origen': vuelo.origen,
-                'origen_aeropuerto': vuelo.origen_aeropuerto,
-                'escala1': vuelo.escala1,
-                'escala1_aeropuerto': vuelo.escala1_aeropuerto,
-                'escala2': vuelo.escala2,
-                'escala2_aeropuerto': vuelo.escala2_aeropuerto,
-                'destino': vuelo.destino,
-                'destino_aeropuerto': vuelo.destino_aeropuerto,
-                'numero_escalas': vuelo.numero_escalas,
-                'duracion_total': vuelo.duracion_total,
-                'idaN': vuelo.idaN,
-                'vueltaN': vuelo.vueltaN,
-                'idaF': vuelo.idaF,
-                'vueltaF': vuelo.vueltaF,
-                'solo_idaN': vuelo.solo_idaN,
-                'solo_idaF': vuelo.solo_idaF,
-                'tarifaS': vuelo.tarifaS,
-                'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-                'tarifaM': vuelo.tarifaM,
-                'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-                'tarifaL': vuelo.tarifaL,
-                'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+                "origen": vuelo.origen,
+                "origen_aeropuerto": vuelo.origen_aeropuerto,
+                "escala1": vuelo.escala1,
+                "escala1_aeropuerto": vuelo.escala1_aeropuerto,
+                "escala2": vuelo.escala2,
+                "escala2_aeropuerto": vuelo.escala2_aeropuerto,
+                "destino": vuelo.destino,
+                "destino_aeropuerto": vuelo.destino_aeropuerto,
+                "numero_escalas": vuelo.numero_escalas,
+                "duracion_total": vuelo.duracion_total,
+                "idaN": vuelo.idaN,
+                "vueltaN": vuelo.vueltaN,
+                "idaF": vuelo.idaF,
+                "vueltaF": vuelo.vueltaF,
+                "solo_idaN": vuelo.solo_idaN,
+                "solo_idaF": vuelo.solo_idaF,
+                "tarifaS": vuelo.tarifaS,
+                "RestriccionestarifaS": vuelo.RestriccionestarifaS,
+                "tarifaM": vuelo.tarifaM,
+                "RestriccionestarifaM": vuelo.RestriccionestarifaM,
+                "tarifaL": vuelo.tarifaL,
+                "RestriccionestarifaL": vuelo.RestriccionestarifaL,
             }
-            duracion_total += datos['duracion_total']
-            numero_escalas += datos['numero_escalas']
-            idaN_total += datos['idaN']
-            vueltaN_total += datos['vueltaN']
+            duracion_total += datos["duracion_total"]
+            numero_escalas += datos["numero_escalas"]
+            idaN_total += datos["idaN"]
+            vueltaN_total += datos["vueltaN"]
 
         precio = idaN_total + vueltaN_total
         fecha_salida = fecha_hora_vuelo
@@ -225,7 +233,7 @@ def crear_regreso():
             ciudadDestino=destino,
             fechaHLlegada=fecha_llegada,
             fechaHSalida=fecha_hora_vuelo,
-            mascotas = mascotas,
+            mascotas=mascotas,
             duracionVuelo=duracion_total,
             asientosDisponibles="4",
             numeroEscalas=numero_escalas,
@@ -241,55 +249,50 @@ def crear_regreso():
 @routes_vuelos.route("/consulvuelos", methods=["GET"])
 def consulvuelos():
     datos = {}
-    vuelos_table = db.Model.metadata.tables["tblvuelos"]
-    aerolinia_table = db.Model.metadata.tables["tblaerolinea"]
-    resultado = (
-        db.session.query(Vuelo, Aerolinea)
-        .select_from(vuelos_table)
-        .join(aerolinia_table)
-        .all()
-    )
-    
+    resultado = (db.session.query(Vuelo, Aerolinea).select_from(Vuelo).join(Aerolinea).all())
+
     i = 0
-    for Vuelo, Aerolinea in resultado:
+    for vuelo, aerolinea in resultado:
         i += 1
         datos[i] = {
-            "id": Vuelo.id,
-            "aerolinea": Aerolinea.nombre,
-            "origen": Vuelo.ciudadOrigen,
-            "destino": Vuelo.ciudadDestino,
-            "Fsalida": Vuelo.fechaHSalida,
-            "Fllegada": Vuelo.fechaHLlegada,
-            "asientosD": Vuelo.asientosDisponibles,
-            "precio": Vuelo.precio,
-            "#escalas": Vuelo.numeroEscalas,
-            "duracion": Vuelo.duracionVuelo,
+            "id": vuelo.id,
+            "aerolinea": aerolinea.nombre,
+            "origen": vuelo.ciudadOrigen,
+            "destino": vuelo.ciudadDestino,
+            "Fsalida": vuelo.fechaHSalida,
+            "Fllegada": vuelo.fechaHLlegada,
+            "asientosD": vuelo.asientosDisponibles,
+            "precio": vuelo.precio,
+            "#escalas": vuelo.numeroEscalas,
+            "duracion": vuelo.duracionVuelo,
         }
     return jsonify(datos)
+
 
 @routes_vuelos.route("/info_tarifa", methods=["GET"])
 def mostrar_tarifa():
     origen
     destino
     print(origen, destino)
-    resultado = db.session.query(Informacion).filter(
-        Informacion.origen == origen,
-        Informacion.destino == destino,
-    ).all()
+    resultado = (
+        db.session.query(Informacion)
+        .filter(
+            Informacion.origen == origen,
+            Informacion.destino == destino,
+        )
+        .all()
+    )
     datos = {}
-    i=0
+    i = 0
     for vuelo in resultado:
-        i+= 1
+        i += 1
         datos[i] = {
-            'tarifaS': vuelo.tarifaS,
-            'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-            'tarifaM': vuelo.tarifaM,
-            'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-            'tarifaL': vuelo.tarifaL,
-            'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+            "tarifaS": vuelo.tarifaS,
+            "RestriccionestarifaS": vuelo.RestriccionestarifaS,
+            "tarifaM": vuelo.tarifaM,
+            "RestriccionestarifaM": vuelo.RestriccionestarifaM,
+            "tarifaL": vuelo.tarifaL,
+            "RestriccionestarifaL": vuelo.RestriccionestarifaL,
         }
 
     return jsonify(datos)
-
-
-
