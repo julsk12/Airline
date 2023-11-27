@@ -17,3 +17,7 @@ def indexlogin():
 @routes_home.route('/indexregistro', methods=['GET'] )
 def indexregistro():
     return render_template('/public/registro.html')
+
+@routes_home.route('/indexhome', methods=['GET'] )
+def indexhome():
+    return render_template('/index.html')
