@@ -30,6 +30,15 @@
 
   <body>
     <style>
+      .checkout{
+        margin-left: 10%;
+      }
+      #inputs-fechas{
+        border-radius: 4px solid black !important;
+      }
+      .hidden {
+      display: none;
+    }
     .row { 
       display: inline-flex;
     width: 100%;
@@ -47,73 +56,77 @@
   </style>
 
     <div id="calendario">
-      <div class="container">
+      <div class="container" style="min-width: fit-content;">
         <h1 class="hero-title">Buscador de Vuelos</h1>
-        <div class="checkout">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault"
-              id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-              Ida y venida
-            </label>
+        <div style="margin: 30px;">
+          <div class="checkout">
+            <div class="form-check">
+              <input onchange="retorno()" class="form-check-input" type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1" checked>
+              <label class="form-check-label" for="flexRadioDefault1">
+                Ida y venida
+              </label>
+            </div>
+            <div class="form-check">
+              <input onchange="retorno2()" class="form-check-input" type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault2" >
+              <label class="form-check-label" for="flexRadioDefault2">
+                Solo ida
+              </label>
+            </div>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault"
-              id="flexRadioDefault2" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Solo ida
-            </label>
-          </div>
-        </div>
-        <form action="#" method="post">
-          <div class="form-group">
-            <div class="origen">
-              <div class="columna1">
-                <div class="icon"><i class="fas fa-plane-departure"></i></div>
-                <div class="inputs">
-                  <label for="origen">Origen:</label>
-                  <input type="text" id="origen" name="origen"
-                    placeholder="Ciudad de origen" required>
-                  <div id="sugerencias-panel" class="sugerencias-panel"></div>
+          <form action="#" method="post">
+            <div class="form-group">
+              <div class="origen">
+                <div class="columna1">
+                  <div class="icon"><i class="fas fa-plane-departure"></i></div>
+                  <div class="inputs">
+                    <label for="origen">Origen:</label>
+                    <input type="text" id="origen" name="origen"
+                      placeholder="Ciudad de origen" required>
+                    <div id="sugerencias-panel" class="sugerencias-panel"></div>
+                  </div>
                 </div>
-              </div>
-              <div class="columna2">
-                <div class="icon"><i class="fas fa-plane-departure"></i></div>
-                <div class="inputs">
-                  <label for="destino">Destino:</label>
-                  <input type="text" id="destino" name="destino"
-                    placeholder="Ciudad de origen" required>
-                  <div id="sugerencias-modal" class="sugerencias-panel">
+                <div class="columna2">
+                  <div class="icon"><i class="fas fa-plane-departure"></i></div>
+                  <div class="inputs">
+                    <label for="destino">Destino:</label>
+                    <input type="text" id="destino" name="destino"
+                      placeholder="Ciudad de origen" required>
+                    <div id="sugerencias-modal" class="sugerencias-panel">
 
+                    </div>
+                  </div>
+                </div>
+                <div id="inputs-fechas" class="form-group ">
+                  <div class="columna3">
+                    <label for="fecha_ida">Ida:</label>
+                    <input style="color: black;" type="date" id="fecha_ida" name="fecha" required>
+                  </div>
+                </div>
+                <div id="inputs-fechas" class="form-group">
+                  <div id="fechaVuelta" class="columna4">
+                    <label for="fecha_vuelta">vuelta</label>
+                    <input class="|" style="color: black;" id="fecha_vuelta" type="date" name="fecha" required>
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <div class="columna3">
-                  <label for="fecha">Ida:</label>
-                  <input type="date" id="fecha_ida" name="fecha" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="columna4">
-                  <label for="fecha">vuelta</label>
-                  <input type="date" id="fecha_vuelta" name="fecha" required>
-                </div>
+                <label for="pasajeros">Número de Pasajeros:</label>
+                <input type="number" id="pasajeros" name="pasajeros" min="1"
+                  value="1" required>
               </div>
             </div>
-            <div class="form-group">
-              <label for="pasajeros">Número de Pasajeros:</label>
-              <input type="number" id="pasajeros" name="pasajeros" min="1"
-                value="1" required>
-            </div>
-          </div>
-        </div>
 
-      </form>
+          </form>
+        </div><button
+          class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
+          type="button" onclick="crear_vuelo()">Buscar</button>
+      </div>
+
     </div>
-    <button
-      class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
-      type="button" onclick="crear_vuelo()">Buscar</button>
 
     <div class="tarifas">
       <main class="main flow">
