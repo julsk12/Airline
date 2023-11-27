@@ -90,6 +90,7 @@ function crear_vuelo() {
 }
 
 function buscarvuelos() {
+<<<<<<< HEAD
   morfismo = document.getElementById("vuelos");
   axios
     .get("/api/consulvuelos", {
@@ -104,6 +105,21 @@ function buscarvuelos() {
       for (let index = 1; index < length; index++) {
         if (datos[index].origen === origen) {
           listper += `
+=======
+    morfismo = document.getElementById('vuelos');
+    axios.get('/api/consulvuelos', {
+        responseType: 'json'
+      })
+        .then(function (res) {
+          console.log(res.data);
+          let datos = res.data;
+          var length = Object.keys(datos).length + 1;
+          let listper = '';
+          
+          for (let index = 1; index < length; index++) {
+            if (datos[index].origen === origen) {
+                listper += `
+>>>>>>> d4c7506d08f2a30a667cc99d99ec770033e7dcc8
               <div class="cards-vuelos col-md-4 mb-4">
               <div class="card overflow-hidden shadow">
                 <div class="card-body py-4 px-3">
@@ -114,13 +130,18 @@ function buscarvuelos() {
                     </h5>
                     <h6 class="text-secondary fw-medium">${datos[index].destino}
                     </h6>
+<<<<<<< HEAD
                     <span class="fs-1 fw-medium">${datos[index].precio}</span>
+=======
+                    <span style="color: black;" class="fs-1 fw-medium">${datos[index].precio}</span>
+>>>>>>> d4c7506d08f2a30a667cc99d99ec770033e7dcc8
                   </div>
                   <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
                       style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${datos[index].duracion}</span></div>
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
               `;
         }
       }
@@ -143,3 +164,26 @@ function retorno2(){
     var fechaVueltaInput = document.getElementById("fechaVuelta");
     fechaVueltaInput.style.display = "block";
   };
+=======
+              `
+            } 
+              ;
+          }
+          
+          morfismo.innerHTML = listper;
+    
+        })
+        .catch(function (error) {
+          // Maneja los errores aquí
+          console.log(error);
+        });
+    }
+    console.clear();
+
+    function retorno() {
+        document.getElementsByClassName("form-check-input").addEventListener('checked', function () {
+                
+        })
+        
+    }
+>>>>>>> d4c7506d08f2a30a667cc99d99ec770033e7dcc8
