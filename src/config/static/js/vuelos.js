@@ -63,8 +63,9 @@ function configurarAutocompletado(inputId, panelId) {
 }
 
 function crear_vuelo() {
-  origen = document.getElementById("origen").value;
-  destino = document.getElementById("destino").value;
+  origen = document.getElementById('origen').value;
+  destino = document.getElementById('destino').value;
+  fecha_vuelta = document.getElementById('fecha_vuelta').value;
   console.log(origen, destino);
   axios
     .post(
@@ -72,7 +73,8 @@ function crear_vuelo() {
       {
         origen: origen,
         destino: destino,
-        mascota: "no",
+        mascota: "si",
+        fecha_vuelta: fecha_vuelta,
       },
       {
         headers: {
@@ -89,8 +91,9 @@ function crear_vuelo() {
     });
 }
 
+
 function buscarvuelos() {
-  morfismo = document.getElementById("vuelos");
+  morfismo = document.getElementById("cvuelos");
   axios
     .get("/api/consulvuelos", {
       responseType: "json",
@@ -105,24 +108,26 @@ function buscarvuelos() {
         if (datos[index].origen === origen && datos[index].destino === destino) {
           listper += `
               <div class="cards-vuelos col-md-4 mb-4">
-              <div class="card overflow-hidden shadow">
-                <div class="card-body py-4 px-3">
-                  <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                    <h6 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                        href="#!">${datos[index].origen}</a>
-                    </h5>
-                    <h6 class="text-secondary fw-medium">${datos[index].destino}
-                    </h6>
-                    <span style="color: black;" class="fs-1 fw-medium">${datos[index].precio}</span>
+                <div class="card overflow-hidden shadow">
+                  <div class="card-body py-4 px-3">
+                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                      <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal" class="btn-mio link-900 text-decoration-none stretched-link"
+                          >${datos[index].origen}</button>
+                      </h6>
+                      <h6 class="text-secondary fw-medium">${datos[index].destino}
+                      </h6>
+                      <span style="color: black;" class="fs-1 fw-medium">${datos[index].precio}</span>
+                    </div>
+                    <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
+                        style="margin-right: 14px" width="20" alt="navigation" /><span style="color: black;" class="fs-0 fw-medium">${datos[index].duracion}</span>
+                    </div>  
                   </div>
-                  <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
-                      style="margin-right: 14px" width="20" alt="navigation" /><span style="color: black;" class="fs-0 fw-medium">${datos[index].duracion}</span></div>
                 </div>
               </div>
-            </div>
               `;
         }
       }
+      window.onload = viewtarifas();
 
       morfismo.innerHTML = listper;
     })
@@ -142,3 +147,44 @@ function retorno2(){
     var fechaVueltaInput = document.getElementById("fechaVuelta");
     fechaVueltaInput.style.display = "block";
   };
+
+  const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
+const modals = document.querySelectorAll(".modal");
+const modalCloseButtons = document.querySelectorAll(".modal-close");
+
+modalTriggerButtons.forEach(elem => {
+  elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target")));
+});
+modalCloseButtons.forEach(elem => {
+  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+});
+modals.forEach(elem => {
+  elem.addEventListener("click", event => {
+    if(event.currentTarget === event.target) toggleModal(event.currentTarget.id);
+  });
+});
+
+
+document.addEventListener("keydown", event => {
+  if(event.keyCode === 27 && document.querySelector(".modal.modal-show")) {
+    toggleModal(document.querySelector(".modal.modal-show").id);
+  }
+});
+
+function toggleModal(modalId) {
+  const modal = document.getElementById(modalId);
+
+  if(getComputedStyle(modal).display==="flex") { // alternatively: if(modal.classList.contains("modal-show"))
+    modal.classList.add("modal-hide");
+    setTimeout(() => {
+      document.body.style.overflow = "initial";
+      modal.classList.remove("modal-show", "modal-hide");
+      modal.style.display = "none";      
+    }, 200);
+  }
+  else {
+    document.body.style.overflow = "hidden";
+    modal.style.display = "flex";
+    modal.classList.add("modal-show");
+  }
+}

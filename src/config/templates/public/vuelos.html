@@ -24,8 +24,16 @@
     <meta name="msapplication-TileImage"
       content="../../static/img/favicons/mstile-150x150.png">
     <link href="../../static/img/logo.svg" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbs5XW9SxvZrvZTHbODw81MTkX2aF5/cWEMq06iFu4l1HPz4nF+76g1P1wY+jUq6"
+      crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-rbs5XW9SxvZrvZTHbODw81MTkX2aF5/cWEMq06iFu4l1HPz4nF+76g1P1wY+jUq6"
+      crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -54,10 +62,12 @@
       flex-grow: 1;
     }
   </style>
-  <a class="navbar-brand" href="/fronted/indexhome"><img src="../../static/img/logo.svg" height="34"
-    alt="logo" /></a>
+    <a class="navbar-brand" href="/fronted/indexhome"><img
+        src="../../static/img/logo.svg" height="34"
+        alt="logo" /></a>
     <div id="calendario">
-      <div class="container" style="min-width: fit-content; background-color: rgba(223, 215, 249, 0.199);border-radius: 129px 20px 20px 20px;">
+      <div class="container"
+        style="min-width: fit-content; background-color: rgba(223, 215, 249, 0.199);border-radius: 129px 20px 20px 20px;">
         <h1 class="hero-title">Buscador de Vuelos</h1>
         <div style="margin: 30px;">
           <div class="checkout">
@@ -72,7 +82,7 @@
             <div class="form-check">
               <input onchange="retorno2()" class="form-check-input" type="radio"
                 name="flexRadioDefault"
-                id="flexRadioDefault2" >
+                id="flexRadioDefault2">
               <label class="form-check-label" for="flexRadioDefault2">
                 Solo ida
               </label>
@@ -104,13 +114,15 @@
                 <div id="inputs-fechas" class="form-group ">
                   <div class="columna3">
                     <label for="fecha_ida">Ida:</label>
-                    <input style="color: black;" type="date" id="fecha_ida" name="fecha" required>
+                    <input style="color: black;" type="date" id="fecha_ida"
+                      name="fecha" required>
                   </div>
                 </div>
                 <div id="inputs-fechas" class="form-group">
                   <div id="fechaVuelta" class="columna4">
                     <label for="fecha_vuelta">vuelta</label>
-                    <input class="|" style="color: black;" id="fecha_vuelta" type="date" name="fecha" required>
+                    <input class="|" style="color: black;" id="fecha_vuelta"
+                      type="date" name="fecha" required>
                   </div>
                 </div>
               </div>
@@ -122,18 +134,19 @@
             </div>
 
           </form>
-        </div><button
+        </div><a
           class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
-          type="button" onclick="crear_vuelo()">Buscar</button>
+          type="button" onclick="crear_vuelo()">Buscar</a>
       </div>
 
     </div>
 
     <div class="tarifas">
       <main class="main flow">
-        <h1 style="color: black;" class="main__heading">Tarifas</h1>
+        <h1 class="main__heading" style="color: rgb(0, 0, 180);">Tarifas</h1>
         <div class="main__cards cards">
           <div class="cards__inner" id="tarifas">
+
           </div>
           <br>
           <div class="overlay cards__inner"></div>
@@ -141,18 +154,38 @@
       </main>
     </div>
 
-    <div id="vuelos" class="row">
+    <section id="cvuelos" class="row">
 
-    </div>
-    <dialog>
-      <div class="modal">
-          <div class="modal-dialog">
-            <div class="modal-body">
-
-            </div>
+    </section>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModal">
+      Abrir Modal
+  </button>
+    <div class="modal fade" id="miModal" tabindex="-1"
+      aria-labelledby="miModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Cerrar"></button>
+          <div class="modal-body">
+            <section class="card">
+              <h1>ciudadOrigen</h1>
+              <h1>ciudadDestino</h1>
+              <p>fechaHSalida----fechaHLlegada</p>
+              <p>mascotas</p>
+              <p>asientosDisponibles</p>
+              <p>precio</p>
+              <p>numeroEscalas</p>
+              <p>duracionVuelo</p>
+            </section>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+              data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar cambios</button>
+          </div>
+        </div>
       </div>
-    </dialog>
+    </div>
 
   </body>
   <script src="../../static/js/bootstrap.min.js"></script>
