@@ -67,6 +67,7 @@ def crear_vuelos():
     Vuelo.ciudadOrigen == origen,
     Vuelo.ciudadDestino == destino).all()
     i=0
+    precio2=0
     if not consulta:
         resultado = db.session.query(Informacion).filter(
             Informacion.origen == origen,
@@ -130,7 +131,7 @@ def crear_vuelos():
             precio = idaN_total + vueltaN_total
             fecha_salida = fecha_hora_vuelo
             duracion_total_horas = duracion_total
-
+            precio2= idaN_total
             duracion_total_timedelta = timedelta(hours=duracion_total_horas)
 
             fecha_llegada = fecha_salida + duracion_total_timedelta
@@ -141,7 +142,8 @@ def crear_vuelos():
             'ciudadDestino':destino,
             'fechaHSalida':fecha_hora_vuelo,
             'fechaHLlegada':fecha_llegada,
-            'numeroEscalas':numero_escalas  
+            'numeroEscalas':numero_escalas,
+            'precio': idaN_total  
             }
             trato.append(save)
             print(trato)
@@ -172,7 +174,8 @@ def crear_vuelos():
                 'ciudadDestino': lie.ciudadDestino,
                 'fechaHSalida': lie.fechaHSalida,
                 'fechaHLlegada': lie.fechaHLlegada,
-                'numeroEscalas': lie.numeroEscalas      
+                'numeroEscalas': lie.numeroEscalas,
+                'precio': precio2
             }
             trry.append(block)
 
@@ -218,8 +221,11 @@ def crear_vuel():
                 fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
                 mascotas = "no"  
                 
-            datos = {}
-            i=0
+                datos = {}
+            
+            save={}
+            
+            trato = []
             idaN_total = 0  
             vueltaN_total = 0
             duracion_total = 0
@@ -253,16 +259,25 @@ def crear_vuel():
                 numero_escalas += datos['numero_escalas']
                 idaN_total += datos['idaN']
                 vueltaN_total += datos['vueltaN']
-
             precio = idaN_total + vueltaN_total
             fecha_salida = fecha_hora_vuelo
             duracion_total_horas = duracion_total
-
+            precio2= idaN_total
             duracion_total_timedelta = timedelta(hours=duracion_total_horas)
 
             fecha_llegada = fecha_salida + duracion_total_timedelta
-
-            # Crea un objeto Vuelo y guárdalo en la base de datos
+            i += 1
+            save[i]={
+            'id_aerolinea':"avianca",
+            'ciudadOrigen':origen,
+            'ciudadDestino':destino,
+            'fechaHSalida':fecha_hora_vuelo,
+            'fechaHLlegada':fecha_llegada,
+            'numeroEscalas':numero_escalas,
+            'precio': idaN_total  
+            }
+            trato.append(save)
+            print(trato)
             vuelo = Vuelo(
                 id_aerolinea="avianca",
                 ciudadOrigen=origen,
@@ -278,22 +293,7 @@ def crear_vuel():
             db.session.add(vuelo)
 
         db.session.commit()
-        mostrar = db.session.query(Vuelo).filter(
-            Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
-            Vuelo.ciudadOrigen == origen,
-            Vuelo.ciudadDestino == destino,
-        ).all()
-        for fly in mostrar:
-            i += 1
-            datos[i] = {
-            'id_aerolinea':fly.id_aerolinea,
-            'ciudadOrigen':fly.ciudadOrigen,
-            'ciudadDestino':fly.ciudadDestino,
-            'fechaHSalida':fly.fechaHSalida,
-            'fechaHLlegada':fly.fechaHLlegada,
-            'numeroEscalas':fly.numeroEscalas      
-            }
-        return jsonify(datos)
+        return jsonify(save)
     else:
         block={}
         trry = []
@@ -305,7 +305,8 @@ def crear_vuel():
                 'ciudadDestino': lie.ciudadDestino,
                 'fechaHSalida': lie.fechaHSalida,
                 'fechaHLlegada': lie.fechaHLlegada,
-                'numeroEscalas': lie.numeroEscalas      
+                'numeroEscalas': lie.numeroEscalas,
+                'precio': precio2
             }
             trry.append(block)
 
