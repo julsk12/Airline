@@ -51,7 +51,7 @@ mascota = ""
 
 
 @routes_vuelos.route("/crear_vuelos", methods=["POST"])
-def crear_vuelos():
+def crear_vuelo():
     
     global origen, destino, mascota, fecha_vuelta
     origen = request.form["origen"]
