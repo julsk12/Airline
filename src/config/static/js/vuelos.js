@@ -92,7 +92,7 @@ function crear_vuelo() {
 function buscarvuelos() {
   morfismo = document.getElementById("vuelos");
   axios
-    .get("/api/consulvuelos", {
+    .get("/api/crear_vuelos", {
       responseType: "json",
     })
     .then(function (res) {
@@ -109,9 +109,9 @@ function buscarvuelos() {
                 <div class="card-body py-4 px-3">
                   <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                     <h6 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                        href="#!">${datos[index].origen}</a>
+                        href="#!">${datos[index].ciudadOrigen}</a>
                     </h5>
-                    <h6 class="text-secondary fw-medium">${datos[index].destino}
+                    <h6 class="text-secondary fw-medium">${datos[index].ciudadDestino}
                     </h6>
                     <span style="color: black;" class="fs-1 fw-medium">${datos[index].precio}</span>
                   </div>
