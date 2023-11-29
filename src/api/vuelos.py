@@ -277,6 +277,7 @@ def info_tarifa():
     i=0
     for vuelo in resultado:
             print(vuelo.origen)
+            print(vuelo.destino)
             i+= 1
             datos[i] = {
                 'origen': vuelo.origen,

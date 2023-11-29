@@ -1,205 +1,204 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>AIRTOON</title>
-    <link rel="stylesheet" href="../../static/css/theme.css">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.css.map">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.min.css">
-    <link rel="stylesheet" href="../../static/css/theme.css.map">
-    <link rel="stylesheet" href="../../static/css/theme.min.css.map">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.min.css.map">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.css">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous">
-    <meta name="msapplication-TileImage"
-      content="../../static/img/favicons/mstile-150x150.png">
-    <link href="../../static/img/logo.svg" rel="stylesheet" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbs5XW9SxvZrvZTHbODw81MTkX2aF5/cWEMq06iFu4l1HPz4nF+76g1P1wY+jUq6"
-      crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-rbs5XW9SxvZrvZTHbODw81MTkX2aF5/cWEMq06iFu4l1HPz4nF+76g1P1wY+jUq6"
-      crossorigin="anonymous"></script>
-  </head>
+  <title>AIRTOON</title>
+  <link rel="stylesheet" href="../../static/css/theme.css">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.css.map">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.min.css">
+  <link rel="stylesheet" href="../../static/css/theme.css.map">
+  <link rel="stylesheet" href="../../static/css/theme.min.css.map">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.min.css.map">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.css">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="../../static/css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta name="msapplication-TileImage" content="../../static/img/favicons/mstile-150x150.png">
+  <link href="../../static/img/logo.svg" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbs5XW9SxvZrvZTHbODw81MTkX2aF5/cWEMq06iFu4l1HPz4nF+76g1P1wY+jUq6" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-rbs5XW9SxvZrvZTHbODw81MTkX2aF5/cWEMq06iFu4l1HPz4nF+76g1P1wY+jUq6"
+    crossorigin="anonymous"></script>
+</head>
 
-  <body>
-    <style>
-      .checkout{
-        margin-left: 10%;
-      }
-      #inputs-fechas{
-        border-radius: 4px solid black !important;
-      }
-      .hidden {
+<body>
+  <style>
+    .p {
+      color: black;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .checkout {
+      margin-left: 10%;
+    }
+
+    #inputs-fechas {
+      border-radius: 4px solid black !important;
+    }
+
+    .hidden {
       display: none;
     }
-    .row { 
+
+    .row {
       display: inline-flex;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
+      width: 100%;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
     }
-    .cards-vuelos{
+
+    .cards-vuelos {
       max-width: 400px;
       aspect-ratio: 3/2;
       flex-grow: 1;
     }
   </style>
-    <a class="navbar-brand" href="/fronted/indexhome"><img
-        src="../../static/img/logo.svg" height="34"
-        alt="logo" /></a>
-    <div id="calendario">
-      <div class="container"
-        style="min-width: fit-content; background-color: rgba(223, 215, 249, 0.199);border-radius: 129px 20px 20px 20px;">
-        <h1 class="hero-title">Buscador de Vuelos</h1>
-        <div style="margin: 30px;">
-          <div class="checkout">
-            <div class="form-check">
-              <input onchange="retorno()" class="form-check-input" type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1" checked>
-              <label class="form-check-label" for="flexRadioDefault1">
-                Ida y venida
-              </label>
-            </div>
-            <div class="form-check">
-              <input onchange="retorno2()" class="form-check-input" type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2">
-              <label class="form-check-label" for="flexRadioDefault2">
-                Solo ida
-              </label>
-            </div>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block"
+    data-navbar-on-scroll="data-navbar-on-scroll">
+    <div style="display: flex; justify-content: center;" class="center"><a class="navbar-brand"
+        href="/fronted/indexhome"><img src="../../static/img/logo.svg" height="34" alt="logo" /></a>
+    </div>
+  </nav>
+  <div id="calendario">
+    <div style="background-image: url(../../static/img/category/shape.svg);" class="container"
+      style="min-width: fit-content; background-color: rgba(223, 215, 249, 0.199);border-radius: 129px 20px 20px 20px;">
+      <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Buscar mi Vuelos</h1>
+      <div style="margin: 30px;">
+        <div class="checkout">
+          <div class="form-check">
+            <input onchange="retorno()" class="form-check-input" type="radio" name="flexRadioDefault"
+              id="flexRadioDefault1" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              Ida y venida
+            </label>
           </div>
-          <form action="#" method="post">
+          <div class="form-check">
+            <input onchange="retorno2()" class="form-check-input" type="radio" name="flexRadioDefault"
+              id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Solo ida
+            </label>
+          </div>
+        </div>
+        <form action="#" method="post">
+          <div class="form-group">
+            <div class="origen">
+              <div class="columna1">
+                <div class="icon"><i class="fas fa-plane-departure"></i></div>
+                <div class="inputs">
+                  <label for="origen">Origen:</label>
+                  <input type="text" id="origen" name="origen" placeholder="Ciudad de origen" required>
+                  <div id="sugerencias-panel" class="sugerencias-panel"></div>
+                </div>
+              </div>
+              <div class="columna2">
+                <div class="icon"><i class="fas fa-plane-departure"></i></div>
+                <div class="inputs">
+                  <label for="destino">Destino:</label>
+                  <input type="text" id="destino" name="destino" placeholder="Ciudad de origen" required>
+                  <div id="sugerencias-modal" class="sugerencias-panel">
+
+                  </div>
+                </div>
+              </div>
+              <div id="inputs-fechas" class="form-group ">
+                <div class="columna3">
+                  <label for="fecha_ida">Ida:</label>
+                  <input style="color: black;" type="date" id="fecha_ida" name="fecha" required>
+                </div>
+              </div>
+              <div id="inputs-fechas" class="form-group">
+                <div id="fechaVuelta" class="columna4">
+                  <label for="fecha_vuelta">vuelta</label>
+                  <input class="|" style="color: black;" id="fecha_vuelta" type="date" name="fecha" required>
+                </div>
+              </div>
+            </div>
             <div class="form-group">
-              <div class="origen">
-                <div class="columna1">
-                  <div class="icon"><i class="fas fa-plane-departure"></i></div>
-                  <div class="inputs">
-                    <label for="origen">Origen:</label>
-                    <input type="text" id="origen" name="origen"
-                      placeholder="Ciudad de origen" required>
-                    <div id="sugerencias-panel" class="sugerencias-panel"></div>
-                  </div>
-                </div>
-                <div class="columna2">
-                  <div class="icon"><i class="fas fa-plane-departure"></i></div>
-                  <div class="inputs">
-                    <label for="destino">Destino:</label>
-                    <input type="text" id="destino" name="destino"
-                      placeholder="Ciudad de origen" required>
-                    <div id="sugerencias-modal" class="sugerencias-panel">
-
-                    </div>
-                  </div>
-                </div>
-                <div id="inputs-fechas" class="form-group ">
-                  <div class="columna3">
-                    <label for="fecha_ida">Ida:</label>
-                    <input style="color: black;" type="date" id="fecha_ida"
-                      name="fecha" required>
-                  </div>
-                </div>
-                <div id="inputs-fechas" class="form-group">
-                  <div id="fechaVuelta" class="columna4">
-                    <label for="fecha_vuelta">vuelta</label>
-                    <input class="|" style="color: black;" id="fecha_vuelta"
-                      type="date" name="fecha" required>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="pasajeros">Número de Pasajeros:</label>
-                <input type="number" id="pasajeros" name="pasajeros" min="1"
-                  value="1" required>
-              </div>
+              <label for="pasajeros">Número de Pasajeros:</label>
+              <input type="number" id="pasajeros" name="pasajeros" min="1" value="1" required>
             </div>
+          </div>
 
-          </form>
-        </div><a
-          class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
-          type="button" onclick="crear_vuelo()">Buscar</a>
-      </div>
-
+        </form>
+      </div><a class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow" type="button"
+        onclick="crear_vuelo()">Buscar</a>
     </div>
 
-    <div class="tarifas">
-      <main class="main flow">
-        <h1 class="main__heading" style="color: rgb(0, 0, 180);">Tarifas</h1>
-        <div class="main__cards cards">
-          <div class="cards__inner" id="tarifas">
+  </div>
 
-          </div>
-          <br>
-          <div class="overlay cards__inner"></div>
+  <div class="tarifas">
+    <main class="main flow">
+      <h1 class="main__heading" style="color: rgb(0, 0, 180);">Tarifas</h1>
+      <div class="main__cards cards">
+        <div class="cards__inner" id="tarifas">
+
         </div>
-      </main>
-    </div>
+        <br>
+        <div class="overlay cards__inner"></div>
+      </div>
+    </main>
+  </div>
 
-    <section id="cvuelos" class="row">
+  <section style="background-image: url(../../static/img/hero/hero-bg.svg);
+    background-repeat: no-repeat;
+    filter: drop-shadow(2px 4px 6px rgb(28, 117, 219));
+    z-index: 1;" id="cvuelos" class="row">
+    
+  </section>
 
-    </section>
-
-    <div class="modal fade" id="miModal" tabindex="-1"
-      aria-labelledby="miModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <button type="button" class="btn-close" data-bs-dismiss="modal"
-            aria-label="Cerrar"></button>
-          <div class="modal-body">
-            <section class="card">
-              <h1>ciudadOrigen</h1>
-              <h1>ciudadDestino</h1>
-              <p>fechaHSalida----fechaHLlegada</p>
-              <p>mascotas</p>
-              <p>asientosDisponibles</p>
-              <p>precio</p>
-              <p>numeroEscalas</p>
-              <p>duracionVuelo</p>
-            </section>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"
-              data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar cambios</button>
-          </div>
+  <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+    <div
+      style="height: 110vh;max-height: fit-content;width: 90%;max-width: fit-content;min-width: fit-content;min-height: fit-content;"
+      class="modal-dialog">
+      <div class="modal-content">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <div class="modal-body">
+          <section class="card">
+            <h1>ciudadOrigen</h1>
+            <h1>ciudadDestino</h1>
+            <p>fechaHSalida----fechaHLlegada</p>
+            <p>mascotas</p>
+            <p>asientosDisponibles</p>
+            <p>precio</p>
+            <p>numeroEscalas</p>
+            <p>duracionVuelo</p>
+          </section>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar cambios</button>
         </div>
       </div>
     </div>
+  </div>
 
-  </body>
-  <script src="../../static/js/bootstrap.min.js"></script>
-  <script src="../../static/js/popper.min.js"></script>
-  <script src="../../static/js/is.min.js"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-  <script src="../../static/js/all.min.js"></script>
-  <script src="/../static/js/theme.js.map"></script>
-  <script src="../../static/js/theme.js"></script>
-  <script src="../../static/theme.js"></script>
-  <script src="../../static/bootstrap-navbar.js"></script>
-  <script src="../../static/js/script.js"></script>
-  <script src="../../static/js/vuelos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/popper.min.js"></script>
+<script src="../../static/js/is.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="../../static/js/all.min.js"></script>
+<script src="/../static/js/theme.js.map"></script>
+<script src="../../static/js/theme.js"></script>
+<script src="../../static/theme.js"></script>
+<script src="../../static/bootstrap-navbar.js"></script>
+<script src="../../static/js/script.js"></script>
+<script src="../../static/js/vuelos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-    rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+  rel="stylesheet">
+
 </html>

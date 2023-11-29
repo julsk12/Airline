@@ -25,7 +25,8 @@ body {
   height: 100%;
   width: 100%;
   display: flex;
-  padding: 10%;
+  padding-left: 10% !important;
+  padding-right: 10% !important;
   align-items: center;
 }
 
@@ -562,7 +563,8 @@ button.search-button:before {
 .origen{
   min-width: fit-content;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 3px solid #070f6f;
+  border-radius: 5px;
   margin: 10px;
   box-sizing: border-box;
   display: flex;
@@ -590,10 +592,15 @@ button.search-button:before {
   font-size: 20px;
   color:rgb(0, 102, 255);
 }
+input{
+  border: 1px solid #878787 !important;
+  border-radius: 10px !important;
+  box-sizing: border-box !important;
+}
 .inputs input {
+  border: 1px solid #878787 !important;
+  border-radius: 10px;
   box-sizing: border-box;
-  border: none; 
-  
 }
 .columna3{
   display: flex;
