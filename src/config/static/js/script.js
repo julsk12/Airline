@@ -1,28 +1,31 @@
 window.onload = viewtarifas()
-function viewtarifas() {
-  var morfismo = document.getElementById('tarifas');
 
+function viewtarifas() {
+  let morfismo = document.getElementById('tarifas');
+  let Origen = document.getElementById('origen').value;
+  let Destino = document.getElementById('destino').value;
 
   axios.get('/api/info_tarifa', {
     responseType: 'json'
   })
     .then(function (res) {
-      console.log(res.data);
+      console.log("aqui estan los datos",res.data);
       let datos = res.data; 
       var length = Object.keys(datos).length + 1;
       let listper = '';
       
       for (let index = 1; index < length; index++) {
+        if (datos[index].origen === Origen && datos[index].destino === Destino) {
           listper += `
           <div class="cards__card card">
             <p class="card__price">Tarifa S</p>
             <h2 class="card__heading">Viaje ligero</h2>
             <ul role="list" class="card__bullets flow">
-                <li>${datos[index].tarifaS}</li>
+                <li style="color: black;">${datos[index].tarifaS}</li>
             </ul>
             <h2 class="card__heading">Restricciones</h2>
             <ul role="list" class="card__bullets flow">
-                <li>${datos[index].RestriccionestarifaS}</li>
+                <li style="color: black;">${datos[index].RestriccionestarifaS}</li>
             </ul>
                 </div>
           
@@ -30,11 +33,11 @@ function viewtarifas() {
                   <p class="card__price">Tarifa M</p>
                   <h2 class="card__heading">Mas confort</h2>
                   <ul role="list" class="card__bullets flow">
-                    <li>${datos[index].tarifaM}</li>
+                    <li style="color: black;">${datos[index].tarifaM}</li>
                   </ul>
                   <h2 class="card__heading">Restricciones</h2>
                   <ul role="list" class="card__bullets flow">
-                      <li>${datos[index].RestriccionestarifaM}</li>
+                      <li style="color: black;">${datos[index].RestriccionestarifaM}</li>
                   </ul>
                 </div>
           
@@ -42,18 +45,21 @@ function viewtarifas() {
                   <p class="card__price">Tarifa L</p>
                   <h2 class="card__heading">Mas flexible</h2>
                   <ul role="list" class="card__bullets flow">
-                    <li>${datos[index].tarifaL}</li>
+                    <li style="color: black;">${datos[index].tarifaL}</li>
                   </ul>
                   <h2 class="card__heading">Restricciones</h2>
                   <ul role="list" class="card__bullets flow">
-                      <li>${datos[index].RestriccionestarifaL}</li>
+                      <li style="color: black;">${datos[index].RestriccionestarifaL}</li>
                   </ul>
                 </div>
               
-          `;
+          `
+        }
+        ;
       }
-      
       morfismo.innerHTML = listper;
+      
+      
 
     })
     .catch(function (error) {

@@ -636,6 +636,7 @@ vuelos_dos_escalas = [
     },
 ]
 
+
 def create_aero():
     if Informacion.query.count() == 0:
         for aeropuerto_data in vuelos_nacionales + vuelos_directos + vuelos_dos_escalas:

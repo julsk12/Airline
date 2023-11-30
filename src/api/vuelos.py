@@ -334,33 +334,34 @@ def consulvuelos():
             "#escalas": vuelo.numeroEscalas,
             "duracion": vuelo.duracionVuelo,
         }
+        corigen = vuelo.ciudadOrigen
+        cdestino = vuelo.ciudadDestino
+        session['corigen'] = corigen
+        session['cdestino'] = cdestino
     return jsonify(datos)
 
 
 @routes_vuelos.route("/info_tarifa", methods=["GET"])
-def mostrar_tarifa():
-    origen
-    destino
-    print(origen, destino)
-    resultado = (
-        db.session.query(Informacion)
-        .filter(
-            Informacion.origen == origen,
-            Informacion.destino == destino,
-        )
-        .all()
+def info_tarifa():
+    
+    resultado = (db.session.query(Informacion).all()
     )
+    print(resultado)
     datos = {}
-    i = 0
+    i=0
     for vuelo in resultado:
-        i += 1
-        datos[i] = {
-            "tarifaS": vuelo.tarifaS,
-            "RestriccionestarifaS": vuelo.RestriccionestarifaS,
-            "tarifaM": vuelo.tarifaM,
-            "RestriccionestarifaM": vuelo.RestriccionestarifaM,
-            "tarifaL": vuelo.tarifaL,
-            "RestriccionestarifaL": vuelo.RestriccionestarifaL,
-        }
+            print(vuelo.origen)
+            print(vuelo.destino)
+            i+= 1
+            datos[i] = {
+                'origen': vuelo.origen,
+                'destino': vuelo.destino,
+                'tarifaS': vuelo.tarifaS,
+                'RestriccionestarifaS': vuelo.RestriccionestarifaS,
+                'tarifaM': vuelo.tarifaM,
+                'RestriccionestarifaM': vuelo.RestriccionestarifaM,
+                'tarifaL': vuelo.tarifaL,
+                'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+            }
 
     return jsonify(datos)
