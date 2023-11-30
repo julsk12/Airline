@@ -58,109 +58,67 @@ function configurarAutocompletado(inputId, panelId) {
     });
 }
 
-function crear_vuelo() {
-    morfismo = document.getElementById("vuelos");
+function crear_vuelo(){
     origen = document.getElementById('origen').value;
     destino = document.getElementById('destino').value;
     fecha_vuelta = document.getElementById('fecha_vuelta').value;
+    morfismo = document.getElementById("cvuelos");
     console.log(origen, destino);
     axios.post('/api/crear_vuelos', {
         origen: origen,
         destino: destino,
         mascota: "si",
         fecha_vuelta: fecha_vuelta,
-      },
-      {
+        
+    }, {
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
-    .then((res) => {
-      console.log(res.data);
-      let datos = res.data;
-      var length = Object.keys(datos).length + 1;
-      let listper = "";
-
-      for (let index = 1; index < length; index++) {
-        if (datos[index].origen === origen && datos[index].destino === destino) {
-          listper += `
-                  <div class="cards-vuelos col-md-4 mb-4">
-                  <div style="background-image: url(../../static/img/steps/bg.png);
-                            background-repeat: no-repeat; border: none;" class="card overflow-hidden shadow">
-                    <div class="card-body py-4 px-3">
-                      <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                        <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal"
-                            class="btn-mio link-900 text-decoration-none stretched-link">${datos[index].origen}</button>
-                        </h6>
-                        <h6 class="text-secondary fw-medium">${datos[index].destino}
-                        </h6>
-                        <span style="color: black;" class="fs-1 fw-medium">${datos[index].precio}</span>
-                      </div>
-                      <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
-                          style="margin-right: 14px" width="20" alt="navigation" /><span style="color: black;"
-                          class="fs-0 fw-medium">${datos[index].duracion}</span>
+        'Content-Type': 'multipart/form-data'
+    
+        }
+    }
+    ).then((res) => {
+        console.log(res.data);
+        let datos = res.data;
+        var length = Object.keys(datos).length - 1;
+        console.log(length);
+        let listper = "";
+  
+        for (let index = 1; index < length; index++) {
+        //   if (datos[index].origen === origen && datos[index].destino === destino) {
+            listper += `
+                    <div class="cards-vuelos col-md-4 mb-4">
+                    <div style="background-image: url(../../static/img/steps/bg.png);
+                              background-repeat: no-repeat; border: none;" class="card overflow-hidden shadow">
+                      <div class="card-body py-4 px-3">
+                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                          <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal"
+                              class="btn-mio link-900 text-decoration-none stretched-link">${datos.ciudadOrigen}</button>
+                          </h6>
+                          <h6 class="text-secondary fw-medium">${datos.ciudadDestino}
+                          </h6>
+                          <span style="color: black;" class="fs-1 fw-medium">${datos.precio}</span>
+                        </div>
+                        <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
+                            style="margin-right: 14px" width="20" alt="navigation" /><span style="color: black;"
+                            class="fs-0 fw-medium">${datos.duracion}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              `;
-        }
-      }
-      window.onload = viewtarifas();
-
-      morfismo.innerHTML = listper;
+                `;
+          }
+        // }
+        // window.onload = viewtarifas();
+  
+        morfismo.innerHTML = listper;
     })
     .catch((err) => {
-      console.log(err);
-    });
+        console.log(err);
+    })
+    
+    
 }
 
-function crear_vuelo() {
-  morfismo = document.getElementById("vuelos");
-  axios.post('/api/crear_vuelos', {
-    },
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  )
-  .then((res) => {
-    console.log(res.data);
-      let datos = res.data;
-      var length = Object.keys(datos).length + 1;
-      let listper = "";
-
-      for (let index = 1; index < length; index++) {
-        if (datos[index].origen === origen && datos[index].destino === destino) {
-          listper += `
-              <div class="cards-vuelos col-md-4 mb-4">
-              <div class="card overflow-hidden shadow">
-                <div class="card-body py-4 px-3">
-                  <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                    <h6 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                        href="#!">${datos[index].ciudadOrigen}</a>
-                    </h5>
-                    <h6 class="text-secondary fw-medium">${datos[index].ciudadDestino}
-                    </h6>
-                    <span style="color: black;" class="fs-1 fw-medium">${datos[index].precio}</span>
-                  </div>
-                  <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
-                      style="margin-right: 14px" width="20" alt="navigation" /><span style="color: black;" class="fs-0 fw-medium">${datos[index].duracion}</span></div>
-                </div>
-              </div>
-            </div>
-              `;
-        }
-      }
-
-      morfismo.innerHTML = listper;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
 console.clear();
 
 function retorno2(){

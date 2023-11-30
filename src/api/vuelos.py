@@ -51,8 +51,7 @@ mascota = ""
 
 
 @routes_vuelos.route("/crear_vuelos", methods=["POST"])
-def crear_vuelo():
-    
+def crear_vuelos():
     global origen, destino, mascota, fecha_vuelta
     origen = request.form["origen"]
     destino = request.form["destino"]
@@ -61,20 +60,65 @@ def crear_vuelo():
     fecha_vuelta = datetime.strptime(fecha_date, "%Y-%m-%d").date()
     mascotas = ""
     fecha_hora_actual = datetime.now()
-    
+
     nueva_fecha = fecha_hora_actual + timedelta(days=6)
     consulta = Vuelo.query.filter(
-    Vuelo.fechaHSalida.between(fecha_hora_actual, nueva_fecha),
-    Vuelo.ciudadOrigen == origen,
-    Vuelo.ciudadDestino == destino).all()
-    i=0
-    precio2=0
-    if not consulta:
-        resultado = db.session.query(Informacion).filter(
+        Vuelo.fechaHSalida.between(fecha_hora_actual, nueva_fecha),
+        Vuelo.ciudadOrigen == origen,
+        Vuelo.ciudadDestino == destino,
+    ).all()
+    i = 0
+    precio2 = 0
+    datos = {}
+
+    save = {}
+
+    trato = []
+    idaN_total = 0
+    vueltaN_total = 0
+    duracion_total = 0
+    numero_escalas = 0
+    resultado = (
+        db.session.query(Informacion)
+        .filter(
             Informacion.origen == origen,
             Informacion.destino == destino,
-        ).all()
-
+        )
+        .all()
+    )
+    for vuelo in resultado:
+        datos = {
+            "origen": vuelo.origen,
+            "origen_aeropuerto": vuelo.origen_aeropuerto,
+            "escala1": vuelo.escala1,
+            "escala1_aeropuerto": vuelo.escala1_aeropuerto,
+            "escala2": vuelo.escala2,
+            "escala2_aeropuerto": vuelo.escala2_aeropuerto,
+            "destino": vuelo.destino,
+            "destino_aeropuerto": vuelo.destino_aeropuerto,
+            "numero_escalas": vuelo.numero_escalas,
+            "duracion_total": vuelo.duracion_total,
+            "idaN": vuelo.idaN,
+            "vueltaN": vuelo.vueltaN,
+            "idaF": vuelo.idaF,
+            "vueltaF": vuelo.vueltaF,
+            "solo_idaN": vuelo.solo_idaN,
+            "solo_idaF": vuelo.solo_idaF,
+            "tarifaS": vuelo.tarifaS,
+            "RestriccionestarifaS": vuelo.RestriccionestarifaS,
+            "tarifaM": vuelo.tarifaM,
+            "RestriccionestarifaM": vuelo.RestriccionestarifaM,
+            "tarifaL": vuelo.tarifaL,
+            "RestriccionestarifaL": vuelo.RestriccionestarifaL,
+        }
+    duracion_total += datos["duracion_total"]
+    numero_escalas += datos["numero_escalas"]
+    idaN_total += datos["idaN"]
+    vueltaN_total += datos["vueltaN"]
+    precio = idaN_total + vueltaN_total
+    duracion_total_horas = duracion_total
+    precio2 = idaN_total
+    if not consulta:
         for i in range(6):
             if i < 2:
                 if i == 1 and mascota == "si":
@@ -86,65 +130,24 @@ def crear_vuelo():
                     fecha_hora_vuelo = fecha_hora_actual + timedelta(
                         days=i, hours=random.randint(0, 23)
                     )
-                    mascotas = "no"    
+                    mascotas = "no"
             else:
                 fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
-                mascotas = "no"  
-                
-            datos = {}
-            
-            save={}
-            
-            trato = []
-            idaN_total = 0  
-            vueltaN_total = 0
-            duracion_total = 0
-            numero_escalas = 0
-            for vuelo in resultado:
-                datos = {
-                    'origen': vuelo.origen,
-                    'origen_aeropuerto': vuelo.origen_aeropuerto,
-                    'escala1': vuelo.escala1,
-                    'escala1_aeropuerto': vuelo.escala1_aeropuerto,
-                    'escala2': vuelo.escala2,
-                    'escala2_aeropuerto': vuelo.escala2_aeropuerto,
-                    'destino': vuelo.destino,
-                    'destino_aeropuerto': vuelo.destino_aeropuerto,
-                    'numero_escalas': vuelo.numero_escalas,
-                    'duracion_total': vuelo.duracion_total,
-                    'idaN': vuelo.idaN,
-                    'vueltaN': vuelo.vueltaN,
-                    'idaF': vuelo.idaF,
-                    'vueltaF': vuelo.vueltaF,
-                    'solo_idaN': vuelo.solo_idaN,
-                    'solo_idaF': vuelo.solo_idaF,
-                    'tarifaS': vuelo.tarifaS,
-                    'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-                    'tarifaM': vuelo.tarifaM,
-                    'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-                    'tarifaL': vuelo.tarifaL,
-                    'RestriccionestarifaL': vuelo.RestriccionestarifaL,
-                }
-                duracion_total += datos['duracion_total']
-                numero_escalas += datos['numero_escalas']
-                idaN_total += datos['idaN']
-                vueltaN_total += datos['vueltaN']
-            precio = idaN_total + vueltaN_total
-            fecha_salida = fecha_hora_vuelo
-            duracion_total_horas = duracion_total
-            precio2= idaN_total
-            duracion_total_timedelta = timedelta(hours=duracion_total_horas)
+                mascotas = "no"
 
+            duracion_total_timedelta = timedelta(hours=duracion_total_horas)
+            fecha_salida = fecha_hora_vuelo
             fecha_llegada = fecha_salida + duracion_total_timedelta
             i += 1
-            save[i]={
-            'id_aerolinea':"avianca",
-            'ciudadOrigen':origen,
-            'ciudadDestino':destino,
-            'fechaHSalida':fecha_hora_vuelo,
-            'fechaHLlegada':fecha_llegada,
-            'numeroEscalas':numero_escalas,
-            'precio': idaN_total  
+            save = {
+                "id_aerolinea": "avianca",
+                "ciudadOrigen": origen,
+                "ciudadDestino": destino,
+                "fechaHSalida": fecha_hora_vuelo,
+                "fechaHLlegada": fecha_llegada,
+                "numeroEscalas": numero_escalas,
+                "precio": idaN_total,
+                "duracion": duracion_total_horas,
             }
             trato.append(save)
             print(trato)
@@ -154,7 +157,7 @@ def crear_vuelo():
                 ciudadDestino=destino,
                 fechaHLlegada=fecha_llegada,
                 fechaHSalida=fecha_hora_vuelo,
-                mascotas = mascotas,
+                mascotas=mascotas,
                 duracionVuelo=duracion_total,
                 asientosDisponibles="4",
                 numeroEscalas=numero_escalas,
@@ -165,47 +168,93 @@ def crear_vuelo():
         db.session.commit()
         return jsonify(save)
     else:
-        block={}
+        block = {}
         trry = []
         for lie in consulta:
-            
-            block= {
-                'id_aerolinea': lie.id_aerolinea,
-                'ciudadOrigen': lie.ciudadOrigen,
-                'ciudadDestino': lie.ciudadDestino,
-                'fechaHSalida': lie.fechaHSalida,
-                'fechaHLlegada': lie.fechaHLlegada,
-                'numeroEscalas': lie.numeroEscalas,
-                'precio': precio2
+            block = {
+                "id_aerolinea": lie.id_aerolinea,
+                "ciudadOrigen": lie.ciudadOrigen,
+                "ciudadDestino": lie.ciudadDestino,
+                "fechaHSalida": lie.fechaHSalida,
+                "fechaHLlegada": lie.fechaHLlegada,
+                "numeroEscalas": lie.numeroEscalas,
+                "precio": precio2,
+                "duracion": duracion_total_horas,
             }
             trry.append(block)
 
         print("ayuda", trry)
         return jsonify(block)
 
+
 @routes_vuelos.route("/crear_vuelta", methods=["POST"])
 def crear_vuel():
-    
-    origen 
-    destino 
+    origen
+    destino
     mascota
     fecha_vuelta
     mascotas = ""
     nueva_fecha = fecha_vuelta + timedelta(days=6)
     consulta = Vuelo.query.filter(
-    Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
-    Vuelo.ciudadOrigen == origen,
-    Vuelo.ciudadDestino == destino).all()
-    
-    if not consulta:
-        resultado = db.session.query(Informacion).filter(
+        Vuelo.fechaHSalida.between(fecha_vuelta, nueva_fecha),
+        Vuelo.ciudadOrigen == origen,
+        Vuelo.ciudadDestino == destino,
+    ).all()
+
+    resultado = (
+        db.session.query(Informacion)
+        .filter(
             Informacion.origen == origen,
             Informacion.destino == destino,
-        ).all()
-        hora_actual = datetime.now().time()
-        fecha_hora_actual = datetime.combine(fecha_vuelta, hora_actual)
-        print(fecha_hora_actual)
+        )
+        .all()
+    )
+    hora_actual = datetime.now().time()
+    fecha_hora_actual = datetime.combine(fecha_vuelta, hora_actual)
+    print(fecha_hora_actual)
+    datos = {}
 
+    save = {}
+
+    trato = []
+    idaN_total = 0
+    vueltaN_total = 0
+    duracion_total = 0
+    numero_escalas = 0
+    for vuelo in resultado:
+        datos = {
+            "origen": vuelo.origen,
+            "origen_aeropuerto": vuelo.origen_aeropuerto,
+            "escala1": vuelo.escala1,
+            "escala1_aeropuerto": vuelo.escala1_aeropuerto,
+            "escala2": vuelo.escala2,
+            "escala2_aeropuerto": vuelo.escala2_aeropuerto,
+            "destino": vuelo.destino,
+            "destino_aeropuerto": vuelo.destino_aeropuerto,
+            "numero_escalas": vuelo.numero_escalas,
+            "duracion_total": vuelo.duracion_total,
+            "idaN": vuelo.idaN,
+            "vueltaN": vuelo.vueltaN,
+            "idaF": vuelo.idaF,
+            "vueltaF": vuelo.vueltaF,
+            "solo_idaN": vuelo.solo_idaN,
+            "solo_idaF": vuelo.solo_idaF,
+            "tarifaS": vuelo.tarifaS,
+            "RestriccionestarifaS": vuelo.RestriccionestarifaS,
+            "tarifaM": vuelo.tarifaM,
+            "RestriccionestarifaM": vuelo.RestriccionestarifaM,
+            "tarifaL": vuelo.tarifaL,
+            "RestriccionestarifaL": vuelo.RestriccionestarifaL,
+        }
+    duracion_total += datos["duracion_total"]
+    numero_escalas += datos["numero_escalas"]
+    idaN_total += datos["idaN"]
+    vueltaN_total += datos["vueltaN"]
+
+    precio = idaN_total + vueltaN_total
+    duracion_total_horas = duracion_total
+
+    if not consulta:
         for i in range(6):
             if i < 2:
                 if i == 1 and mascota == "si":
@@ -217,65 +266,25 @@ def crear_vuel():
                     fecha_hora_vuelo = fecha_hora_actual + timedelta(
                         days=i, hours=random.randint(0, 23)
                     )
-                    mascotas = "no"    
+                    mascotas = "no"
             else:
                 fecha_hora_vuelo = fecha_hora_actual + timedelta(days=i)
-                mascotas = "no"  
-                
-                datos = {}
-            
-            save={}
-            
-            trato = []
-            idaN_total = 0  
-            vueltaN_total = 0
-            duracion_total = 0
-            numero_escalas = 0
-            for vuelo in resultado:
-                datos = {
-                    'origen': vuelo.origen,
-                    'origen_aeropuerto': vuelo.origen_aeropuerto,
-                    'escala1': vuelo.escala1,
-                    'escala1_aeropuerto': vuelo.escala1_aeropuerto,
-                    'escala2': vuelo.escala2,
-                    'escala2_aeropuerto': vuelo.escala2_aeropuerto,
-                    'destino': vuelo.destino,
-                    'destino_aeropuerto': vuelo.destino_aeropuerto,
-                    'numero_escalas': vuelo.numero_escalas,
-                    'duracion_total': vuelo.duracion_total,
-                    'idaN': vuelo.idaN,
-                    'vueltaN': vuelo.vueltaN,
-                    'idaF': vuelo.idaF,
-                    'vueltaF': vuelo.vueltaF,
-                    'solo_idaN': vuelo.solo_idaN,
-                    'solo_idaF': vuelo.solo_idaF,
-                    'tarifaS': vuelo.tarifaS,
-                    'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-                    'tarifaM': vuelo.tarifaM,
-                    'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-                    'tarifaL': vuelo.tarifaL,
-                    'RestriccionestarifaL': vuelo.RestriccionestarifaL,
-                }
-                duracion_total += datos['duracion_total']
-                numero_escalas += datos['numero_escalas']
-                idaN_total += datos['idaN']
-                vueltaN_total += datos['vueltaN']
-            precio = idaN_total + vueltaN_total
-            fecha_salida = fecha_hora_vuelo
-            duracion_total_horas = duracion_total
-            precio2= idaN_total
+                mascotas = "no"
+
             duracion_total_timedelta = timedelta(hours=duracion_total_horas)
+            fecha_salida = fecha_hora_vuelo
 
             fecha_llegada = fecha_salida + duracion_total_timedelta
-            i += 1
-            save[i]={
-            'id_aerolinea':"avianca",
-            'ciudadOrigen':origen,
-            'ciudadDestino':destino,
-            'fechaHSalida':fecha_hora_vuelo,
-            'fechaHLlegada':fecha_llegada,
-            'numeroEscalas':numero_escalas,
-            'precio': idaN_total  
+
+            save = {
+                "id_aerolinea": "avianca",
+                "ciudadOrigen": origen,
+                "ciudadDestino": destino,
+                "fechaHSalida": fecha_hora_vuelo,
+                "fechaHLlegada": fecha_llegada,
+                "numeroEscalas": numero_escalas,
+                "precio": idaN_total,
+                "duracion": duracion_total_horas,
             }
             trato.append(save)
             print(trato)
@@ -285,7 +294,7 @@ def crear_vuel():
                 ciudadDestino=destino,
                 fechaHLlegada=fecha_llegada,
                 fechaHSalida=fecha_hora_vuelo,
-                mascotas = mascotas,
+                mascotas=mascotas,
                 duracionVuelo=duracion_total,
                 asientosDisponibles="4",
                 numeroEscalas=numero_escalas,
@@ -296,28 +305,31 @@ def crear_vuel():
         db.session.commit()
         return jsonify(save)
     else:
-        block={}
+        block = {}
         trry = []
         for lie in consulta:
-            
-            block= {
-                'id_aerolinea': lie.id_aerolinea,
-                'ciudadOrigen': lie.ciudadOrigen,
-                'ciudadDestino': lie.ciudadDestino,
-                'fechaHSalida': lie.fechaHSalida,
-                'fechaHLlegada': lie.fechaHLlegada,
-                'numeroEscalas': lie.numeroEscalas,
-                'precio': precio2
+            block = {
+                "id_aerolinea": lie.id_aerolinea,
+                "ciudadOrigen": lie.ciudadOrigen,
+                "ciudadDestino": lie.ciudadDestino,
+                "fechaHSalida": lie.fechaHSalida,
+                "fechaHLlegada": lie.fechaHLlegada,
+                "numeroEscalas": lie.numeroEscalas,
+                "precio": idaN_total,
+                "duracion": lie.duracionVuelo,
             }
             trry.append(block)
 
         print("ayuda", trry)
         return jsonify(block)
 
+
 @routes_vuelos.route("/consulvuelos", methods=["GET"])
 def consulvuelos():
     datos = {}
-    resultado = (db.session.query(Vuelo, Aerolinea).select_from(Vuelo).join(Aerolinea).all())
+    resultado = (
+        db.session.query(Vuelo, Aerolinea).select_from(Vuelo).join(Aerolinea).all()
+    )
 
     i = 0
     for vuelo, aerolinea in resultado:
@@ -336,32 +348,30 @@ def consulvuelos():
         }
         corigen = vuelo.ciudadOrigen
         cdestino = vuelo.ciudadDestino
-        session['corigen'] = corigen
-        session['cdestino'] = cdestino
+        session["corigen"] = corigen
+        session["cdestino"] = cdestino
     return jsonify(datos)
 
 
 @routes_vuelos.route("/info_tarifa", methods=["GET"])
 def info_tarifa():
-    
-    resultado = (db.session.query(Informacion).all()
-    )
+    resultado = db.session.query(Informacion).all()
     print(resultado)
     datos = {}
-    i=0
+    i = 0
     for vuelo in resultado:
-            print(vuelo.origen)
-            print(vuelo.destino)
-            i+= 1
-            datos[i] = {
-                'origen': vuelo.origen,
-                'destino': vuelo.destino,
-                'tarifaS': vuelo.tarifaS,
-                'RestriccionestarifaS': vuelo.RestriccionestarifaS,
-                'tarifaM': vuelo.tarifaM,
-                'RestriccionestarifaM': vuelo.RestriccionestarifaM,
-                'tarifaL': vuelo.tarifaL,
-                'RestriccionestarifaL': vuelo.RestriccionestarifaL,
-            }
+        print(vuelo.origen)
+        print(vuelo.destino)
+        i += 1
+        datos[i] = {
+            "origen": vuelo.origen,
+            "destino": vuelo.destino,
+            "tarifaS": vuelo.tarifaS,
+            "RestriccionestarifaS": vuelo.RestriccionestarifaS,
+            "tarifaM": vuelo.tarifaM,
+            "RestriccionestarifaM": vuelo.RestriccionestarifaM,
+            "tarifaL": vuelo.tarifaL,
+            "RestriccionestarifaL": vuelo.RestriccionestarifaL,
+        }
 
     return jsonify(datos)
