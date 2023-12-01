@@ -126,7 +126,7 @@ function crear_vuelo() {
                               <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos.ciudadOrigen}</h1>
                               <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos.ciudadDestino}</h1>
                               <p class="ppp mb-0 fw-medium">${datos.fechaHSalida}     ${datos.fechaHLlegada}</p>
-                              <p class="ppp mb-0 fw-medium">Mascotas: ${mascotas}</p>
+                              <p class="ppp mb-0 fw-medium">Mascotas: ${datos.mascotas}</p>
                               <p class="ppp mb-0 fw-medium">${datos.puestos}</p>
                               <p class="ppp mb-0 fw-medium">${datos.precio}</p>
                               <p class="ppp mb-0 fw-medium">${datos.numeroEscalas}</p>
@@ -142,7 +142,6 @@ function crear_vuelo() {
                       `
                 ;
       }
-      mascotas = ""
       morfismo.innerHTML = listper;
       modalvuelo.innerHTML = vuelo_modal;
     })
