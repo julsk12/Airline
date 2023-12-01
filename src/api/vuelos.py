@@ -180,7 +180,7 @@ def crear_vuelos():
                 'numeroEscalas': lie.numeroEscalas,
                 'precio': precio2,
                 'duracion': duracion_total_horas,
-                'mascotas': lie.mascotas,
+                'mascota': lie.mascotas,
             }
             trry.append(block)
 
