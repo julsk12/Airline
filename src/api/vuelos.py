@@ -355,7 +355,9 @@ def consulvuelos():
 
 @routes_vuelos.route("/info_tarifa", methods=["GET"])
 def info_tarifa():
-    resultado = db.session.query(Informacion).all()
+    resultado = db.session.query(Informacion).filter(
+            Informacion.origen == origen,
+            Informacion.destino == destino,).all()
     print(resultado)
     datos = {}
     i = 0

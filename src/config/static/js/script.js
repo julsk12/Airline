@@ -15,7 +15,6 @@ function viewtarifas() {
       let listper = '';
       
       for (let index = 1; index < length; index++) {
-        if (datos[index].origen === Origen && datos[index].destino === Destino) {
           listper += `
           <div class="cards__card card">
             <p class="card__price">Tarifa S</p>
@@ -54,7 +53,7 @@ function viewtarifas() {
                 </div>
               
           `
-        }
+        
         ;
       }
       morfismo.innerHTML = listper;
