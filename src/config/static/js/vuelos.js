@@ -142,7 +142,6 @@ function crear_vuelo() {
                       `
                 ;
       }
-      mascotas = ""
       morfismo.innerHTML = listper;
       modalvuelo.innerHTML = vuelo_modal;
     })
