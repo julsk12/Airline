@@ -113,8 +113,8 @@ aeropuertos_extranjeros = [
         "Dirección": "Bangkok, Tailandia"
     },
     {
-        "Nombre": "Aeropuerto Internacional John F. Kennedy (JFK), Nueva York, EE. UU.",
-        "Dirección": "Nueva York, EE. UU."
+        "Nombre": "Aeropuerto Internacional John F. Kennedy (JFK), Nueva York, Estados Unidos",
+        "Dirección": "Nueva York, Estados Unidos"
     },
     {
         "Nombre": "Aeropuerto Heathrow de Londres (LHR), Londres, Reino Unido",
@@ -133,8 +133,8 @@ aeropuertos_extranjeros = [
         "Dirección": "Pekín, China"
     },
     {
-        "Nombre": "Aeropuerto Internacional de Miami (MIA), Miami, EE. UU.",
-        "Dirección": "Miami, EE. UU."
+        "Nombre": "Aeropuerto Internacional de Miami (MIA), Miami, Estados Unidos",
+        "Dirección": "Miami, Estados Unidos"
     },
     {
         "Nombre": "Aeropuerto Adolfo Suárez Madrid-Barajas (MAD), Madrid, España",
@@ -173,20 +173,20 @@ aeropuertos_extranjeros = [
         "Dirección": "Melbourne, Australia"
     },
     {
-        "Nombre": "Aeropuerto Internacional de Los Ángeles (LAX), Los Ángeles, EE. UU.",
-        "Dirección": "Los Ángeles, EE. UU."
+        "Nombre": "Aeropuerto Internacional de Los Ángeles (LAX), Los Ángeles, Estados Unidos",
+        "Dirección": "Los Ángeles, Estados Unidos"
     },
     {
         "Nombre": "Aeropuerto Internacional Indira Gandhi (DEL), Nueva Delhi, India",
         "Dirección": "Nueva Delhi, India"
     },
     {
-        "Nombre": "Aeropuerto Internacional Hartsfield-Jackson (ATL), Atlanta, EE. UU.",
-        "Dirección": "Atlanta, EE. UU."
+        "Nombre": "Aeropuerto Internacional Hartsfield-Jackson (ATL), Atlanta, Estados Unidos",
+        "Dirección": "Atlanta, Estados Unidos"
     },
     {
-        "Nombre": "Aeropuerto Internacional Louis Armstrong (MSY), Nueva Orleans, EE. UU.",
-        "Dirección": "Nueva Orleans, EE. UU."
+        "Nombre": "Aeropuerto Internacional Louis Armstrong (MSY), Nueva Orleans, Estados Unidos",
+        "Dirección": "Nueva Orleans, Estados Unidos"
     },
     {
         "Nombre": "Aeropuerto Internacional Simón Bolívar (CCS), Caracas, Venezuela",
@@ -209,8 +209,8 @@ aeropuertos_extranjeros = [
         "Dirección": "Moscú, Rusia"
     },
     {
-        "Nombre": "Aeropuerto Internacional de San Francisco (SFO), San Francisco, EE. UU.",
-        "Dirección": "San Francisco, EE. UU."
+        "Nombre": "Aeropuerto Internacional de San Francisco (SFO), San Francisco, Estados Unidos",
+        "Dirección": "San Francisco, Estados Unidos"
     }
 ]
 
