@@ -17,36 +17,37 @@ class Aeropuerto(db.Model):
         self.direccion = direccion
         self.serviciosdisponibles = serviciosdisponibles
 
+
 aeropuertos_nacionales = [
     {
         "Nombre": "El Edén",
         "Teléfono": "67479400",
-        "Dirección": "Quindío / Colombia"
+        "Dirección": "Quindío, Colombia"
     },
     {
         "Nombre": "Palonegro",
         "Teléfono": "(607) 6910140",
-        "Dirección": "Santander / Colombia"
+        "Dirección": "Santander, Colombia"
     },
     {
         "Nombre": "Rafael Núñez",
         "Teléfono": "(5) 6931351",
-        "Dirección": "Cartagena / Bolívar / Colombia"
+        "Dirección": "Cartagena, Colombia"
     },
     {
         "Nombre": "Gustavo Rojas Pinilla",
         "Teléfono": "+57 8 512 6112",
-        "Dirección": "San Andrés y Providencia / Colombia"
+        "Dirección": "San Andrés, Colombia"
     },
     {
         "Nombre": "Los Garzones",
         "Teléfono": "(+57) 604 7911476",
-        "Dirección": "Montería / Córdoba / Colombia"
+        "Dirección": "Montería, Colombia"
     },
     {
         "Nombre": "Almirante Padilla",
         "Teléfono": "301 3445618",
-        "Dirección": "Riohacha / Colombia"
+        "Dirección": "Riohacha, Colombia"
     },
     {
         "Nombre": "Aeropuerto Internacional Ernesto Cortissoz (BAQ), Barranquilla, Colombia",
