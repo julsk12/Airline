@@ -20,6 +20,11 @@ body {
     font-size: large;
     font-weight: bold;
 }
+
+.ppp{
+  margin: 0 !important;
+}
+
 #calendario{
   justify-content: center;
   height: 100%;
@@ -67,6 +72,7 @@ ul {
   flex-wrap: wrap;
   gap: 2.5em;
 }
+
 
 .card {
   --flow-space: 0.5em;

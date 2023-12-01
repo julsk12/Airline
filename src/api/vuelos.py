@@ -78,39 +78,34 @@ def crear_vuelos():
     vueltaN_total = 0
     duracion_total = 0
     numero_escalas = 0
-    resultado = (
-        db.session.query(Informacion)
-        .filter(
-            Informacion.origen == origen,
-            Informacion.destino == destino,
-        )
-        .all()
-    )
+    resultado = db.session.query(Informacion).all()
     for vuelo in resultado:
-        datos = {
-            "origen": vuelo.origen,
-            "origen_aeropuerto": vuelo.origen_aeropuerto,
-            "escala1": vuelo.escala1,
-            "escala1_aeropuerto": vuelo.escala1_aeropuerto,
-            "escala2": vuelo.escala2,
-            "escala2_aeropuerto": vuelo.escala2_aeropuerto,
-            "destino": vuelo.destino,
-            "destino_aeropuerto": vuelo.destino_aeropuerto,
-            "numero_escalas": vuelo.numero_escalas,
-            "duracion_total": vuelo.duracion_total,
-            "idaN": vuelo.idaN,
-            "vueltaN": vuelo.vueltaN,
-            "idaF": vuelo.idaF,
-            "vueltaF": vuelo.vueltaF,
-            "solo_idaN": vuelo.solo_idaN,
-            "solo_idaF": vuelo.solo_idaF,
-            "tarifaS": vuelo.tarifaS,
-            "RestriccionestarifaS": vuelo.RestriccionestarifaS,
-            "tarifaM": vuelo.tarifaM,
-            "RestriccionestarifaM": vuelo.RestriccionestarifaM,
-            "tarifaL": vuelo.tarifaL,
-            "RestriccionestarifaL": vuelo.RestriccionestarifaL,
-        }
+        if vuelo.origen == origen:
+            datos = {
+                "origen": vuelo.origen,
+                "origen_aeropuerto": vuelo.origen_aeropuerto,
+                "escala1": vuelo.escala1,
+                "escala1_aeropuerto": vuelo.escala1_aeropuerto,
+                "escala2": vuelo.escala2,
+                "escala2_aeropuerto": vuelo.escala2_aeropuerto,
+                "destino": vuelo.destino,
+                "destino_aeropuerto": vuelo.destino_aeropuerto,
+                "numero_escalas": vuelo.numero_escalas,
+                "duracion_total": vuelo.duracion_total,
+                "idaN": vuelo.idaN,
+                "vueltaN": vuelo.vueltaN,
+                "idaF": vuelo.idaF,
+                "vueltaF": vuelo.vueltaF,
+                "solo_idaN": vuelo.solo_idaN,
+                "solo_idaF": vuelo.solo_idaF,
+                "tarifaS": vuelo.tarifaS,
+                "RestriccionestarifaS": vuelo.RestriccionestarifaS,
+                "tarifaM": vuelo.tarifaM,
+                "RestriccionestarifaM": vuelo.RestriccionestarifaM,
+                "tarifaL": vuelo.tarifaL,
+                "RestriccionestarifaL": vuelo.RestriccionestarifaL,
+            }
+
     duracion_total += datos["duracion_total"]
     numero_escalas += datos["numero_escalas"]
     idaN_total += datos["idaN"]
@@ -120,6 +115,7 @@ def crear_vuelos():
     precio2 = idaN_total
     if not consulta:
         for i in range(6):
+            print("aqui esta lklll")
             if i < 2:
                 if i == 1 and mascota == "si":
                     fecha_hora_vuelo = fecha_hora_actual + timedelta(
@@ -168,14 +164,18 @@ def crear_vuelos():
         db.session.commit()
         return jsonify(save)
     else:
+        puestos =random.randint(1, 10)
         block = {}
         trry = []
         for lie in consulta:
+            print("aqui esta este")
             block = {
                 "id_aerolinea": lie.id_aerolinea,
                 "ciudadOrigen": lie.ciudadOrigen,
                 "ciudadDestino": lie.ciudadDestino,
                 "fechaHSalida": lie.fechaHSalida,
+                "mascotas": mascotas,
+                "puestos": puestos,
                 "fechaHLlegada": lie.fechaHLlegada,
                 "numeroEscalas": lie.numeroEscalas,
                 "precio": precio2,
@@ -314,13 +314,14 @@ def crear_vuel():
                 "ciudadDestino": lie.ciudadDestino,
                 "fechaHSalida": lie.fechaHSalida,
                 "fechaHLlegada": lie.fechaHLlegada,
+                "mascotas": mascotas,
                 "numeroEscalas": lie.numeroEscalas,
                 "precio": idaN_total,
                 "duracion": lie.duracionVuelo,
             }
             trry.append(block)
 
-        print("ayuda", trry)
+        print("ayuda", mascotas)
         return jsonify(block)
 
 
