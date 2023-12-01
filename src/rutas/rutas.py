@@ -21,3 +21,7 @@ def indexregistro():
 @routes_home.route('/indexhome', methods=['GET'] )
 def indexhome():
     return render_template('/index.html')
+
+@routes_home.route('/indexreserva', methods=['GET'] )
+def indexreserva():
+    return render_template('/public/reservacion.html')

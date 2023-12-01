@@ -97,7 +97,7 @@ function crear_vuelo() {
         listper += `
                     <div class="cards-vuelos col-md-4 mb-4">
                     <div style="background-image: url(../../static/img/steps/bg.png);
-                              background-repeat: no-repeat; border: none;" class="card overflow-hidden shadow">
+                              background-repeat: no-repeat; border: none; min-width: fit-content; margin: 10px;" class="card overflow-hidden shadow">
                       <div class="card-body py-4 px-3">
                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                           <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal"
@@ -107,7 +107,7 @@ function crear_vuelo() {
                           </h6>
                           <span style="color: black;" class="fs-1 fw-medium">$ ${datos.precio}</span>
                         </div>
-                        <div class="d-flex align-items-center"style="color: black; font-size: 20px !important;" > <img src="../../static/img/dest/navigation.svg"
+                        <div class="d-flex align-items-center"style="color: black; font-size: 20px !important;  min-width: fit-content;" > <img src="../../static/img/dest/navigation.svg"
                             style=" margin-right: 14px" width="20" alt="navigation" />N° Escalas:  <span style="color: black; font-size: 30px !important;"
                             class="fs-0 fw-medium">${datos.duracion}</span>
                         </div>
@@ -118,7 +118,7 @@ function crear_vuelo() {
                 `
           vuelo_modal += `
           <div style="height: 110vh;max-height: fit-content;width: 90%;max-width: fit-content;min-width: fit-content;min-height: fit-content;" class="modal-dialog">
-                          <div class="modal-content">
+                          <div style="border-radius: 129px 20px 129px 20px;" class="modal-content">
                           <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Cerrar"></button>
                           <div class="modal-body">
                             <div class="articule">
@@ -133,9 +133,12 @@ function crear_vuelo() {
                               <p class="ppp mb-0 fw-medium">${datos.duracion} hora(s)</p>
                             </div>
                           </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Guardar cambios</button>
+                        <div style="
+                        justify-content: center !important;
+                    " class="modal-footer">
+                        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</a>
+                        <a href="/fronted/indexreserva" type="button" class="btn btn-primary" style="
+                        background-color: #3352ff;">Comprar Ticket</a>
                         </div>
                         </div>
                       </div>
