@@ -62,10 +62,7 @@ def crear_vuelos():
     fecha_hora_actual = datetime.now()
     
     nueva_fecha = fecha_hora_actual + timedelta(days=6)
-    consulta = Vuelo.query.filter(
-    Vuelo.fechaHSalida.between(fecha_hora_actual, nueva_fecha),
-    Vuelo.ciudadOrigen == origen,
-    Vuelo.ciudadDestino == destino).all()
+    consulta = Vuelo.query.filter(Vuelo.fechaHSalida.between(fecha_hora_actual, nueva_fecha),Vuelo.ciudadOrigen == origen,Vuelo.ciudadDestino == destino).all()
     i=0
     precio2=0
     datos = {}
@@ -170,6 +167,7 @@ def crear_vuelos():
         block={}
         trry = []
         for lie in consulta:
+            puestos =random.randint(1, 10)
             
             block= {
                 'id_aerolinea': lie.id_aerolinea,
@@ -180,7 +178,8 @@ def crear_vuelos():
                 'numeroEscalas': lie.numeroEscalas,
                 'precio': precio2,
                 'duracion': duracion_total_horas,
-                'mascota': lie.mascotas,
+                'mascotas': lie.mascotas,
+                'puestos': puestos,
             }
             trry.append(block)
 

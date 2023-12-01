@@ -90,7 +90,6 @@ function crear_vuelo() {
       console.log(res.data);
       let datos = res.data;
       var length = Object.keys(datos).length - 1;
-      console.log(length);
       let listper = "";
       let vuelo_modal = "";
 
@@ -106,10 +105,10 @@ function crear_vuelo() {
                           </h6>
                           <h6 class="text-secondary fw-medium">${datos.ciudadDestino}
                           </h6>
-                          <span style="color: black;" class="fs-1 fw-medium">${datos.precio}</span>
+                          <span style="color: black;" class="fs-1 fw-medium">$ ${datos.precio}</span>
                         </div>
-                        <div class="d-flex align-items-center"> <img src="../../static/img/dest/navigation.svg"
-                            style="margin-right: 14px" width="20" alt="navigation" /><span style="color: black;"
+                        <div class="d-flex align-items-center"style="color: black; font-size: 20px !important;" > <img src="../../static/img/dest/navigation.svg"
+                            style=" margin-right: 14px" width="20" alt="navigation" />N° Escalas:  <span style="color: black; font-size: 30px !important;"
                             class="fs-0 fw-medium">${datos.duracion}</span>
                         </div>
                       </div>
@@ -125,12 +124,13 @@ function crear_vuelo() {
                             <div class="articule">
                               <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos.ciudadOrigen}</h1>
                               <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos.ciudadDestino}</h1>
-                              <p class="ppp mb-0 fw-medium">${datos.fechaHSalida}     ${datos.fechaHLlegada}</p>
-                              <p class="ppp mb-0 fw-medium">Mascotas: ${datos.mascota}</p>
-                              <p class="ppp mb-0 fw-medium">${datos.puestos}</p>
-                              <p class="ppp mb-0 fw-medium">${datos.precio}</p>
-                              <p class="ppp mb-0 fw-medium">${datos.numeroEscalas}</p>
-                              <p class="ppp mb-0 fw-medium">${datos.duracionVuelo}</p>
+                              <p class="ppp mb-0 fw-medium">Fecha Salida: ${datos.fechaHSalida}</p>
+                              <p class="ppp mb-0 fw-medium">Fecha Llegada: ${datos.fechaHLlegada}</p>
+                              <p class="ppp mb-0 fw-medium">Mascotas: ${datos.mascotas}</p>
+                              <p class="ppp mb-0 fw-medium">Puestos disponibles: ${datos.puestos}</p>
+                              <p class="ppp mb-0 fw-medium">$ ${datos.precio}</p>
+                              <p class="ppp mb-0 fw-medium">Escalas:${datos.numeroEscalas}</p>
+                              <p class="ppp mb-0 fw-medium">${datos.duracion} hora(s)</p>
                             </div>
                           </div>
                         <div class="modal-footer">
