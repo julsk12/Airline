@@ -85,7 +85,7 @@
         class="container"
         style="min-width: fit-content; background-color: rgba(223, 215, 249, 0.199);border-radius: 129px 20px 20px 20px;">
         <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Buscar
-          mi Vuelos</h1>
+          mi Vuelo</h1>
         <div style="margin: 30px;">
           <div class="checkout">
             <div class="form-check">
@@ -146,12 +146,12 @@
               <div class="form-group">
                 <label for="pasajeros">Número de Pasajeros:</label>
                 <input type="number" id="pasajeros" name="pasajeros" min="1"
-                  value="1" required>
+                  value="1" max="10" maxlength="10" required>
               </div>
             </div>
 
           </form>
-        </div><a
+        </div><a id="buscar"
           class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
           type="button"
           onclick="crear_vuelo()">Buscar</a>
@@ -179,11 +179,13 @@
 
     </section>
 
-    <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
-                      
-    </div>
+    <div class="modal fade" id="miModal" tabindex="-1"
+      aria-labelledby="miModalLabel" aria-hidden="true">
 
+    </div>
+    
   </body>
+  <script src="../../static/js/reservacion.js"></script>
   <script src="../../static/js/bootstrap.min.js"></script>
   <script src="../../static/js/popper.min.js"></script>
   <script src="../../static/js/is.min.js"></script>

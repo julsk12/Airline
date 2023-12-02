@@ -158,11 +158,13 @@ console.clear();
 function retorno2() {
   var fechaVueltaInput = document.getElementById("fechaVuelta");
   fechaVueltaInput.style.display = "none";
+  vuelo_ida_vuelta(estado = 1)
 }
 
 function retorno() {
   var fechaVueltaInput = document.getElementById("fechaVuelta");
   fechaVueltaInput.style.display = "block";
+  vuelo_ida_vuelta(estado = 2)
 }
 
 const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");

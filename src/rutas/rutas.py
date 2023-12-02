@@ -25,3 +25,8 @@ def indexhome():
 @routes_home.route('/indexreserva', methods=['GET'] )
 def indexreserva():
     return render_template('/public/reservacion.html')
+
+
+@routes_home.route('/indexreserva2', methods=['GET'] )
+def indexreserva2():
+    return render_template('/public/reservacion2.html')

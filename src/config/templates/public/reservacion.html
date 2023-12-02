@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <title>AIRTOON</title>
     <link rel="stylesheet" href="../../static/css/theme.css">
     <link rel="stylesheet" href="../../static/css/style2.css">
@@ -21,8 +20,14 @@
     <link href="../../static/img/logo.svg" rel="stylesheet" />
 </head>
 
-<body>
-    <main class="main" id="top">
+<body style="overflow: auto;">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block"
+        data-navbar-on-scroll="data-navbar-on-scroll">
+        <div style="display: flex; justify-content: center;" class="center"><a class="navbar-brand"
+                href="/fronted/indexhome"><img src="../../static/img/logo.svg" height="34" alt="logo" /></a>
+        </div>
+    </nav>
+    <main class="main " id="top">
         <div class="container">
             <div class="progress-container">
                 <div class="progress" id="progress"></div>
@@ -43,24 +48,69 @@
                     <p class="text">Review</p>
                 </div>
             </div>
+        </div>
+        <section id="seccion1" class="seccion">
+            <div class="card card-tarifa" id="s">
+                <h2>Tarifa S</h2>
+                <p>Descripción de la tarifa S</p>
+            </div>
+            <div class="card card-tarifa" id="m">
+                <h2>Tarifa M</h2>
+                <p>Descripción de la tarifa M</p>
+            </div>
+            <div class="card card-tarifa" id="l">
+                <h2>Tarifa L</h2>
+                <p>Descripción de la tarifa L</p>
+            </div>
+        </section>
+        <div style="display: grid;" class="container-fluid">
+            <p>Favor confirmar el numero de pasajeros</p>
+            <input onchange="npasajeros()" title="Pasajeros" min="1" max="10" type="number" name id="Pasajeros">
+
+            <div id="seccion2">
+
+            </div>
+
+            <div>
+                <label style="margin-top: 20px;">Pasajero responsable</label><br>
+                <label for="genero">Género:</label>
+                <select class="input-info" id="genero">
+                    <option value=""></option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+                <br>
+                <label for="primer_nombre">Primer nombre:</label>
+                <input class="input-info" type="text" id="primer_nombre">
+                <br>
+                <label for="primer_apellido">Primer apellido:</label>
+                <input class="input-info" type="text" id="primer_apellido">
+            </div>
+
+        </div>
+
+        <div class="container">
             <button class="btn" id="back" disabled>&larr; Back</button>
             <button class="btn" id="next">Next &rarr;</button>
         </div>
+
         <script src="../../static/js/reservacion.js"></script>
     </main>
 
 </body>
-    <script src="../../static/js/bootstrap.min.js"></script>
-    <script src="../../static/js/popper.min.js"></script>
-    <script src="../../static/js/is.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="../../static/js/all.min.js"></script>
-    <script src="/../static/js/theme.js.map"></script>
-    <script src="../../static/js/theme.js"></script>
-    <script src="../../static/theme.js"></script>
-    <script src="../../static/bootstrap-navbar.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/popper.min.js"></script>
+<script src="../../static/js/is.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="../../static/js/all.min.js"></script>
+<script src="/../static/js/theme.js.map"></script>
+<script src="../../static/js/theme.js"></script>
+<script src="../../static/theme.js"></script>
+<script src="../../static/bootstrap-navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+    rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-        rel="stylesheet">
 </html>

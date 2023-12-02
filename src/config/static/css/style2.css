@@ -18,12 +18,36 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#top{
+    margin-top: 20%;
+}
+
+.seccion{
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.card-tarifa{
+    width: 300px;
+    aspect-ratio: 1/3;
+    flex-grow: 1;
+    background-color: #0c7bff !important;
+    border: none;
+    color: white;
 }
 
 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
@@ -128,4 +152,86 @@ body {
     cursor: not-allowed;
     color: oklch(1 0 0);
     transform: none;
+}
+
+
+.card {
+    width: 300px;
+    height: 200px;
+    padding: 20px;
+    margin: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    background-color: #5fb7ff !important;
+    box-shadow: 0 4px 8px;
+}
+.card::selection {
+    background-color: #5fb7ff !important;
+    box-shadow: 0 4px 8px;
+}
+#Pasajeros{
+    max-width: -webkit-fill-available;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 2px solid #656565;
+}
+.input-info{
+    width: -webkit-fill-available;
+    border-radius: 1px;
+    border-left: 0px;
+    border-right: none !important;
+    border-top: 0px;
+    border-bottom: 2px solid #616060;
+}
+
+#Pasajeros::before{
+    max-width: -webkit-fill-available;
+    border-color: #0026f7 !important;
+    border: 2px solid;
+}
+.container-fluid{
+    min-width: fit-content !important;
+    max-width: 70%;
+    border: 2px solid;
+    display: grid;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 50px 110px 30px 30px;
+}
+
+.seccion2{
+    margin: 20px 0px 20px;
+    gap: 1rem;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+}
+
+.card:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('../img/cta/send.png') no-repeat right;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover:before {
+    opacity: 1;
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 0;
 }
