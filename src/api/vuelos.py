@@ -45,6 +45,7 @@ origen = ""
 destino = ""
 fecha_vuelta = ""
 mascota = ""
+precio2=0
 # para tarifa S sumale 12%
 # para tarifa M sumale 24%
 # para tarifa L sumale 30.6%
@@ -52,7 +53,7 @@ mascota = ""
 @routes_vuelos.route("/crear_vuelos", methods=["POST"])
 def crear_vuelos():
     
-    global origen, destino, mascota, fecha_vuelta
+    global origen, destino, mascota, fecha_vuelta, precio2
     origen = request.form["origen"]
     destino = request.form["destino"]
     mascota = request.form["mascota"]
@@ -64,7 +65,7 @@ def crear_vuelos():
     nueva_fecha = fecha_hora_actual + timedelta(days=6)
     consulta = Vuelo.query.filter(Vuelo.fechaHSalida.between(fecha_hora_actual, nueva_fecha),Vuelo.ciudadOrigen == origen,Vuelo.ciudadDestino == destino).all()
     i=0
-    precio2=0
+    
     datos = {}
     
     save={}
@@ -313,7 +314,7 @@ def crear_vuel():
                 'fechaHSalida': lie.fechaHSalida,
                 'fechaHLlegada': lie.fechaHLlegada,
                 'numeroEscalas': lie.numeroEscalas,
-                'precio': idaN_total,
+                'precio': precio2,
                 'duracion': lie.duracionVuelo,
                 'mascotas': lie.mascotas,
 
@@ -358,6 +359,8 @@ def consulvuelos():
 def mostrar_tarifa():
     origen
     destino
+    precio2
+    print(precio2)
     print(origen, destino)
     resultado = db.session.query(Informacion).filter(
         Informacion.origen == origen,
@@ -374,6 +377,7 @@ def mostrar_tarifa():
             'RestriccionestarifaM': vuelo.RestriccionestarifaM,
             'tarifaL': vuelo.tarifaL,
             'RestriccionestarifaL': vuelo.RestriccionestarifaL,
+            'precio': precio2,
         }
 
     return jsonify(datos)
