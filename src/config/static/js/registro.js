@@ -55,18 +55,8 @@ function iniciarSesion() {
         return;
     }
 
-    if (!/^\d+$/.test(contra)) {
-        alert('Solo numeros en este campo');
-        return;
-    }
-
     if (!validarCorreo(user)) {
         alert('Correo Electrónico invalido');
-        return;
-    }
-
-    if (user === 'Admino@gmail.com' && contra === '123') {
-        alert('¡Bienvenido, ' + usuario + '!');
         return;
     }
 
@@ -78,6 +68,7 @@ function iniciarSesion() {
             console.log(nombre, password);
             for (let i = 1; i <= Object.keys(datos).length; i++) {
                 if (datos[i].correou == nombre && datos[i].password == password) {
+                    localStorage.setItem('IDU', nombre);
                     window.location.replace('/');
                     return;
                 }

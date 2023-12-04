@@ -13,34 +13,41 @@ next.addEventListener('click', () => {
                 text: "Por favor seleciona una tarifa",
                 icon: "error"
             });
-        }  
+        }
     }
     if (currentActive === 2) {
         let pasajeros = document.getElementById("Pasajeros").value;
-    for (let index = 1; index < pasajeros; index++) {
-        let primer_nombre = document.getElementById(`nombre_pasajero${index}`).value;
-        let genero = document.getElementById(`genero_pasajero${index}`).value;
-        let primer_apellido = document.getElementById(`apellido_pasajero${index}`).value;
-        console.log(primer_apellido, primer_nombre, genero)
-        if (primer_nombre === "" || primer_apellido === "" || genero === "") {
-            Swal.fire({
-                title: "Oops!",
-                text: "Por favor llena todos los campos",
-                icon: "error"
-            });
-        }else{
-            currentActive++
-            if (currentActive > wraps.length) {
-                currentActive = wraps.length
+        for (let index = 1; index <= pasajeros; index++) {
+            console.log(pasajeros)
+            let primer_nombre = document.getElementById(`nombre_pasajero${index}`).value;
+            let genero = document.getElementById(`genero_pasajero${index}`).value;
+            let primer_apellido = document.getElementById(`apellido_pasajero${index}`).value;
+            console.log(primer_apellido, primer_nombre, genero)
+            if (primer_nombre === "" || primer_apellido === "" || genero === "") {
+                Swal.fire({
+                    title: "Oops!",
+                    text: "Por favor llena todos los campos",
+                    icon: "error"
+                });
+            } else {
+                currentActive++
+                if (currentActive > wraps.length) {
+                    currentActive = wraps.length
+                }
+                update()
             }
-            update()
         }
     }
+    if (currentActive === 3) {
+        let pago = document.getElementById("pago")
+        document.getElementById("seccion-pasajeros").style.display = "none"
+
+        pago.style.display = "block"
     }
 })
 
 function validar_datos() {
-    
+
 }
 
 back.addEventListener('click', () => {
@@ -88,6 +95,9 @@ function npasajeros() {
         <select class="input-info" id="genero_pasajero${index}">
             <option value="masculino">Masculino</option>
             <option value="femenino">Femenino</option>
+            <option value="mascota">Mascota</option>
+            <option value="niño">Niño</option>
+            <option value="bebe">Bebe</option>
             <option value="otro">Otro</option>
         </select>
         <br>
@@ -158,8 +168,14 @@ function viewtarifas() {
             text: "Has seleccionado la tarifa S",
             icon: "success"
           });
-        tarifa = "S"
-        document.getElementById("seccion1").style.display = "none"
+          tarifa = "S"
+          document.getElementById("seccion-pasajeros").style.display = "grid"
+          document.getElementById("seccion1").style.display = "none"
+          currentActive++
+          if (currentActive > wraps.length) {
+              currentActive = wraps.length
+          }
+          update()
     });
     
     document.getElementById('m').addEventListener('click', function() {
@@ -173,8 +189,15 @@ function viewtarifas() {
             text: "Has seleccionado la tarifa M",
             icon: "success"
           });
-        tarifa = "M"
-        document.getElementById("seccion1").style.display = "none"
+          tarifa = "M"
+          document.getElementById("seccion-pasajeros").style.display = "grid"
+          document.getElementById("seccion1").style.display = "none"
+          currentActive++
+          if (currentActive > wraps.length) {
+              currentActive = wraps.length
+          }
+      
+          update()
     });
     
     document.getElementById('l').addEventListener('click', function() {
@@ -188,8 +211,15 @@ function viewtarifas() {
             text: "Has seleccionado la tarifa L",
             icon: "success"
           });
-        tarifa = "L"
-        document.getElementById("seccion1").style.display = "none"
+          tarifa = "L"
+          document.getElementById("seccion1").style.display = "none"
+          document.getElementById("seccion-pasajeros").style.display = "grid"
+          currentActive++
+          if (currentActive > wraps.length) {
+              currentActive = wraps.length
+          }
+      
+          update()
     });
 
     })
@@ -199,14 +229,12 @@ function viewtarifas() {
     });
 }
 
-
-
 function showLoading(event, button) {
     event.preventDefault(); // Prevent form submission
-  
+
     button.innerHTML = "Processing Payment...";
-  
-    setTimeout(function() {
-      button.innerHTML = "Payment completed.";
+
+    setTimeout(function () {
+        button.innerHTML = "Payment completed.";
     }, 3000); // Change to the desired duration in milliseconds
-  }
+}

@@ -69,8 +69,14 @@ function crear_vuelo() {
   morfismo = document.getElementById("cvuelos");
   modalvuelo = document.getElementById("miModal");
 
- 
-  console.log(origen, destino);
+  var fecha_vuel;
+  if (fecha_vuelta === "") {
+    fecha_vuel = "2023-12-30";
+  }
+  else{
+    fecha_vuel=fecha_vuelta
+  }
+
   axios
     .post(
       "/api/crear_vuelos",

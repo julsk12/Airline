@@ -44,6 +44,24 @@
         .icon img {
             height: 100px; 
         }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            transform: translateY(-50%);
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -61,19 +79,21 @@
     </div>
     <section>
         <h2>Información del Usuario</h2>
-        <p><strong>Nombre:</strong> Juan Pérez</p>
-        <p><strong>Correo Electrónico:</strong> juan@example.com</p>
-        <p><strong>Número de Teléfono:</strong> +1234567890</p>
-        <p><strong>Dirección:</strong> Calle Principal, Ciudad</p>
+        <p id="R1"><strong>Nombre:</strong></p>
+        <p id="R2"><strong>Correo Electrónico:</strong></p>
+        <p id="R3"><strong>Número de Teléfono:</strong></p>
+        <p id="R4"><strong>Dirección:</strong></p>
         <h2>Historial de Vuelos</h2>
         <ul>
-            <li>Vuelo a Miami - 2023-01-05</li>
-            <li>Vuelo a París - 2023-02-15</li>
-            <li>Vuelo a Tokio - 2023-04-10</li>
+            <li id="R5"></li>
         </ul>
+        <button type="button" onclick="cerrarUS()">Cerrar Sesión</button>
     </section>
     <div class="icon">
         <img src="../../static/img/category/icon2.png" alt="Icono">
     </div>
+
+    <script src="{{url_for('static', filename='js/Perfil.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>

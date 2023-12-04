@@ -19,7 +19,6 @@
     <meta name="theme-color" content="#ffffff">
     <link href="../../static/img/logo.svg" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 </head>
 
 <body style="overflow: auto;">
@@ -52,7 +51,7 @@
             </div>
         </div>
         <section id="seccion1" class="seccion">
-           
+            
         </section>
         <div id="seccion-pasajeros" style="display: none;" class="container-fluid">
             <p>Favor confirmar el numero de pasajeros</p>
@@ -65,26 +64,32 @@
             <div>
                 <label style="margin-top: 20px;">Pasajero responsable</label><br>
                 <label for="genero">Género:</label>
-                <select id="genero_pasajero1" class="input-info" id="genero">
+                <select id="genero_pasajero1" class="input-info">
                     <option value=""></option>
                     <option value="masculino">Masculino</option>
                     <option value="femenino">Femenino</option>
+                    <option value="mascota">Mascota</option>
+                    <option value="niño">Niño</option>
+                    <option value="bebe">Bebe</option>
                     <option value="otro">Otro</option>
-                </select>
+                </select>                
                 <br>
-                <label for="primer_nombre">Identificacion:</label>
+                <label for="identificacion">Identificacion:</label>
+                <input class="input-info" type="text" id="Identificacion">
+                <br>
+                <label for="correo">Correo:</label>
                 <input class="input-info" type="text" id="Identificacion">
                 <br>
                 <label for="primer_nombre">Primer nombre:</label>
-                <input id="nombre_pasajero1" class="input-info" type="text" id="primer_nombre">
+                <input id="nombre_pasajero1" class="input-info" type="text" >
                 <br>
                 <label for="primer_apellido">Primer apellido:</label>
-                <input id="apellido_pasajero1" class="input-info" type="text" id="primer_apellido">
+                <input id="apellido_pasajero1" class="input-info" type="text" >
             </div>
 
         </div>
 
-        <div class="credit-card-form">
+        <div id="pago" style="display: none;" class="credit-card-form">
             <h2>PAYMENT PORTAL</h2>
             <img class="Image1" src="https://i.ibb.co/hgJ7z3J/6375aad33dbabc9c424b5713-card-mockup-01.png" alt="6375aad33dbabc9c424b5713-card-mockup-01" border="0"></a>
           <p></p>
@@ -127,7 +132,6 @@
 <script src="../../static/js/all.min.js"></script>
 <script src="/../static/js/theme.js.map"></script>
 <script src="../../static/js/theme.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../../static/js/reservacion.js"></script>
 <script src="../../static/theme.js"></script>
 <script src="../../static/bootstrap-navbar.js"></script>

@@ -3,6 +3,8 @@ from config.db import db, app, ma
 from flask import Flask, Blueprint, redirect, request, jsonify, json, session, render_template
 
 from Model.Reservas import Reserva, ReseSchema
+from Model.Vuelos import Vuelo, FliesSchema
+
 
 routes_reserva = Blueprint("routes_reserva", __name__)
 
@@ -41,9 +43,19 @@ def actualizarreservas():
 
     db.session.commit()
     return redirect('/reserva')
-
+extras = []
 @routes_reserva.route('/guardarreserva', methods=['POST'] )
 def guardar_reserva():
+    global extras
+    # resultado = db.session.query(Vuelo).filter(
+    #     Informacion.origen == origen,
+    #     Informacion.destino == destino,
+    # ).all()
+    id_usuario = request.json['id_usuario']
+    id_vuelo = request.json['id_vuelo']
+    estadoreserva = request.json['estadoreserva']
+    asientosReservados = request.json['asientosReservados']
+    fechaReserva = request.json['fechaReserva']
     rese = request.json['id_usuario','id_vuelo', 'estadoreserva', 'asientosReservados', 'fechaReserva']
     new_reser = Reserva(rese)
     db.session.add(new_reser)
