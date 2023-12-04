@@ -18,6 +18,8 @@
     <meta name="msapplication-TileImage" content="../../static/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
     <link href="../../static/img/logo.svg" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body style="overflow: auto;">
@@ -50,18 +52,7 @@
             </div>
         </div>
         <section id="seccion1" class="seccion">
-            <div class="card card-tarifa" id="s">
-                <h2>Tarifa S</h2>
-                <p>Descripción de la tarifa S</p>
-            </div>
-            <div class="card card-tarifa" id="m">
-                <h2>Tarifa M</h2>
-                <p>Descripción de la tarifa M</p>
-            </div>
-            <div class="card card-tarifa" id="l">
-                <h2>Tarifa L</h2>
-                <p>Descripción de la tarifa L</p>
-            </div>
+           
         </section>
         <div id="seccion-pasajeros" style="display: none;" class="container-fluid">
             <p>Favor confirmar el numero de pasajeros</p>
@@ -80,6 +71,9 @@
                     <option value="femenino">Femenino</option>
                     <option value="otro">Otro</option>
                 </select>
+                <br>
+                <label for="primer_nombre">Identificacion:</label>
+                <input class="input-info" type="text" id="Identificacion">
                 <br>
                 <label for="primer_nombre">Primer nombre:</label>
                 <input id="nombre_pasajero1" class="input-info" type="text" id="primer_nombre">
@@ -133,6 +127,8 @@
 <script src="../../static/js/all.min.js"></script>
 <script src="/../static/js/theme.js.map"></script>
 <script src="../../static/js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../../static/js/reservacion.js"></script>
 <script src="../../static/theme.js"></script>
 <script src="../../static/bootstrap-navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

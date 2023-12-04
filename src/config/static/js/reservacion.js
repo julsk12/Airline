@@ -91,6 +91,9 @@ function npasajeros() {
             <option value="otro">Otro</option>
         </select>
         <br>
+        <label style="fw-bold text-danger mb-3" for="primer_nombre">Identificación:</label>
+        <input class="input-info" type="text" id="identificacion">
+        <br>
         <label style="fw-bold text-danger mb-3" for="primer_nombre">Primer nombre:</label>
         <input class="input-info" type="text" id="nombre_pasajero${index}">
         <br>
@@ -100,56 +103,103 @@ function npasajeros() {
     morfismo.innerHTML = lista;
 }
 
-document.getElementById('s').addEventListener('click', function () {
-    Swal.fire({
-        title: "MUY BIEN!",
-        text: "Has seleccionado la tarifa S",
-        icon: "success"
+window.onload = viewtarifas()
+var preciotar;
+var pre_por;
+function viewtarifas() {
+  let morfismo = document.getElementById('seccion1');
+
+  axios.get('/api/info_tarifa', {
+    responseType: 'json'
+  })
+    .then(function (res) {
+      console.log("aqui estan los datos",res.data);
+      let datos = res.data; 
+      var length = Object.keys(datos).length + 1;
+      let listper = '';
+      
+      for (let index = 1; index < length; index++) {
+            preciotar= datos[index].precio;
+            console.log(preciotar)
+          listper += `
+          <div class="card card-tarifa" id="s">
+          <h2>Tarifa S</h2>
+          <p>${datos[index].tarifaS}</p>
+          <h2>Restricciones</h2>
+          <p>${datos[index].RestriccionestarifaS}</p>
+      </div>
+      <div class="card card-tarifa" id="m">
+          <h2>Tarifa M</h2>
+          <p>${datos[index].tarifaM}</p>
+          <h2>Restricciones</h2>
+          <p>${datos[index].RestriccionestarifaM}</p>
+      </div>
+      <div class="card card-tarifa" id="l">
+          <h2>Tarifa L</h2>
+          <p>${datos[index].tarifaL}</p>
+          <h2>Restricciones</h2>
+          <p>${datos[index].RestriccionestarifaL}</p>
+      </div>  
+          `
+        
+        ;
+      }
+      morfismo.innerHTML = listper;
+      
+      document.getElementById('s').addEventListener('click', function() {
+    
+        premaspor = preciotar*0.12
+        precmas=preciotar + premaspor
+        pre_por = precmas;
+
+        console.log(pre_por);
+        Swal.fire({
+            title: "MUY BIEN!",
+            text: "Has seleccionado la tarifa S",
+            icon: "success"
+          });
+        tarifa = "S"
+        document.getElementById("seccion1").style.display = "none"
     });
-    tarifa = "S"
-    document.getElementById("seccion-pasajeros").style.display = "grid"
-    document.getElementById("seccion1").style.display = "none"
-    currentActive++
-    if (currentActive > wraps.length) {
-        currentActive = wraps.length
-    }
+    
+    document.getElementById('m').addEventListener('click', function() {
+        premaspor = preciotar*0.24
+        precmas=preciotar + premaspor
+        pre_por = precmas;
 
-    update()
-});
-
-document.getElementById('m').addEventListener('click', function () {
-    Swal.fire({
-        title: "MUY BIEN!",
-        text: "Has seleccionado la tarifa M",
-        icon: "success"
+        console.log(pre_por);
+        Swal.fire({
+            title: "MUY BIEN!",
+            text: "Has seleccionado la tarifa M",
+            icon: "success"
+          });
+        tarifa = "M"
+        document.getElementById("seccion1").style.display = "none"
     });
-    tarifa = "M"
-    document.getElementById("seccion-pasajeros").style.display = "grid"
-    document.getElementById("seccion1").style.display = "none"
-    currentActive++
-    if (currentActive > wraps.length) {
-        currentActive = wraps.length
-    }
+    
+    document.getElementById('l').addEventListener('click', function() {
+        premaspor = preciotar*0.30
+        precmas=preciotar + premaspor
+        pre_por = precmas;
 
-    update()
-});
-
-document.getElementById('l').addEventListener('click', function () {
-    Swal.fire({
-        title: "MUY BIEN!",
-        text: "Has seleccionado la tarifa L",
-        icon: "success"
+        console.log(pre_por);
+        Swal.fire({
+            title: "MUY BIEN!",
+            text: "Has seleccionado la tarifa L",
+            icon: "success"
+          });
+        tarifa = "L"
+        document.getElementById("seccion1").style.display = "none"
     });
-    tarifa = "L"
-    document.getElementById("seccion1").style.display = "none"
-    document.getElementById("seccion-pasajeros").style.display = "grid"
-    currentActive++
-    if (currentActive > wraps.length) {
-        currentActive = wraps.length
-    }
 
-    update()
-});
+    })
+    .catch(function (error) {
+      // Maneja los errores aquí
+      console.log(error);
+    });
+}
+
+
 
 function showLoading(event, button) {
     event.preventDefault(); // Prevent form submission

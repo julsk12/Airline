@@ -52,7 +52,8 @@ def guardar_users():
 def registrar():
     data = request.json
     new_paq = Users(correo=data['correo'],
-                    nombre=data['nombre'], 
+                    nombre=data['nombre'],
+                    cedula=data['cedula'], 
                     password=data['password'], 
                     celular=data['celular'], 
                     direccion=data['direccion'],)
@@ -71,6 +72,24 @@ def ingresar():
         datos[i] = {
             'correou': correo.correo,
             'password': correo.password
+        }
+    print(datos)
+    return jsonify(datos)
+
+@routes_users.route('/perfilUS', methods=['GET'])
+def perfilUS():
+    datos = {}
+    usuarios_table = db.Model.metadata.tables['tblsusuarios']
+    resultado = db.session.query(Users).select_from(Users).all()
+    i = 0
+    for correo in resultado:
+        i += 1
+        datos[i] = {
+            'correou': correo.correo,
+            'nombreu': correo.nombre,
+            'cedulau': correo.cedula,
+            'celularu': correo.celular,
+            'direccionu': correo.direccion,
         }
     print(datos)
     return jsonify(datos)

@@ -2,11 +2,12 @@ function registrar() {
     var newnombre = document.getElementById('nombre').value;
     var newidentificacion = document.getElementById('identificacion').value;
     var newemail = document.getElementById('email').value;
+    var newcontraseña = document.getElementById('contraseña').value;
     var newdireccion = document.getElementById('direccion').value;
     var newtelefono = document.getElementById('telefono').value;
     console.log(newnombre, newidentificacion, newemail, newdireccion, newtelefono);
 
-    if(newnombre.trim() === "" || newidentificacion.trim() === "" || newemail.trim() === "" || newdireccion.trim() === "" || newtelefono.trim() === ""){
+    if(newnombre.trim() === "" || newidentificacion.trim() === "" || newemail.trim() === "" || newcontraseña.trim() === "" || newdireccion.trim() === "" || newtelefono.trim() === ""){
         alert('No deben quedar campos vacios');
         return;
     }
@@ -24,7 +25,8 @@ function registrar() {
     axios.post('/api/registrar', {
         nombre: newnombre,
         correo: newemail,
-        password: newidentificacion,
+        cedula: newidentificacion,
+        password: newcontraseña,
         celular: newtelefono,
         direccion: newdireccion,
     }, {
@@ -99,12 +101,14 @@ function Limpiar() {
     const newnombre = document.getElementById('nombre');
     const newidentificacion = document.getElementById('identificacion');
     const newemail = document.getElementById('email');
+    const newcontraseña = document.getElementById('contraseña').value;
     const newdireccion = document.getElementById('direccion');
     const newtelefono = document.getElementById('telefono');
 
     newnombre.value = "";
     newidentificacion.value = "";
     newemail.value = "";
+    newcontraseña.value = "";
     newdireccion.value = "";
     newtelefono.value = "";
 }

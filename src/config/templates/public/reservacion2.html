@@ -1,21 +1,13 @@
 {% extends '/public/reservacion.html' %}
 {% block div %}
 <section class="seccion">
-    <div class="card card-tarifa" id="s">
-        <h2>Tarifa S</h2>
-        <p>Descripción de la tarifa S</p>
-    </div>
-    <div class="card card-tarifa" id="m">
-        <h2>Tarifa M del 2</h2>
-        <p>Descripción de la tarifa M</p>
-    </div>
-    <div class="card card-tarifa" id="m">
-        <h2>Tarifa M</h2>
-        <p>Descripción de la tarifa M</p>
-    </div>
+
 </section>
 <div class="container">
     <button class="btn" id="back" disabled>&larr; Back</button>
     <a class="btn" id="next">Next &rarr;</a>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../../static/js/reservacion.js"></script>
+
 {% endblock %}
