@@ -24,6 +24,12 @@ function cargarus() {
         });
 }
 
+function cerrarUS() {
+    window.alert("Sesion Finalizada");
+    localStorage.removeItem('IDU');
+    window.location.replace('/');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     cargarus();
 });

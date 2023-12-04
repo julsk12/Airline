@@ -44,6 +44,24 @@
         .icon img {
             height: 100px; 
         }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            transform: translateY(-50%);
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -69,6 +87,7 @@
         <ul>
             <li id="R5"></li>
         </ul>
+        <button type="button" onclick="cerrarUS()">Cerrar Sesión</button>
     </section>
     <div class="icon">
         <img src="../../static/img/category/icon2.png" alt="Icono">
