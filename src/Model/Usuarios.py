@@ -7,13 +7,15 @@ class Users(db.Model):
     
     correo = db.Column(db.String(200), primary_key=True)
     nombre = db.Column(db.String(200))
+    cedula = db.Column(db.Integer)
     password = db.Column(db.String(200))
     celular = db.Column(db.Integer)
     direccion = db.Column(db.String(200))
     
-    def __init__(self,  correo, nombre, password, celular, direccion):
+    def __init__(self,  correo, nombre, cedula, password, celular, direccion):
         self.correo = correo
         self.nombre = nombre
+        self.cedula = cedula
         self.password = password
         self.celular = celular
         self.direccion = direccion
@@ -24,5 +26,5 @@ class Users(db.Model):
             
 class UsuariosSchema(ma.Schema):
     class Meta:
-        fields = ('correo', 'nombre', 'password', 'celular', 'direccion')
+        fields = ('correo', 'nombre', 'cedula', 'password', 'celular', 'direccion')
     
