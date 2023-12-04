@@ -40,50 +40,13 @@
           <div class="circle">2</div>
           <p class="text">Datos</p>
         </div>
-        <section id="seccion1" class="seccion">
-            
-        </section>
-        <div id="seccion-pasajeros" style="display: none;" class="container-fluid">
-            <p>Favor confirmar el numero de pasajeros</p>
-            <input onchange="npasajeros()" title="Pasajeros" min="1" max="10" type="number" name id="Pasajeros">
-
-            <div id="seccion2">
-
-            </div>
-
-            <div>
-                <label style="margin-top: 20px;">Pasajero responsable</label><br>
-                <label for="genero">Género:</label>
-                <select id="genero_pasajero1" class="input-info">
-                    <option value=""></option>
-                    <option value="masculino">Masculino</option>
-                    <option value="femenino">Femenino</option>
-                    <option value="mascota">Mascota</option>
-                    <option value="niño">Niño</option>
-                    <option value="bebe">Bebe</option>
-                    <option value="otro">Otro</option>
-                </select>                
-                <br>
-                <label for="identificacion">Identificacion:</label>
-                <input class="input-info" type="text" id="Identificacion">
-                <br>
-                <label for="correo">Correo:</label>
-                <input class="input-info" type="text" id="correo">
-                <br>
-                <label for="primer_nombre">Primer nombre:</label>
-                <input id="nombre_pasajero1" class="input-info" type="text" >
-                <br>
-                <label for="primer_apellido">Primer apellido:</label>
-                <input id="apellido_pasajero1" class="input-info" type="text" >
-            </div>
-
         <div class="text-wrap">
           <div class="circle">3</div>
-          <p class="text">Pagos</p>
+          <p class="text">Seleccionar puestos</p>
         </div>
         <div class="text-wrap">
           <div class="circle">4</div>
-          <p class="text">Confirmacion</p>
+          <p class="text">Pagos</p>
         </div>
       </div>
     </div>
@@ -93,37 +56,33 @@
     <div id="seccion-pasajeros" style="display: none;" class="container-fluid">
       <p>Favor confirmar el numero de pasajeros</p>
       <input onchange="npasajeros()" title="Pasajeros" value="1" min="1" max="10" type="number" name id="Pasajeros">
-
-      <div id="seccion2">
-
-      </div>
-
       <div>
         <label style="margin-top: 20px;">Pasajero responsable</label><br>
         <label for="genero">Género:</label>
         <select id="genero_pasajero1" class="input-info">
-          <option value=""></option>
+          <option value></option>
           <option value="masculino">Masculino</option>
           <option value="femenino">Femenino</option>
           <option value="otro">Otro</option>
         </select>
         <br>
         <label for="identificacion">Identificacion:</label>
-        <input class="input-info" type="text" id="Identificacion">
+        <input oninput="validateInputnumber(event)" class="input-info" type="text" id="Identificacion">
         <br>
         <label for="correo">Correo:</label>
-        <input class="input-info" type="text" id="Identificacion">
+        <input class="input-info" title="ingrese correo electronico" type="email" id="Identificacion">
         <br>
         <label for="primer_nombre">Primer nombre:</label>
-        <input id="nombre_pasajero1" class="input-info" type="text">
+        <input oninput="validateInput(event)" id="nombre_pasajero1" class="input-info" type="text">
         <br>
         <label for="primer_apellido">Primer apellido:</label>
-        <input id="apellido_pasajero1" class="input-info" type="text">
+        <input oninput="validateInput(event)" id="apellido_pasajero1" class="input-info" type="text">
       </div>
+      <div id="seccion2">
 
+      </div>
     </div>
-    <div style="display: flex;
-    width: 100%;" class="flex-center">
+    <div style="display: flex; width: 100%;" class="flex-center">
       <div id="pago" style="display: none;" class="credit-card-form">
         <h2>PAYMENT PORTAL</h2>
         <img class="Image1" src="https://i.ibb.co/hgJ7z3J/6375aad33dbabc9c424b5713-card-mockup-01.png"
@@ -132,11 +91,11 @@
         <form>
           <div class="form-group">
             <label for="card-number">Numero de tarjeta</label>
-            <input type="text" id="card-number" placeholder="Card number">
+            <input oninput="validateInputnumber(event)" type="text" id="card-number" placeholder="Card number">
           </div>
           <div class="form-group">
             <label for="card-holder">Nombre del propietario</label>
-            <input type="text" id="card-holder" placeholder="Card holder's name">
+            <input oninput="validateInput(event)" type="text" id="card-holder" placeholder="Card holder's name">
           </div>
           <div class="form-row">
             <div class="form-group form-column">
@@ -145,26 +104,44 @@
             </div>
             <div class="form-group form-column">
               <label for="cvv">CVV</label>
-              <input type="text" id="cvv" placeholder="CVV">
+              <input oninput="validateInputnumber(event)" type="text" id="cvv" placeholder="CVV">
             </div>
           </div>
           <button type="button" onclick="carga()">pagar</button>
         </form>
       </div>
     </div>
-    <div class="container">
-      <button class="btn" id="back" disabled>&larr; Back</button>
-      <button class="btn" id="next">Next &rarr;</button>
-    </div>
+      <div  style="display: flex; width: 100%;" class="flex-center">
+        <div id="puestos" style="display: none;" class="credit-card-form">
 
-        <div class="container">
-            <button class="btn" id="back" disabled>&larr; Back</button>
-            <button class="btn" id="next" onclick="reservacion()">Next &rarr;</button>
+          <h2>Selecciona tu asiento</h2>
+
+          <div id="seat-map">
+            <!-- El mapa de asientos se generará aquí -->
+          </div>
+          <div id="Detalles">
+            <div class="seat0"></div>
+            <li style="display: inline;">Disponible</li><br>
+            <div class="seat1"></div>
+            <li style="display: inline;">Seleccionado</li><br>
+            <div class="seat2"></div>
+            <li style="display: inline;">Ocupado</li><br>
+            <div class="seat3"></div>
+            <li style="display: inline;">Pasillo</li><br>
+            <div class="seat4"></div>
+            <li style="display: inline;">Mascota</li><br>
+          </div>
+          <p id="selected-seat-info"></p>
         </div>
+      </div>
 
-        <script src="../../static/js/reservacion.js"></script>
-    </main>
-    <script src="../../static/js/reservacion.js"></script>
+      <div class="container">
+
+        <button class="btn" id="back" disabled>&larr; Back</button>
+        <button class="btn" id="next">Next &rarr;</button>
+      </div>
+
+      <script src="../../static/js/reservacion.js"></script>
   </main>
 
 </body>
