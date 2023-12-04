@@ -156,8 +156,9 @@ body {
 
 
 .card {
+    height: fit-content;
+    max-height: 320px;
     width: 300px;
-    height: 200px;
     padding: 20px;
     margin: 10px;
     background-color: #f8f8f8;
@@ -247,11 +248,11 @@ p {
 }
 
 .credit-card-form {
-    margin-bottom: 20%;
-    margin-right: 25%;
+    min-width: min-content;
+    width: 400px;
+    max-width: max-content;
+    margin-bottom: 10%;
     margin-top: 10%;
-    margin-left: 25%;
-    max-width: 400px;
     padding: 1em;
     border-radius: 10px;
     box-shadow: 0px 6px 10px rgba(255, 255, 255, 0.1);
@@ -259,6 +260,7 @@ p {
     background-color: #dbdbdb;
     text-align: center;
     color: #424242;
+
     align-content: center;
 
 }
