@@ -289,7 +289,6 @@ function viewtarifas() {
 function carga() {
   let numero_tarjeta = document.getElementById("card-number").value;
   let cvv = document.getElementById("cvv").value;
-  let nombre = document.getElementById("card-holder").value;
   let fecha_expiracion = document.getElementById("expiry-date").value;
 
   const regexcard = new RegExp("^[0-9]{13,16}$");
@@ -298,16 +297,12 @@ function carga() {
   const regex_expiracion = new RegExp("^(0[1-9]|1[0-2])\\/[0-9]{2}$");
   const fe_isValid = regex_expiracion.test(fecha_expiracion);
 
-  const regex_nombre = new RegExp("^[A-Za-z]{2,48}$");
-  const nombre_isValid = regex_nombre.test(nombre);
-
   const regex = new RegExp("^[0-9]{3,4}$");
   const isValid = regex.test(cvv);
 
   if (
     numero_isValid === true &&
     fe_isValid === true &&
-    nombre_isValid === true &&
     isValid === true
   ) {
     setTimeout(function () {
@@ -316,7 +311,13 @@ function carga() {
         text: "Has seleccionado la tarifa L",
         icon: "success",
       });
-    }, 3000); // Change to the desired duration in milliseconds
+    }, 1000);
+
+    setTimeout(function () {
+      window.location.href = "/"
+    },3000)
+
+
   } else {
     Swal.fire({
       title: "Oops!",
@@ -469,5 +470,5 @@ function validateInputnumber(event) {
 
 function totalpagar(){
    let total_pagar = document.getElementById("total_pagar")
-   
+   total_pagar.innerText = pre_por
 }
