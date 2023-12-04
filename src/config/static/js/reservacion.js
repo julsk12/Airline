@@ -60,14 +60,25 @@ next.addEventListener("click", () => {
       }
     }
   }else if (currentActive === 3) {
+    const selectedSeatInfo = document.getElementById('selected-seat-info').innerText;
 
-    document.getElementById("pago").style.display = "block";
-    document.getElementById("puestos").style.display = "none";
-    currentActive++;
-    if (currentActive > wraps.length) {
-      currentActive = wraps.length;
+    if (selectedSeatInfo) {
+      document.getElementById("pago").style.display = "block";
+      document.getElementById("puestos").style.display = "none";
+      currentActive++;
+      if (currentActive > wraps.length) {
+        currentActive = wraps.length;
+      }
+      update();
+    } else {
+      Swal.fire({
+        title: "Oops!",
+        text: "Por favor Selecciona un asiento",
+        icon: "error",
+      });
     }
-    update();
+    selectedSeats = [];
+    document.getElementById('selected-seat-info').innerText = '';
   }
 
 });
@@ -411,20 +422,9 @@ function toggleSeat() {
   }
   document.getElementById(
     "selected-seat-info"
-  ).innerText = `Asientos seleccionados: ${selectedSeats.join(", ")}`;
+  ).innerText = `${selectedSeats.join(", ")}`;
 }
 
-function generateTicket() {
-  const selectedSeatInfo = document.getElementById('selected-seat-info').innerText;
-
-  if (selectedSeatInfo) {
-      alert(`¡Ticket generado!\n${selectedSeatInfo}`);
-  } else {
-      alert('Por favor, selecciona al menos un asiento antes de generar el ticket.');
-  }
-  selectedSeats = [];
-  document.getElementById('selected-seat-info').innerText = '';
-}
 
 //ocupar automáticamente algunos asientos al azar al cargar la página
 function autoSelectSeats() {
@@ -444,7 +444,7 @@ function autoSelectSeats() {
   });
 }
 
-// cargar automaticamente las funciones anteriores al iniciar
+// cargar automaticamente las funciones anteriores al iniciarpre_
 window.onload = function () {
   generateSeatMap(rows, cols);
   autoSelectSeats();
@@ -465,4 +465,9 @@ function validateInputnumber(event) {
   if (!regex.test(input)) {
     event.target.value = input.replace(/[^0-9\s]/g, "");
   }
+}
+
+function totalpagar(){
+   let total_pagar = document.getElementById("total_pagar")
+   
 }
