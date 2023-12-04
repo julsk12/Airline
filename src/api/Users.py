@@ -52,7 +52,8 @@ def guardar_users():
 def registrar():
     data = request.json
     new_paq = Users(correo=data['correo'],
-                    nombre=data['nombre'], 
+                    nombre=data['nombre'],
+                    cedula=data['cedula'], 
                     password=data['password'], 
                     celular=data['celular'], 
                     direccion=data['direccion'],)

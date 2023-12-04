@@ -30,3 +30,7 @@ def indexreserva():
 @routes_home.route('/indexreserva2', methods=['GET'] )
 def indexreserva2():
     return render_template('/public/reservacion2.html')
+
+@routes_home.route('/indexperfil', methods=['GET'] )
+def indexperfil():
+    return render_template('/public/perfil.html')
