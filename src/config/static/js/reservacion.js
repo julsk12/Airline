@@ -25,6 +25,7 @@ next.addEventListener("click", () => {
     }
   }
   if (currentActive === 2) {
+    console.log(currentActive)
     let pasajeros = document.getElementById("Pasajeros").value;
     for (let index = 1; index <= pasajeros; index++) {
       console.log(pasajeros);
@@ -47,38 +48,62 @@ next.addEventListener("click", () => {
           icon: "error",
         });
       } else {
+        document.getElementById("puestos").style.display = "block";
+        document.getElementById("seccion-pasajeros").style.display = "none";
         currentActive++;
         if (currentActive > wraps.length) {
           currentActive = wraps.length;
         }
         update();
+      console.log(currentActive)
+
       }
     }
-  }
-  if (currentActive === 3) {
-    let pago = document.getElementById("pago");
-    document.getElementById("seccion-pasajeros").style.display = "none";
-    pago.style.display = "block";
-  }
-});
+  }else if (currentActive === 3) {
 
-function validar_datos() {}
+    document.getElementById("pago").style.display = "block";
+    document.getElementById("puestos").style.display = "none";
+    currentActive++;
+    if (currentActive > wraps.length) {
+      currentActive = wraps.length;
+    }
+    update();
+  }
+
+});
 
 back.addEventListener("click", () => {
   if (currentActive === 2) {
     document.getElementById("seccion1").style.display = "flex";
     document.getElementById("seccion-pasajeros").style.display = "none";
+    currentActive--;
+    if (currentActive < 1) {
+      currentActive = 1;
+    }
+  
+    update();
   }
   if (currentActive === 3) {
     document.getElementById("seccion-pasajeros").style.display = "block";
-    document.getElementById("pago").style.display = "none";
+    document.getElementById("puestos").style.display = "none";
+    currentActive--;
+    if (currentActive < 1) {
+      currentActive = 1;
+    }
+  
+    update();
   }
-  currentActive--;
-  if (currentActive < 1) {
-    currentActive = 1;
+  if (currentActive === 4) {
+    document.getElementById("puestos").style.display = "block";
+    document.getElementById("pago").style.display = "none";
+    currentActive--;
+    if (currentActive < 1) {
+      currentActive = 1;
+    }
+  
+    update();
   }
 
-  update();
 });
 
 function update() {
@@ -183,77 +208,72 @@ function viewtarifas() {
         premaspor = preciotar * 0.12;
         precmas = preciotar + premaspor;
         pre_por = precmas;
-
         console.log(pre_por);
         Swal.fire({
-            title: "MUY BIEN!",
-            text: "Has seleccionado la tarifa S",
-            icon: "success"
-          });
-          tarifa = "S"
-          tar = "S"
-          document.getElementById("seccion-pasajeros").style.display = "grid"
-          document.getElementById("seccion1").style.display = "none"
-          currentActive++
-          if (currentActive > wraps.length) {
-              currentActive = wraps.length
-          }
-          update()
-    });
-    
-    document.getElementById('m').addEventListener('click', function() {
-        premaspor = preciotar*0.24
-        precmas=preciotar + premaspor
+          title: "MUY BIEN!",
+          text: "Has seleccionado la tarifa S",
+          icon: "success",
+        });
+        tarifa = "S";
+        tar = "S";
+        document.getElementById("seccion-pasajeros").style.display = "grid";
+        document.getElementById("seccion1").style.display = "none";
+        currentActive++;
+        if (currentActive > wraps.length) {
+          currentActive = wraps.length;
+        }
+        update();
+      });
+
+      document.getElementById("m").addEventListener("click", function () {
+        premaspor = preciotar * 0.24;
+        precmas = preciotar + premaspor;
+        pre_por = precmas;
+        console.log(pre_por);
+        Swal.fire({
+          title: "MUY BIEN!",
+          text: "Has seleccionado la tarifa M",
+          icon: "success",
+        });
+        tarifa = "M";
+        tar = "M";
+        document.getElementById("seccion-pasajeros").style.display = "grid";
+        document.getElementById("seccion1").style.display = "none";
+        currentActive++;
+        if (currentActive > wraps.length) {
+          currentActive = wraps.length;
+        }
+
+        update();
+      });
+      document.getElementById("l").addEventListener("click", function () {
+        premaspor = preciotar * 0.3;
+        precmas = preciotar + premaspor;
         pre_por = precmas;
 
         console.log(pre_por);
         Swal.fire({
-            title: "MUY BIEN!",
-            text: "Has seleccionado la tarifa M",
-            icon: "success"
-          });
-          tarifa = "M"
-          tar = "M"
-          document.getElementById("seccion-pasajeros").style.display = "grid"
-          document.getElementById("seccion1").style.display = "none"
-          currentActive++
-          if (currentActive > wraps.length) {
-              currentActive = wraps.length
-          }
-      
-          update()
+          title: "MUY BIEN!",
+          text: "Has seleccionado la tarifa L",
+          icon: "success",
+        });
+        tarifa = "L";
+        tar = "L";
+        document.getElementById("seccion-pasajeros").style.display = "grid";
+        document.getElementById("seccion1").style.display = "none";
+        currentActive++;
+        if (currentActive > wraps.length) {
+          currentActive = wraps.length;
+        }
+
+        update();
+      });
+    })
+    .catch(function (error) {
+      // Maneja los errores aquí
+      console.log(error);
     });
-    
-    document.getElementById('l').addEventListener('click', function() {
-        premaspor = preciotar*0.30
-        precmas=preciotar + premaspor
-        pre_por = precmas;
-
-        console.log(pre_por);
-        Swal.fire({
-            title: "MUY BIEN!",
-            text: "Has seleccionado la tarifa L",
-            icon: "success"
-          });
-          tarifa = "L"
-          tar = "L"
-          document.getElementById("seccion1").style.display = "none"
-          document.getElementById("seccion-pasajeros").style.display = "grid"
-          currentActive++
-          if (currentActive > wraps.length) {
-              currentActive = wraps.length
-          }
-      
-          update()
-    });
-
-})
-.catch((err) => {
-  console.log(err);
-});
-
 }
-
 
 function carga() {
   let numero_tarjeta = document.getElementById("card-number").value;
@@ -280,63 +300,169 @@ function carga() {
     isValid === true
   ) {
     setTimeout(function () {
-        Swal.fire({
-            title: "MUY BIEN!",
-            text: "Has seleccionado la tarifa L",
-            icon: "success",
-          });
-    }, 3000); // Change to the desired duration in milliseconds
-  }else{
-    Swal.fire({
-        title: "Oops!",
-        text: "Por favor llena todos los campos",
-        icon: "error",
+      Swal.fire({
+        title: "MUY BIEN!",
+        text: "Has seleccionado la tarifa L",
+        icon: "success",
       });
+    }, 3000); // Change to the desired duration in milliseconds
+  } else {
+    Swal.fire({
+      title: "Oops!",
+      text: "Por favor llena todos los campos",
+      icon: "error",
+    });
   }
 }
 
 function reservacion(tar) {
-    id_usuario = document.getElementById('correo').value;
-    nombre = document.getElementById('nombre_pasajero1').value;
-    apellido = document.getElementById('apellido_pasajero1').value;
-    nombre_completo = nombre + "" + apellido;
-    estadoReserva = "aprobada";
-    asientosReservados = document.getElementById('Pasajeros').value;
-    nasientos = "A3, A4, B10"
-    tipoboleto = tar;
-    axios
-      .post(
-        "/api/savereservas",
-        {
+  id_usuario = document.getElementById("correo").value;
+  nombre = document.getElementById("nombre_pasajero1").value;
+  apellido = document.getElementById("apellido_pasajero1").value;
+  nombre_completo = nombre + "" + apellido;
+  estadoReserva = "aprobada";
+  asientosReservados = document.getElementById("Pasajeros").value;
+  nasientos = "A3, A4, B10";
+  tipoboleto = tar;
+  axios
+    .post(
+      "/api/savereservas",
+      {
         id_usuario: id_usuario,
         nombre_completo: nombre_completo,
         estadoReserva: estadoReserva,
         asientosReservados: asientosReservados,
         nasientos: nasientos,
         tipoboleto: tipoboleto,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form",
         },
-        {
-          headers: {
-            "Content-Type": "multipart/form",
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.message === "El cliente acargo no está regitrado") {
-            Swal.fire({
-                title: "Oops!",
-                text: "Debe registrarse antes de continuar",
-                icon: "error"
-            });
-        }else{
-            console.clear();
-        }
-     
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  
+      }
+    )
+    .then((res) => {
+      console.log(res.data);
+      if (res.data.message === "El cliente acargo no está regitrado") {
+        Swal.fire({
+          title: "Oops!",
+          text: "Debe registrarse antes de continuar",
+          icon: "error",
+        });
+      } else {
+        console.clear();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+console.clear();
+
+const rows = 6;
+const cols = 7;
+let selectedSeats = [];
+let pasajeros = document.getElementById("Pasajeros").value;
+
+// Número de asientos que se pueden seleccionar, seleccionados aleatorio y espacio para el mapa
+const seatsToSelect = pasajeros;
+const seatsToSelectaleator = 25;
+const seatMapContainer = document.getElementById("seat-map");
+const columnLetters = ["A", "B", "C", "D", "E", "F", "G"];
+
+// generara el mapa de asientos y demas
+function generateSeatMap(rows, cols) {
+  for (let row = 1; row <= rows; row++) {
+    for (let col = 1; col <= cols; col++) {
+      const seat = document.createElement("div");
+      seat.className = "seat";
+      seat.dataset.row = row;
+      seat.dataset.col = col;
+      if (columnLetters[col - 1] === "D") {
+        seat.classList.add("pasillo");
+        seat.removeEventListener("click", toggleSeat);
+      } else {
+        seat.addEventListener("click", toggleSeat);
+      }
+
+      seatMapContainer.appendChild(seat);
+    }
+    seatMapContainer.appendChild(document.createElement("br"));
   }
-  console.clear();
+}
+
+//selección del asiento
+function toggleSeat() {
+  const row = this.dataset.row;
+  const col = this.dataset.col;
+  const columnLetter = columnLetters[col - 1];
+  const seatReference = `${columnLetter}-${row}`;
+
+  if (this.classList.contains("auto-selected")) {
+    return;
+  }
+
+  if (this.classList.contains("selected")) {
+    this.classList.remove("selected");
+    selectedSeats = selectedSeats.filter((seat) => seat !== seatReference);
+  } else if (selectedSeats.length < seatsToSelect) {
+    this.classList.add("selected");
+    selectedSeats.push(seatReference);
+  }
+  document.getElementById(
+    "selected-seat-info"
+  ).innerText = `Asientos seleccionados: ${selectedSeats.join(", ")}`;
+}
+
+function generateTicket() {
+  const selectedSeatInfo = document.getElementById('selected-seat-info').innerText;
+
+  if (selectedSeatInfo) {
+      alert(`¡Ticket generado!\n${selectedSeatInfo}`);
+  } else {
+      alert('Por favor, selecciona al menos un asiento antes de generar el ticket.');
+  }
+  selectedSeats = [];
+  document.getElementById('selected-seat-info').innerText = '';
+}
+
+//ocupar automáticamente algunos asientos al azar al cargar la página
+function autoSelectSeats() {
+  const allSeats = document.querySelectorAll(".seat");
+  const totalSeats = allSeats.length;
+
+  const randomSeatIndices = Array.from({ length: seatsToSelectaleator }, () =>
+    Math.floor(Math.random() * totalSeats)
+  );
+
+  randomSeatIndices.forEach((index) => {
+    const seat = allSeats[index];
+    seat.classList.add("auto-selected");
+    selectedSeats.push(
+      `${columnLetters[seat.dataset.col - 1]}-${seat.dataset.row}`
+    );
+  });
+}
+
+// cargar automaticamente las funciones anteriores al iniciar
+window.onload = function () {
+  generateSeatMap(rows, cols);
+  autoSelectSeats();
+  selectedSeats = [];
+};
+
+function validateInput(event) {
+  var input = event.target.value;
+  var regex = /^[a-zA-Z\s]+$/;
+  if (!regex.test(input)) {
+    event.target.value = input.replace(/[^a-zA-Z\s]/g, "");
+  }
+}
+
+function validateInputnumber(event) {
+  var input = event.target.value;
+  var regex = /^[0-9]+$/;
+  if (!regex.test(input)) {
+    event.target.value = input.replace(/[^0-9\s]/g, "");
+  }
+}

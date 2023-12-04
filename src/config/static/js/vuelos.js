@@ -68,6 +68,14 @@ function crear_vuelo() {
   fecha_vuelta = document.getElementById("fecha_vuelta").value;
   morfismo = document.getElementById("cvuelos");
   modalvuelo = document.getElementById("miModal");
+
+  var fecha_vuel;
+  if (fecha_vuelta === "") {
+    fecha_vuel = "2023-12-30";
+  } else {
+    fecha_vuel = fecha_vuelta;
+  }
+
   axios
     .post(
       "/api/crear_vuelos",
@@ -92,33 +100,32 @@ function crear_vuelo() {
 
       for (let index = 1; index < length; index++) {
         listper += `
-                    <div class="cards-vuelos col-md-4 mb-4">
-                    <div style="background-image: url(../../static/img/steps/bg.png);
-                    background-repeat: no-repeat; border: none; min-width: fit-content; margin: 10px;" class="card overflow-hidden shadow" onclick="mostrarDetalles(
-                    '${datos.ciudadOrigen}',
-                    '${datos.ciudadDestino}',
-                    '${datos.fechaHSalida}',
-                    '${datos.fechaHLlegada}'
-                  )">
-                      <div class="card-body py-4 px-3">
-                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                          <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal"
-                              class="btn-mio link-900 text-decoration-none stretched-link">${datos.ciudadOrigen}</button>
-                          </h6>
-                          <h6 class="text-secondary fw-medium">${datos.ciudadDestino}
-                          </h6>
-                          <span style="color: black;" class="fs-1 fw-medium">$ ${datos.precio}</span>
-                        </div>
-                        <div class="d-flex align-items-center"style="color: black; font-size: 20px !important;  min-width: fit-content;" > <img src="../../static/img/dest/navigation.svg"
-                            style=" margin-right: 14px" width="20" alt="navigation" />N° Escalas:  <span style="color: black; font-size: 30px !important;"
-                            class="fs-0 fw-medium">${datos.duracion}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+        <div class="cards-vuelos col-md-4 mb-4">
+        <div style="background-image: url(../../static/img/steps/bg.png);
 
-                `
-          vuelo_modal += `
+        background-repeat: no-repeat; border: none; min-width: fit-content; margin: 10px;" class="card overflow-hidden shadow" onclick="mostrarDetalles(
+        '${datos.ciudadOrigen}',
+        '${datos.ciudadDestino}',
+        '${datos.fechaHSalida}',
+        '${datos.fechaHLlegada}')">
+          <div class="card-body py-4 px-3">
+            <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+              <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal"
+                  class="btn-mio link-900 text-decoration-none stretched-link">${datos.ciudadOrigen}</button>
+              </h6>
+              <h6 class="text-secondary fw-medium">${datos.ciudadDestino}
+              </h6>
+              <span style="color: black;" class="fs-1 fw-medium">$ ${datos.precio}</span>
+            </div>
+            <div class="d-flex align-items-center"style="color: black; font-size: 20px !important;  min-width: fit-content;" > <img src="../../static/img/dest/navigation.svg"
+                style=" margin-right: 14px" width="20" alt="navigation" />N° Escalas:  <span style="color: black; font-size: 30px !important;"
+                class="fs-0 fw-medium">${datos.duracion}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+                `;
+        vuelo_modal += `
           <div style="height: 110vh;max-height: fit-content;width: 90%;max-width: fit-content;min-width: fit-content;min-height: fit-content;" class="modal-dialog">
                           <div style="border-radius: 129px 20px 129px 20px;" class="modal-content">
                           <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Cerrar"></button>
@@ -144,8 +151,7 @@ function crear_vuelo() {
                         </div>
                         </div>
                       </div>
-                      `
-                ;
+                      `;
       }
       morfismo.innerHTML = listper;
       modalvuelo.innerHTML = vuelo_modal;
@@ -154,7 +160,13 @@ function crear_vuelo() {
       console.log(err);
     });
 }
-function mostrarDetalles(ciudadOrigen, ciudadDestino, fechaSalida, fechaLlegada) {
+
+function mostrarDetalles(
+  ciudadOrigen,
+  ciudadDestino,
+  fechaSalida,
+  fechaLlegada
+) {
   console.log("Ciudad Origen:", ciudadOrigen);
   console.log("Ciudad Destino:", ciudadDestino);
   console.log("Fecha Salida:", fechaSalida);
@@ -176,25 +188,23 @@ function mostrarDetalles(ciudadOrigen, ciudadDestino, fechaSalida, fechaLlegada)
     )
     .then((res) => {
       console.log(res.data);
-   
     })
     .catch((err) => {
       console.log(err);
     });
-
 }
 console.clear();
 
 function retorno2() {
   var fechaVueltaInput = document.getElementById("fechaVuelta");
   fechaVueltaInput.style.display = "none";
-  vuelo_ida_vuelta(estado = 1)
+  vuelo_ida_vuelta((estado = 1));
 }
 
 function retorno() {
   var fechaVueltaInput = document.getElementById("fechaVuelta");
   fechaVueltaInput.style.display = "block";
-  vuelo_ida_vuelta(estado = 2)
+  vuelo_ida_vuelta((estado = 2));
 }
 
 const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");

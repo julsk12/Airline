@@ -11,6 +11,73 @@
 * {
     box-sizing: border-box;
 }
+.seat {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: inline-block;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #00f;
+}
+
+.auto-selected {
+    background-color: #0f0;
+    border-radius: 50%;
+}
+
+.pasillo {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 20%;
+    background-color: rgb(255, 0, 0);
+}
+
+.seat0 {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: inline-block;
+    background-color: #ccc;
+}
+.seat1 {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: inline-block;
+    background-color: #00f;
+}
+
+.seat4{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: inline-block;
+    background-color: rgb(255, 81, 0);
+}
+.seat2 {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: inline-block;
+    background-color: #0f0;
+}
+.seat3 {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    display: inline-block;
+    background-color: rgb(255, 0, 0);
+}
 
 body {
     background-color: var(--color);

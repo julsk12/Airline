@@ -111,7 +111,7 @@
                 <div class="columna1">
                   <div class="icon"><i class="fas fa-plane-departure"></i></div>
                   <div class="inputs">
-                    <label for="origen">Origen:</label>
+                    <label  oninput="validateInput(event)" for="origen">Origen:</label>
                     <input type="text" id="origen" name="origen"
                       placeholder="Ciudad de origen" required>
                     <div id="sugerencias-panel" class="sugerencias-panel"></div>
@@ -120,11 +120,10 @@
                 <div class="columna2">
                   <div class="icon"><i class="fas fa-plane-departure"></i></div>
                   <div class="inputs">
-                    <label for="destino">Destino:</label>
+                    <label oninput="validateInput(event)" for="destino">Destino:</label>
                     <input type="text" id="destino" name="destino"
                       placeholder="Ciudad de origen" required>
                     <div id="sugerencias-modal" class="sugerencias-panel">
-
                     </div>
                   </div>
                 </div>
