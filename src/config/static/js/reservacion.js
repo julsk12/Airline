@@ -116,6 +116,7 @@ function npasajeros() {
 window.onload = viewtarifas()
 var preciotar;
 var pre_por;
+var tar;
 function viewtarifas() {
   let morfismo = document.getElementById('seccion1');
 
@@ -169,6 +170,7 @@ function viewtarifas() {
             icon: "success"
           });
           tarifa = "S"
+          tar = "S"
           document.getElementById("seccion-pasajeros").style.display = "grid"
           document.getElementById("seccion1").style.display = "none"
           currentActive++
@@ -190,6 +192,7 @@ function viewtarifas() {
             icon: "success"
           });
           tarifa = "M"
+          tar = "M"
           document.getElementById("seccion-pasajeros").style.display = "grid"
           document.getElementById("seccion1").style.display = "none"
           currentActive++
@@ -212,6 +215,7 @@ function viewtarifas() {
             icon: "success"
           });
           tarifa = "L"
+          tar = "L"
           document.getElementById("seccion1").style.display = "none"
           document.getElementById("seccion-pasajeros").style.display = "grid"
           currentActive++
@@ -238,3 +242,49 @@ function showLoading(event, button) {
         button.innerHTML = "Payment completed.";
     }, 3000); // Change to the desired duration in milliseconds
 }
+
+function reservacion(tar) {
+    id_usuario = document.getElementById('correo').value;
+    nombre = document.getElementById('nombre_pasajero1').value;
+    apellido = document.getElementById('apellido_pasajero1').value;
+    nombre_completo = nombre + "" + apellido;
+    estadoReserva = "aprobada";
+    asientosReservados = document.getElementById('Pasajeros').value;
+    nasientos = "A3, A4, B10"
+    tipoboleto = tar;
+    axios
+      .post(
+        "/api/savereservas",
+        {
+        id_usuario: id_usuario,
+        nombre_completo: nombre_completo,
+        estadoReserva: estadoReserva,
+        asientosReservados: asientosReservados,
+        nasientos: nasientos,
+        tipoboleto: tipoboleto,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message === "El cliente acargo no está regitrado") {
+            Swal.fire({
+                title: "Oops!",
+                text: "Debe registrarse antes de continuar",
+                icon: "error"
+            });
+        }else{
+            console.clear();
+        }
+     
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  
+  }
+  console.clear();

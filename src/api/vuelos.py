@@ -16,6 +16,8 @@ import random
 from Model.Vuelos import Vuelo, FliesSchema
 from Model.info_vuelo import Informacion, InfoSchema
 from Model.Aerolineas import Aerolinea
+from Model.Reservas import Reserva, ReseSchema
+
 
 routes_vuelos = Blueprint("routes_vuelos", __name__)
 
@@ -171,6 +173,7 @@ def crear_vuelos():
             puestos =random.randint(1, 10)
             
             block= {
+                'id': lie.id,
                 'id_aerolinea': lie.id_aerolinea,
                 'ciudadOrigen': lie.ciudadOrigen,
                 'ciudadDestino': lie.ciudadDestino,
@@ -325,36 +328,6 @@ def crear_vuel():
         return jsonify(block)
         
 
-
-@routes_vuelos.route("/consulvuelos", methods=["GET"])
-def consulvuelos():
-    datos = {}
-    vuelos_table = db.Model.metadata.tables["tblvuelos"]
-    aerolinia_table = db.Model.metadata.tables["tblaerolinea"]
-    resultado = (
-        db.session.query(Vuelo, Aerolinea)
-        .select_from(vuelos_table)
-        .join(aerolinia_table)
-        .all()
-    )
-    
-    i = 0
-    for Vuelo, Aerolinea in resultado:
-        i += 1
-        datos[i] = {
-            "id": Vuelo.id,
-            "aerolinea": Aerolinea.nombre,
-            "origen": Vuelo.ciudadOrigen,
-            "destino": Vuelo.ciudadDestino,
-            "Fsalida": Vuelo.fechaHSalida,
-            "Fllegada": Vuelo.fechaHLlegada,
-            "asientosD": Vuelo.asientosDisponibles,
-            "precio": Vuelo.precio,
-            "#escalas": Vuelo.numeroEscalas,
-            "duracion": Vuelo.duracionVuelo,
-        }
-    return jsonify(datos)
-
 @routes_vuelos.route("/info_tarifa", methods=["GET"])
 def mostrar_tarifa():
     origen
@@ -381,3 +354,21 @@ def mostrar_tarifa():
         }
 
     return jsonify(datos)
+extras = []
+@routes_vuelos.route('/guardarreserva', methods=['POST'] )
+def guar_reserva():
+    global extras
+    resultado = db.session.query(Vuelo).filter(
+        Informacion.origen == origen,
+        Informacion.destino == destino,
+    ).all()
+    id_usuario = request.json['id_usuario']
+    id_vuelo = request.json['id_vuelo']
+    estadoreserva = request.json['estadoreserva']
+    asientosReservados = request.json['asientosReservados']
+    fechaReserva = request.json['fechaReserva']
+    rese = request.json['id_usuario','id_vuelo', 'estadoreserva', 'asientosReservados', 'fechaReserva']
+    new_reser = Reserva(rese)
+    db.session.add(new_reser)
+    db.session.commit()
+    return redirect('/vuelo')

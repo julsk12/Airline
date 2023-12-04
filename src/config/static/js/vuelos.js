@@ -68,15 +68,6 @@ function crear_vuelo() {
   fecha_vuelta = document.getElementById("fecha_vuelta").value;
   morfismo = document.getElementById("cvuelos");
   modalvuelo = document.getElementById("miModal");
-
-  var fecha_vuel;
-  if (fecha_vuelta === "") {
-    fecha_vuel = "2023-12-30";
-  }
-  else{
-    fecha_vuel=fecha_vuelta
-  }
-
   axios
     .post(
       "/api/crear_vuelos",
@@ -103,7 +94,12 @@ function crear_vuelo() {
         listper += `
                     <div class="cards-vuelos col-md-4 mb-4">
                     <div style="background-image: url(../../static/img/steps/bg.png);
-                              background-repeat: no-repeat; border: none; min-width: fit-content; margin: 10px;" class="card overflow-hidden shadow">
+                    background-repeat: no-repeat; border: none; min-width: fit-content; margin: 10px;" class="card overflow-hidden shadow" onclick="mostrarDetalles(
+                    '${datos.ciudadOrigen}',
+                    '${datos.ciudadDestino}',
+                    '${datos.fechaHSalida}',
+                    '${datos.fechaHLlegada}'
+                  )">
                       <div class="card-body py-4 px-3">
                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                           <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal"
@@ -158,7 +154,35 @@ function crear_vuelo() {
       console.log(err);
     });
 }
+function mostrarDetalles(ciudadOrigen, ciudadDestino, fechaSalida, fechaLlegada) {
+  console.log("Ciudad Origen:", ciudadOrigen);
+  console.log("Ciudad Destino:", ciudadDestino);
+  console.log("Fecha Salida:", fechaSalida);
+  console.log("Fecha Llegada:", fechaLlegada);
+  axios
+    .post(
+      "/api/guardarglobales",
+      {
+        origen: ciudadOrigen,
+        destino: ciudadDestino,
+        fechaSalida: fechaSalida,
+        fechaLlegada: fechaLlegada,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res.data);
+   
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
+}
 console.clear();
 
 function retorno2() {
