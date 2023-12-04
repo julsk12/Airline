@@ -2,53 +2,43 @@
 <html lang="en-US" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>AIRTOON</title>
-    <link rel="stylesheet" href="../../static/css/theme.css">
-    <link rel="stylesheet" href="../../static/css/style2.css">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.css.map">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.min.css">
-    <link rel="stylesheet" href="../../static/css/theme.css.map">
-    <link rel="stylesheet" href="../../static/css/theme.min.css.map">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.min.css.map">
-    <link rel="stylesheet" href="../../static/css/theme-rtl.css">
-    <meta name="msapplication-TileImage" content="../../static/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
-    <link href="../../static/img/logo.svg" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>AIRTOON</title>
+  <link rel="stylesheet" href="../../static/css/theme.css">
+  <link rel="stylesheet" href="../../static/css/style2.css">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.css.map">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.min.css">
+  <link rel="stylesheet" href="../../static/css/theme.css.map">
+  <link rel="stylesheet" href="../../static/css/theme.min.css.map">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.min.css.map">
+  <link rel="stylesheet" href="../../static/css/theme-rtl.css">
+  <meta name="msapplication-TileImage" content="../../static/img/favicons/mstile-150x150.png">
+  <meta name="theme-color" content="#ffffff">
+  <link href="../../static/img/logo.svg" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body style="overflow: auto;">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block"
-        data-navbar-on-scroll="data-navbar-on-scroll">
-        <div style="display: flex; justify-content: center;" class="center"><a class="navbar-brand"
-                href="/fronted/indexhome"><img src="../../static/img/logo.svg" height="34" alt="logo" /></a>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block"
+    data-navbar-on-scroll="data-navbar-on-scroll">
+    <div style="display: flex; justify-content: center;" class="center"><a class="navbar-brand"
+        href="/fronted/indexhome"><img src="../../static/img/logo.svg" height="34" alt="logo" /></a>
+    </div>
+  </nav>
+  <main class="main " id="top">
+    <div class="container">
+      <div class="progress-container">
+        <div class="progress" id="progress"></div>
+        <div class="text-wrap active">
+          <div class="circle">1</div>
+          <p class="text">Tarifas</p>
         </div>
-    </nav>
-    <main class="main " id="top">
-        <div class="container">
-            <div class="progress-container">
-                <div class="progress" id="progress"></div>
-                <div class="text-wrap active">
-                    <div class="circle">1</div>
-                    <p class="text">Tarifas</p>
-                </div>
-                <div class="text-wrap">
-                    <div class="circle">2</div>
-                    <p class="text">Datos</p>
-                </div>
-                <div class="text-wrap">
-                    <div class="circle">3</div>
-                    <p class="text">Pagos</p>
-                </div>
-                <div class="text-wrap">
-                    <div class="circle">4</div>
-                    <p class="text">Confirmacion</p>
-                </div>
-            </div>
+        <div class="text-wrap">
+          <div class="circle">2</div>
+          <p class="text">Datos</p>
         </div>
         <section id="seccion1" class="seccion">
             
@@ -87,34 +77,85 @@
                 <input id="apellido_pasajero1" class="input-info" type="text" >
             </div>
 
+        <div class="text-wrap">
+          <div class="circle">3</div>
+          <p class="text">Pagos</p>
         </div>
+        <div class="text-wrap">
+          <div class="circle">4</div>
+          <p class="text">Confirmacion</p>
+        </div>
+      </div>
+    </div>
+    <section id="seccion1" class="seccion">
 
-        <div id="pago" style="display: none;" class="credit-card-form">
-            <h2>PAYMENT PORTAL</h2>
-            <img class="Image1" src="https://i.ibb.co/hgJ7z3J/6375aad33dbabc9c424b5713-card-mockup-01.png" alt="6375aad33dbabc9c424b5713-card-mockup-01" border="0"></a>
-          <p></p>
-            <form>
-              <div class="form-group">
-                <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" placeholder="Card number">
-              </div>
-              <div class="form-group">
-                <label for="card-holder">Card Holder</label>
-                <input type="text" id="card-holder" placeholder="Card holder's name">
-              </div>
-              <div class="form-row">
-                <div class="form-group form-column">
-                  <label for="expiry-date">Expiry Date</label>
-                  <input type="text" id="expiry-date" placeholder="MM/YY">
-                </div>
-                <div class="form-group form-column">
-                  <label for="cvv">CVV</label>
-                  <input type="text" id="cvv" placeholder="CVV">
-                </div>
-              </div>
-              <button type="submit" class="click-button" onclick="showLoading(event, this)">PAY NOW - $(TOTAL)</button>
-            </form>
+    </section>
+    <div id="seccion-pasajeros" style="display: none;" class="container-fluid">
+      <p>Favor confirmar el numero de pasajeros</p>
+      <input onchange="npasajeros()" title="Pasajeros" value="1" min="1" max="10" type="number" name id="Pasajeros">
+
+      <div id="seccion2">
+
+      </div>
+
+      <div>
+        <label style="margin-top: 20px;">Pasajero responsable</label><br>
+        <label for="genero">Género:</label>
+        <select id="genero_pasajero1" class="input-info">
+          <option value=""></option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+        <br>
+        <label for="identificacion">Identificacion:</label>
+        <input class="input-info" type="text" id="Identificacion">
+        <br>
+        <label for="correo">Correo:</label>
+        <input class="input-info" type="text" id="Identificacion">
+        <br>
+        <label for="primer_nombre">Primer nombre:</label>
+        <input id="nombre_pasajero1" class="input-info" type="text">
+        <br>
+        <label for="primer_apellido">Primer apellido:</label>
+        <input id="apellido_pasajero1" class="input-info" type="text">
+      </div>
+
+    </div>
+    <div style="display: flex;
+    width: 100%;" class="flex-center">
+      <div id="pago" style="display: none;" class="credit-card-form">
+        <h2>PAYMENT PORTAL</h2>
+        <img class="Image1" src="https://i.ibb.co/hgJ7z3J/6375aad33dbabc9c424b5713-card-mockup-01.png"
+          alt="6375aad33dbabc9c424b5713-card-mockup-01" border="0"></a>
+        <p></p>
+        <form>
+          <div class="form-group">
+            <label for="card-number">Numero de tarjeta</label>
+            <input type="text" id="card-number" placeholder="Card number">
           </div>
+          <div class="form-group">
+            <label for="card-holder">Nombre del propietario</label>
+            <input type="text" id="card-holder" placeholder="Card holder's name">
+          </div>
+          <div class="form-row">
+            <div class="form-group form-column">
+              <label for="expiry-date">Fecha expiracion</label>
+              <input type="text" id="expiry-date" placeholder="MM/YY">
+            </div>
+            <div class="form-group form-column">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" placeholder="CVV">
+            </div>
+          </div>
+          <button type="button" onclick="carga()">pagar</button>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <button class="btn" id="back" disabled>&larr; Back</button>
+      <button class="btn" id="next">Next &rarr;</button>
+    </div>
 
         <div class="container">
             <button class="btn" id="back" disabled>&larr; Back</button>
@@ -123,6 +164,8 @@
 
         <script src="../../static/js/reservacion.js"></script>
     </main>
+    <script src="../../static/js/reservacion.js"></script>
+  </main>
 
 </body>
 <script src="../../static/js/bootstrap.min.js"></script>
@@ -137,7 +180,7 @@
 <script src="../../static/bootstrap-navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-    rel="stylesheet">
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+  rel="stylesheet">
 
 </html>
