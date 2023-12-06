@@ -60,14 +60,25 @@ next.addEventListener("click", () => {
       }
     }
   }else if (currentActive === 3) {
+    const selectedSeatInfo = document.getElementById('selected-seat-info').innerText;
 
-    document.getElementById("pago").style.display = "block";
-    document.getElementById("puestos").style.display = "none";
-    currentActive++;
-    if (currentActive > wraps.length) {
-      currentActive = wraps.length;
+    if (selectedSeatInfo) {
+      document.getElementById("pago").style.display = "block";
+      document.getElementById("puestos").style.display = "none";
+      currentActive++;
+      if (currentActive > wraps.length) {
+        currentActive = wraps.length;
+      }
+      update();
+    } else {
+      Swal.fire({
+        title: "Oops!",
+        text: "Por favor Selecciona un asiento",
+        icon: "error",
+      });
     }
-    update();
+    selectedSeats = [];
+    document.getElementById('selected-seat-info').innerText = '';
   }
 
 });
@@ -278,7 +289,6 @@ function viewtarifas() {
 function carga() {
   let numero_tarjeta = document.getElementById("card-number").value;
   let cvv = document.getElementById("cvv").value;
-  let nombre = document.getElementById("card-holder").value;
   let fecha_expiracion = document.getElementById("expiry-date").value;
 
   const regexcard = new RegExp("^[0-9]{13,16}$");
@@ -287,16 +297,12 @@ function carga() {
   const regex_expiracion = new RegExp("^(0[1-9]|1[0-2])\\/[0-9]{2}$");
   const fe_isValid = regex_expiracion.test(fecha_expiracion);
 
-  const regex_nombre = new RegExp("^[A-Za-z]{2,48}$");
-  const nombre_isValid = regex_nombre.test(nombre);
-
   const regex = new RegExp("^[0-9]{3,4}$");
   const isValid = regex.test(cvv);
 
   if (
     numero_isValid === true &&
     fe_isValid === true &&
-    nombre_isValid === true &&
     isValid === true
   ) {
     setTimeout(function () {
@@ -305,7 +311,13 @@ function carga() {
         text: "Has seleccionado la tarifa L",
         icon: "success",
       });
-    }, 3000); // Change to the desired duration in milliseconds
+    }, 1000);
+
+    setTimeout(function () {
+      window.location.href = "/"
+    },3000)
+
+
   } else {
     Swal.fire({
       title: "Oops!",
@@ -411,20 +423,9 @@ function toggleSeat() {
   }
   document.getElementById(
     "selected-seat-info"
-  ).innerText = `Asientos seleccionados: ${selectedSeats.join(", ")}`;
+  ).innerText = `${selectedSeats.join(", ")}`;
 }
 
-function generateTicket() {
-  const selectedSeatInfo = document.getElementById('selected-seat-info').innerText;
-
-  if (selectedSeatInfo) {
-      alert(`¡Ticket generado!\n${selectedSeatInfo}`);
-  } else {
-      alert('Por favor, selecciona al menos un asiento antes de generar el ticket.');
-  }
-  selectedSeats = [];
-  document.getElementById('selected-seat-info').innerText = '';
-}
 
 //ocupar automáticamente algunos asientos al azar al cargar la página
 function autoSelectSeats() {
@@ -444,7 +445,7 @@ function autoSelectSeats() {
   });
 }
 
-// cargar automaticamente las funciones anteriores al iniciar
+// cargar automaticamente las funciones anteriores al iniciarpre_
 window.onload = function () {
   generateSeatMap(rows, cols);
   autoSelectSeats();
@@ -465,4 +466,9 @@ function validateInputnumber(event) {
   if (!regex.test(input)) {
     event.target.value = input.replace(/[^0-9\s]/g, "");
   }
+}
+
+function totalpagar(){
+   let total_pagar = document.getElementById("total_pagar")
+   total_pagar.innerText = pre_por
 }
