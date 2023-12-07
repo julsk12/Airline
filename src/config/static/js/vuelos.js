@@ -94,7 +94,7 @@ function crear_vuelo() {
     .then((res) => {
       console.log(res.data);
       let datos = res.data;
-      var length = Object.keys(datos).length - 1;
+      var length = Object.keys(datos).length + 1;
       let listper = "";
       let vuelo_modal = "";
 
@@ -104,26 +104,26 @@ function crear_vuelo() {
         <div style="background-image: url(../../static/img/steps/bg.png);
 
         background-repeat: no-repeat; border: none; min-width: fit-content; margin: 10px;" class="card overflow-hidden shadow" onclick="mostrarDetalles(
-        '${datos.ciudadOrigen}',
-        '${datos.ciudadDestino}',
-        '${datos.fechaHSalida}',
-        '${datos.fechaHLlegada}')">
+        '${datos[index].ciudadOrigen}',
+        '${datos[index].ciudadDestino}',
+        '${datos[index].fechaHSalida}',
+        '${datos[index].fechaHLlegada}')">
           <div class="card-body py-4 px-3">
             <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
               <h6 class="text-secondary fw-medium"><button data-bs-toggle="modal" data-bs-target="#miModal"
-                  class="btn-mio link-900 text-decoration-none stretched-link">${datos.ciudadOrigen}</button>
+                  class="btn-mio link-900 text-decoration-none stretched-link">${datos[index].ciudadOrigen}</button>
               </h6>
-              <h6 class="text-secondary fw-medium">${datos.ciudadDestino}
+              <h6 class="text-secondary fw-medium">${datos[index].ciudadDestino}
               </h6>
-              <span style="color: black;" class="fs-1 fw-medium">$ ${datos.precio}</span>
+              <span style="color: black;" class="fs-1 fw-medium">$ ${datos[index].precio}</span>
             </div>
             <div class="d-flex align-items-center"style="color: black; font-size: 20px !important;  min-width: fit-content;" > <img src="../../static/img/dest/navigation.svg"
                 style=" margin-right: 14px" width="20" alt="navigation" />N° Escalas:  <span style="color: black; font-size: 30px !important;"
-                class="fs-0 fw-medium">${datos.duracion}</span>
+                class="fs-0 fw-medium">${datos[index].duracion}</span>
+              </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
                 `;
         vuelo_modal += `
           <div style="height: 110vh;max-height: fit-content;width: 90%;max-width: fit-content;min-width: fit-content;min-height: fit-content;" class="modal-dialog">
@@ -131,15 +131,15 @@ function crear_vuelo() {
                           <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Cerrar"></button>
                           <div class="modal-body">
                             <div class="articule">
-                              <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos.ciudadOrigen}</h1>
-                              <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos.ciudadDestino}</h1>
-                              <p class="ppp mb-0 fw-medium">Fecha Salida: ${datos.fechaHSalida}</p>
-                              <p class="ppp mb-0 fw-medium">Fecha Llegada: ${datos.fechaHLlegada}</p>
-                              <p class="ppp mb-0 fw-medium">Mascotas: ${datos.mascotas}</p>
-                              <p class="ppp mb-0 fw-medium">Puestos disponibles: ${datos.puestos}</p>
-                              <p class="ppp mb-0 fw-medium">$ ${datos.precio}</p>
-                              <p class="ppp mb-0 fw-medium">Escalas:${datos.numeroEscalas}</p>
-                              <p class="ppp mb-0 fw-medium">${datos.duracion} hora(s)</p>
+                              <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos[index].ciudadOrigen}</h1>
+                              <h1 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">${datos[index].ciudadDestino}</h1>
+                              <p class="ppp mb-0 fw-medium">Fecha Salida: ${datos[index].fechaHSalida}</p>
+                              <p class="ppp mb-0 fw-medium">Fecha Llegada: ${datos[index].fechaHLlegada}</p>
+                              <p class="ppp mb-0 fw-medium">Mascotas: ${datos[index].mascotas}</p>
+                              <p class="ppp mb-0 fw-medium">Puestos disponibles: ${datos[index].puestos}</p>
+                              <p class="ppp mb-0 fw-medium">$ ${datos[index].precio}</p>
+                              <p class="ppp mb-0 fw-medium">Escalas:${datos[index].numeroEscalas}</p>
+                              <p class="ppp mb-0 fw-medium">${datos[index].duracion} hora(s)</p>
                             </div>
                           </div>
                         <div style="

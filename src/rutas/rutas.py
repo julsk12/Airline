@@ -34,3 +34,7 @@ def indexreserva2():
 @routes_home.route('/indexperfil', methods=['GET'] )
 def indexperfil():
     return render_template('/public/perfil.html')
+
+@routes_home.route('/indexpoliticam', methods=['GET'] )
+def indexpoliticam():
+    return render_template('/public/politicam.html')

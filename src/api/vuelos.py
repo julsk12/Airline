@@ -171,8 +171,8 @@ def crear_vuelos():
         trry = []
         for lie in consulta:
             puestos =random.randint(1, 10)
-            
-            block= {
+            i += 1
+            block[i]= {
                 'id': lie.id,
                 'id_aerolinea': lie.id_aerolinea,
                 'ciudadOrigen': lie.ciudadOrigen,

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Venta de Tiquetes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color:  #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        section {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .Titulo {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(0, 174, 255, 0.61);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 0;
+        }
+
+        .icon img {
+            height: 100px; 
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            transform: translateY(-50%);
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            position: absolute;
+            right: 5%;
+        }
+        p {
+            font-size: 12px;
+        }
+        .DMAE {
+            position: absolute;
+            z-index: 2;
+            top: 40%;
+            left: 30%;
+            padding: 20px;
+        }
+        #miDiv {
+            width: 300px;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="DMAEvista" class="DMAE" style="visibility: hidden;">
+        <section>
+            <h2>¿Puedo volar con mi perro de soporte emocional?</h2>
+            <img src="../../static/img/MAE.png" height="200"/>
+            <p>Sí, puedes volar con tu perro de soporte emocional siempre y cuando realices la reserva mínimo 48 horas antes de la salida del vuelo.</p>
+                Si tu perro de soporte emocional pesa más de 10 kg, lo llevaremos en bodega sin ningún cargo adicional.</p>
+            <div id="miDiv">
+                <p>&#x2713;Tu perro deberá ir únicamente en contenedores (guacales) flexibles que midan 55x35x25 cm (largo, ancho y alto) y volarán ubicados debajo del asiento frente a ti en el avión.
+                <p>&#x2713;Puedes volar solo con un (1) perro de soporte emocional, el cual deberá cumplir con toda la documentación requerida.</p>
+                <p>&#x2713;Presenta impreso el formulario para el transporte de mascotas en bodega y cabina. Si no lo tienes, solicítalo a nuestros agentes de servicio en el counter del aeropuerto.</p>
+                <p>&#x2713;La altura máxima de tu perro debe ser de 20 cm.</p>
+                <p>&#x2713;La edad mínima para llevar a tu perro debe ser de 4 meses de edad.</p>
+                <p>&#x2713;Su transporte está sujeto a disponibilidad.</p>
+                <p>&#x2713;Las autoridades aeroportuarias de sanidad animal y avianca se reservan el derecho de admisión o transporte de la mascota si consideran que no reúne las condiciones regulatorias y de seguridad aptas para el vuelo.</p>
+                <p>&#x2713;Las mascotas que se muestren agresivas y puedan causar inconvenientes a otros pasajeros y a la tripulación, no podrán volar en cabina, puedes llevarlo en la bodega del avión y deberás asumir los cargos adicionales que se presenten.</p>
+                <p>&#x2713;Nuestra tripulación podrá solicitar el uso del bozal en caso de evidenciar un comportamiento agresivo por parte del perro.</p>
+                <p>&#x2713;Los gatos no son aceptados como animales de soporte emocional.</p>
+            </div>
+        </br>
+        <button type="button" onclick="ocultar()">Cerrar</button>
+        </section>
+    </div>
+    <div id="DMAE2vista" class="DMAE" style="visibility: hidden;">
+        <section>
+            <h2>¿Puedo volar con mi perro de servicio?</h2>
+            <img src="../../static/img/MAE2.png" height="200"/>
+            <p>Sí, podrás hacerlo cumpliendo con la documentación y reglamentación necesaria. Ingresa a avianca.com o comunícate con nuestro Contact center al menos 48 horas antes de la salida de tu vuelo para notificar que volarás con tu perro de servicio.</p>
+            <div id="miDiv">
+                <p>&#x2713;Preséntate en el counter del aeropuerto para verificar toda la documentación que tu perro de servicio necesita para volar. Para vuelos internacionales llega 3 horas antes de la salida programa y para vuelos nacionales llega mínimo 2 horas antes.</p>
+                <p>&#x2713;Presenta impreso el formulario para el transporte de mascotas en bodega y cabina. Si no lo tienes, solicítalo a nuestros agentes de servicio en el counter del aeropuerto.</p>
+                <p>&#x2713;Si el perro tiene un comportamiento potencialmente agresivo, debes llevar un bozal y garantizar su uso de ser necesario. Nuestra tripulación podrá solicitarlo si evidencia este tipo de comportamientos.</p>
+                <p>&#x2713;Las mascotas que se muestren agresivas y puedan causar inconvenientes a otros pasajeros y a la tripulación, no podrán volar en cabina, pueden ir en la bodega del avión y deberás asumir los cargos adicionales que se presenten.</p>
+                <p>&#x2713;Las autoridades aeroportuarias de sanidad animal y avianca se reservan el derecho de admisión o transporte de la mascota, si consideran que no reúne las condiciones regulatorias y de seguridad aptas para el vuelo.</p>
+                <p>&#x2713;El perro de servicio debe comportarse adecuadamente en entornos públicos.</p>
+                <p>&#x2713;Deberás cumplir con todos los certificados solicitados de acuerdo al caso.</p>
+                <p>&#x2713;Puedes volar hasta con 2 perros de servicio, lazarillo o de rescate.</p>
+                <p>&#x2713;Debes ubicarlo durante el vuelo a tus pies o sobre tus piernas (esta última opción, siempre y cuando el perro no supere el tamaño de un niño pequeño en condiciones de volar sobre las piernas de un pasajero).</p>
+                <p>&#x2713;No tenemos restricciones de raza para los perros de servicio. Sin embargo, la regulación de cada país puede restringir el ingreso del perro y no es responsabilidad de la aerolínea por las acciones posteriores que haya por parte de la autoridad sanitaria.</p>
+                <p>&#x2713;Aceptamos perros de servicio sin importar su tamaño, siempre que el perro pueda ser acomodado en un lugar en la cabina de pasajeros que no obstruya la evacuación.</p>
+            </div>
+        </br>
+        <button type="button" onclick="ocultar()">Cerrar</button>
+        </section>
+    </div>
+    <div id="DMAE3vista" class="DMAE" style="visibility: hidden;">
+        <section>
+            <h2>¿Puedo volar con mi mascota?</h2>
+            <img src="../../static/img/MAE3.png" height="200"/>
+            <p>Sí, podrás volar con tu mascota siempre y cuando cumplas con los requisitos de transporte.</p>
+            <div id="miDiv">
+                <p>&#x2713;Aceptamos perros y gatos mayores de 4 meses de edad.</p>
+                <p>&#x2713;En cabina podrán volar perros y gatos cuyo peso no sea mayor de 10 kg, incluyendo el peso de su contenedor.</p>
+                <p>&#x2713;Para garantizar el transporte de tu mascota, debes cumplir con todos los requisitos y documentos exigidos.</p>
+                <p>&#x2713;Podrás volar solo con una (1) mascota en cabina, la cual debe ir únicamente en contenedores (guacales) flexibles, que puedan ser acomodados debajo del asiento frente a ti en el avión.</p>
+                <p>&#x2713;La altura máxima de tu mascota deben ser 20 cm.</p>
+                <p>&#x2713;El contenedor debe medir: 55x35x25 cm (largo, ancho y alto), y tu mascota deberá permanecer en el interior del contenedor durante el vuelo, en todo momento.</p>
+                <p>&#x2713;El transporte de tu mascota está sujeto a disponibilidad de cupo.</p>
+                <p>&#x2713;No transportamos mascotas (perros o gatos) que sean menores de 4 meses de nacimiento, esto debido al periodo mínimo de espera después de aplicar la vacuna de la rabia.</p>
+                <p>&#x2713;Reserva este servicio con más de 48 horas antes de la salida del vuelo, por medio de nuestro Contact center, puntos de venta o agencias de viaje.</p>
+            </div>
+        </br>
+        <button type="button" onclick="ocultar()">Cerrar</button>
+        </section>
+    </div>
+    <div id="DMAE4vista" class="DMAE" style="visibility: hidden;">
+        <section>
+            <h2>¿Puedo volar con mi mascota?</h2>
+            <img src="../../static/img/MAE4.png" height="200"/>
+            <p>Sí, puedes volar con tu perro de soporte emocional siempre y cuando realices la reserva mínimo 48 horas antes de la salida del vuelo.</p>
+                Si tu perro de soporte emocional pesa más de 10 kg, lo llevaremos en bodega sin ningún cargo adicional.</p>
+            <div id="miDiv">
+                <p>&#x2713;En la bodega del avión pueden volar perros, gatos y gallos, cumpliendo con la documentación y reglamentación necesarias.</p>
+                <p>&#x2713;El peso máximo establecido para transportar mascotas en bodega son 50 kg, sin incluir el peso del contenedor.</p>
+                <p>&#x2713;Para garantizar el transporte de tu mascota, debes cumplir con todos los requisitos y documentos exigidos.</p>
+                <p>&#x2713;Tu mascota podrá volar únicamente en contenedores (guacales) de materiales rígidos como fibra de vidrio, metal o plástico y debe ser suministrado por ti.</p>
+                <p>&#x2713;El transporte de tu mascota está sujeto a disponibilidad de cupo.</p>
+                <p>&#x2713;No transportamos mascotas (perros o gatos) que sean menores de 4 meses de nacimiento, esto debido al periodo mínimo de espera después de aplicar la vacuna de la rabia.</p>
+                <p>&#x2713;Reserva este servicio con más de 48 horas antes de la salida del vuelo, por medio de nuestro Contact center, puntos de venta o agencias de viaje.</p>
+                <p>&#x2713;Los gatos no son aceptados como animales de soporte emocional.</p>
+            </div>
+        </br>
+        <button type="button" onclick="ocultar()">Cerrar</button>
+        </section>
+    </div>
+    <div class="background-shape">
+        <img class="pt-7 pt-md-0 hero-img" src="../../static/img/hero/shape.svg" alt="Decorative Shape">
+    </div>
+
+    <form id="registroForm">
+        <div class="logo">
+            <a class="navbar-brand" href="/fronted/indexhome"><img src="../../static/img/logo.svg" height="34"
+                    alt="logo" /></a>
+        </div>
+    <div class="Titulo">
+        <h1>¿Qué tipo de animales pueden viajar?</h1>
+    </div>
+    <div class="container">
+        <section>
+            <h2>Perros de soporte emocional</h2>
+            <h2 style="font-size: 12px;">Son perros que acompañan a su dueño debido a una condición emocional.</h2>
+            <img src="../../static/img/MAE.png" height="200"/>
+            <p ><strong>Peso: Debe ser menor a los 10 kg para volar en cabina. Si tiene un peso entre 10 kg y 50 kg, debe volar en bodega.</strong></p>
+            <p ><strong>Contenedor: Para cabina, requieres un contenedor flexible (55x35x25 cm). Y para bodega un contenedor rígido.</strong></p>
+            <p ><strong>Cantidad: Podrás volar máximo con un (1) perro de soporte emocional.</strong></p>
+            <button type="button" onclick="mostrar()">Detalles</button>
+        </section>
+        <section>
+            <h2>Perros de servicio</h2>
+            <h2 style="font-size: 12px;">Son perros con adiestramiento en centros especializados y certificados.</h2>
+            <img src="../../static/img/MAE2.png" height="200"/>
+            <p ><strong>Peso: Se aceptan perros de servicio sin importar su peso o tamaño, siempre que puedan ser ubicados sin obstruir la evacuación en la cabina.</strong></p>
+            <p ><strong>Contenedor: No requieren del uso de un contenedor para ser transportados en cabina.</strong></p>
+            <p ><strong>Cantidad: Podrán volar hasta dos (2) perros de servicio por pasajero.</strong></p>
+            <button type="button" onclick="mostrar2()">Detalles</button>
+        </section>
+        <section>
+            <h2>Mascotas de hasta 10 kg (en cabina)</h2>
+            <h2 style="font-size: 12px;">Son perros o gatos que tienen un cargo adicional para ser transportados en cabina.</h2>
+            <img src="../../static/img/MAE3.png" height="200"/>
+            <p ><strong>Peso: Tienen un peso máximo de 10 kg incluido el contenedor.</strong></p>
+            <p ><strong>Contenedor: Debe volar en un contenedor flexible de máximo 55x35x25 cm (largo, ancho y alto).</strong></p>
+            <p ><strong>Cantidad: Podrás volar máximo con una (1) mascota y, durante el vuelo, deberá ir ubicada debajo del asiento delantero que está frente a ti.</strong></p>
+            <button type="button" onclick="mostrar3()">Detalles</button>
+        </section>
+        <section>
+            <h2>Mascotas de hasta 50 kg (en bodega)</h2>
+            <h2 style="font-size: 12px;">Son perros o gatos que tienen un cargo adicional para ser transportados en bodega.</h2>
+            <img src="../../static/img/MAE4.png" height="200"/>
+            <p ><strong>Peso: Tienen un peso entre los 10 kg y los 50 kg, sin incluir el contenedor.</strong></p>
+            <p ><strong>Contenedor: Deben volar en un contenedor rígido que le permita moverse libremente.</strong></p>
+            <p ><strong>Cantidad: Si vuelas con más de una mascota, ten en cuenta que cada mascota deberá viajar en su propio contenedor.</strong></p>
+            <button type="button" onclick="mostrar4()">Detalles</button>
+        </section>
+    </div>
+    <div class="icon">
+        <img src="../../static/img/category/icon2.png" alt="Icono">
+    </div>
+    <script src="{{url_for('static', filename='js/politicam.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

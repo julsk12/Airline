@@ -17,7 +17,7 @@ reser_Schema = ReseSchema(many=True)
 def obtenerreser():
     returnall = Reserva.query.all()
     result_reser = reser_Schema.dump(returnall)
-    return formify(result_reser)
+    return jsonify(result_reser)
 
 #-------------------CRUD---------------------------------
 @routes_reserva.route('/eliminarreserva/<id>', methods=['GET'] )
@@ -25,7 +25,7 @@ def eliminarreserva(id):
     rese = Reserva.query.get(id)
     db.session.delete(rese)
     db.session.commit()
-    return formify(rese_schema.dump(rese))
+    return jsonify(rese_schema.dump(rese))
 
 @routes_reserva.route('/actualizarreservas', methods=['POST'] )
 def actualizarreservas():
@@ -84,15 +84,18 @@ def guardar_globe():
 @routes_reserva.route('/savereservas', methods=['POST'] )
 def savereservas():
     id_vuelo
-    id_usuario = request.form['id_usuario']
-    estadoreserva = request.form['estadoreserva']
-    asientosReservados = request.form['asientosReservados']
+    id_usuario = request.json.get('idusuario')
+    print(id_usuario)
+    estadoreserva = "aprobado"
+    asientosReservados = request.json.get('asientosReservados')
     fechaReserva = datetime.now()
-    nasientos = request.form['nasientos']
-    tipoboleto = request.form['tipoboleto']
+    nasientos = request.json.get('nasientos')
+    tipoboleto = request.json.get('tipoboleto')
+    print(nasientos, tipoboleto)
+    
 
     resultado = db.session.query(Users).filter(
-        Users.correo == id_usuario,
+        Users.reser == id_usuario,
     ).all()
     
     if not resultado:
@@ -113,3 +116,20 @@ def savereservas():
 
     db.session.commit()
     return "algo"
+
+@routes_reserva.route('/reservaUS', methods=['GET'])
+def reservaUS():
+    datos = {}
+    reservas_table = db.Model.metadata.tables['tblreservas']
+    resultado = db.session.query(Reserva).select_from(Reserva).all()
+    i = 0
+    for reser in resultado:
+        i += 1
+        datos[i] = {
+            'asientosReservadosu': reser.asientosReservados,
+            'nasientou': reser.nasiento,
+            'tipoBoletou': reser.tipoBoleto,
+            'id_vuelou': reser.id_vuelo,
+        }
+    print(datos)
+    return jsonify(datos)
