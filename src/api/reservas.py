@@ -86,7 +86,7 @@ def savereservas():
     id_vuelo
     id_usuario = request.json.get('idusuario')
     print(id_usuario)
-    estadoreserva = request.json.get('estadoreserva')
+    estadoreserva = "aprobado"
     asientosReservados = request.json.get('asientosReservados')
     fechaReserva = datetime.now()
     nasientos = request.json.get('nasientos')
@@ -95,7 +95,7 @@ def savereservas():
     
 
     resultado = db.session.query(Users).filter(
-        Users.correo == id_usuario,
+        Users.reser == id_usuario,
     ).all()
     
     if not resultado:
@@ -116,3 +116,20 @@ def savereservas():
 
     db.session.commit()
     return "algo"
+
+@routes_reserva.route('/reservaUS', methods=['GET'])
+def reservaUS():
+    datos = {}
+    reservas_table = db.Model.metadata.tables['tblreservas']
+    resultado = db.session.query(Reserva).select_from(Reserva).all()
+    i = 0
+    for reser in resultado:
+        i += 1
+        datos[i] = {
+            'asientosReservadosu': reser.asientosReservados,
+            'nasientou': reser.nasiento,
+            'tipoBoletou': reser.tipoBoleto,
+            'id_vuelou': reser.id_vuelo,
+        }
+    print(datos)
+    return jsonify(datos)

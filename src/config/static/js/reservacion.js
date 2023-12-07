@@ -48,8 +48,8 @@ next.addEventListener("click", () => {
           icon: "error",
         });
       } else {
-        reservacion(tar);
-       
+        document.getElementById("puestos").style.display = "block";
+        document.getElementById("seccion-pasajeros").style.display = "none";
         currentActive++;
         if (currentActive > wraps.length) {
           currentActive = wraps.length;
@@ -63,8 +63,8 @@ next.addEventListener("click", () => {
     const selectedSeatInfo = document.getElementById('selected-seat-info').innerText;
 
     if (selectedSeatInfo) {
-      document.getElementById("pago").style.display = "block";
-      document.getElementById("puestos").style.display = "none";
+      reservacion(tar, selectedSeats);
+      
       currentActive++;
       if (currentActive > wraps.length) {
         currentActive = wraps.length;
@@ -308,7 +308,7 @@ function carga() {
     setTimeout(function () {
       Swal.fire({
         title: "MUY BIEN!",
-        text: "Has seleccionado la tarifa L",
+        text: "Su pago ha sido exitoso",
         icon: "success",
       });
     }, 1000);
@@ -327,48 +327,7 @@ function carga() {
   }
 }
 
-function reservacion(tar) {
-  id_usuario = document.getElementById("correo");
-  nombre = document.getElementById("nombre_pasajero1");
-  apellido = document.getElementById("apellido_pasajero1");
-  nombre_completo = nombre + "" + apellido;
-  estadoReserva = "aprobada";
-  asientosReservados = document.getElementById("Pasajeros").value;
-  nasientos = "a3";
-  tipoboleto = tar;
-  console.log(id_usuario, nombre_completo, estadoReserva, asientosReservados, nasientos, tipoboleto);
-  axios
-    .post(
-      "/api/savereservas",
-      {
-        idusuario: id_usuario.value,
-        estadoReserva: estadoReserva.value,
-        asientosReservados: asientosReservados.value,
-        nasientos: nasientos.value,
-        tipoboleto: tipoboleto.value,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then((res) => {
-      if (res.data === "El cliente acargo no está regitrado") {
-        Swal.fire({
-          title: "Oops!",
-          text: "Debe registrarse antes de continuar",
-          icon: "error",
-        });
-      } else {
-        document.getElementById("puestos").style.display = "block";
-        document.getElementById("seccion-pasajeros").style.display = "none";
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
+
 console.clear();
 
 const rows = 6;
@@ -451,6 +410,48 @@ window.onload = function () {
   autoSelectSeats();
   selectedSeats = [];
 };
+
+function reservacion(tar, selectedSeats) {
+  id_usuario = document.getElementById("correo");
+  nombre = document.getElementById("nombre_pasajero1");
+  apellido = document.getElementById("apellido_pasajero1");
+  nombre_completo = nombre + "" + apellido;
+  // estadoReserva = "aprobada";
+  asientosReservados = document.getElementById("Pasajeros").value;
+  nasientos = selectedSeats;
+  tipoboleto = tar;
+  console.log(id_usuario, nombre_completo, asientosReservados, nasientos, tipoboleto);
+  axios
+    .post(
+      "/api/savereservas",
+      {
+        idusuario: id_usuario.value,
+        asientosReservados: asientosReservados,
+        nasientos: nasientos,
+        tipoboleto: tipoboleto,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((res) => {
+      if (res.data === "El cliente acargo no está regitrado") {
+        Swal.fire({
+          title: "Oops!",
+          text: "Debe registrarse antes de continuar",
+          icon: "error",
+        });
+      } else {
+          document.getElementById("pago").style.display = "block";
+          document.getElementById("puestos").style.display = "none";
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 function validateInput(event) {
   var input = event.target.value;

@@ -17,7 +17,7 @@ function mostrar3() {
     document.getElementById('DMAE4vista').style.visibility = 'hidden';
 }
 function mostrar4() {
-    document.getElementById('DMAE44vista').style.visibility = 'visible';
+    document.getElementById('DMAE4vista').style.visibility = 'visible';
     document.getElementById('DMAEvista').style.visibility = 'hidden';
     document.getElementById('DMAE3vista').style.visibility = 'hidden';
     document.getElementById('DMAE2vista').style.visibility = 'hidden';
