@@ -55,7 +55,7 @@
     </section>
     <div id="seccion-pasajeros" style="display: none;" class="container-fluid">
       <p>Favor confirmar el numero de pasajeros</p>
-      <input onchange="npasajeros()" title="Pasajeros" value="1" min="1" max="10" type="number" name id="Pasajeros">
+      <input onchange="npasajeros()" title="Pasajeros" value="1" min="1" max="10" type="number" id="Pasajeros">
       <div>
         <label style="margin-top: 20px;">Pasajero responsable</label><br>
         <label for="genero">Género:</label>
@@ -70,7 +70,7 @@
         <input oninput="validateInputnumber(event)" class="input-info" type="text" id="Identificacion">
         <br>
         <label for="correo">Correo:</label>
-        <input class="input-info" title="ingrese correo electronico" type="email" id="Identificacion">
+        <input class="input-info" title="ingrese correo electronico" type="email" id="correo">
         <br>
         <label for="primer_nombre">Primer nombre:</label>
         <input oninput="validateInput(event)" id="nombre_pasajero1" class="input-info" type="text">
@@ -139,7 +139,7 @@
       <div class="container">
 
         <button class="btn" id="back" disabled>&larr; Back</button>
-        <button class="btn" id="next">Next &rarr;</button>
+        <button class="btn" id="next" >Next &rarr;</button>
       </div>
 
       <script src="../../static/js/reservacion.js"></script>

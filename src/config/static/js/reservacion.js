@@ -48,8 +48,8 @@ next.addEventListener("click", () => {
           icon: "error",
         });
       } else {
-        document.getElementById("puestos").style.display = "block";
-        document.getElementById("seccion-pasajeros").style.display = "none";
+        reservacion(tar);
+       
         currentActive++;
         if (currentActive > wraps.length) {
           currentActive = wraps.length;
@@ -328,41 +328,41 @@ function carga() {
 }
 
 function reservacion(tar) {
-  id_usuario = document.getElementById("correo").value;
-  nombre = document.getElementById("nombre_pasajero1").value;
-  apellido = document.getElementById("apellido_pasajero1").value;
+  id_usuario = document.getElementById("correo");
+  nombre = document.getElementById("nombre_pasajero1");
+  apellido = document.getElementById("apellido_pasajero1");
   nombre_completo = nombre + "" + apellido;
   estadoReserva = "aprobada";
   asientosReservados = document.getElementById("Pasajeros").value;
-  nasientos = "A3, A4, B10";
+  nasientos = "a3";
   tipoboleto = tar;
+  console.log(id_usuario, nombre_completo, estadoReserva, asientosReservados, nasientos, tipoboleto);
   axios
     .post(
       "/api/savereservas",
       {
-        id_usuario: id_usuario,
-        nombre_completo: nombre_completo,
-        estadoReserva: estadoReserva,
-        asientosReservados: asientosReservados,
-        nasientos: nasientos,
-        tipoboleto: tipoboleto,
+        idusuario: id_usuario.value,
+        estadoReserva: estadoReserva.value,
+        asientosReservados: asientosReservados.value,
+        nasientos: nasientos.value,
+        tipoboleto: tipoboleto.value,
       },
       {
         headers: {
-          "Content-Type": "multipart/form",
+          "Content-Type": "application/json",
         },
       }
     )
     .then((res) => {
-      console.log(res.data);
-      if (res.data.message === "El cliente acargo no está regitrado") {
+      if (res.data === "El cliente acargo no está regitrado") {
         Swal.fire({
           title: "Oops!",
           text: "Debe registrarse antes de continuar",
           icon: "error",
         });
       } else {
-        console.clear();
+        document.getElementById("puestos").style.display = "block";
+        document.getElementById("seccion-pasajeros").style.display = "none";
       }
     })
     .catch((err) => {
